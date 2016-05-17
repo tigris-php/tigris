@@ -22,7 +22,7 @@ abstract class BaseScalar implements TypeInterface
             return $data;
         }
 
-        if (empty($data)) {
+        if (is_null($data)) {
             return null;
         }
 
