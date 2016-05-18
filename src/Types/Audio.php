@@ -11,10 +11,21 @@ use Tigris\Types\Scalar\ScalarString;
 /**
  * Class Audio
  * @package Tigris\Types
+ *
  * @link https://core.telegram.org/bots/api#audio
+ *
+ * @property ScalarString $file_id
+ * @property ScalarInteger $duration
+ * @property ScalarString $performer
+ * @property ScalarString $title
+ * @property ScalarString $mime_type
+ * @property ScalarInteger $file_size
  */
 class Audio extends BaseObject
 {
+    /**
+     * @inheritdoc
+     */
     protected static function fields()
     {
         return [
@@ -24,6 +35,17 @@ class Audio extends BaseObject
             'title' => ScalarString::class,
             'mime_type' => ScalarString::class,
             'file_size' => ScalarInteger::class,
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected static function requiredFields()
+    {
+        return [
+            'file_id',
+            'duration',
         ];
     }
 }
