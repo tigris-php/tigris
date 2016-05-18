@@ -5,6 +5,8 @@
 namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Scalar\ScalarInteger;
+use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class PhotoSize

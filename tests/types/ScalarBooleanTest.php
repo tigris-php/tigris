@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\ScalarBoolean;
+use Tigris\Types\Scalar\ScalarBoolean;
 
 class ScalarBooleanTest extends PHPUnit_Framework_TestCase
 {

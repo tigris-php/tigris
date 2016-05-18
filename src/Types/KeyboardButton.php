@@ -5,6 +5,8 @@
 namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Scalar\ScalarBoolean;
+use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class KeyboardButton

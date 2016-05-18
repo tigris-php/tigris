@@ -2,24 +2,24 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Types;
+namespace Tigris\Types\Scalar;
 
 use Tigris\Types\Base\BaseScalar;
 
 /**
- * Class ScalarFloat
+ * Class ScalarString
  * @package Tigris\Types
  *
- * @property float $value
+ * @property string $value
  */
-class ScalarFloat extends BaseScalar
+class ScalarString extends BaseScalar
 {
     /**
      * @inheritdoc
-     * @return float
+     * @return string
      */
     public static function readData($data)
     {
-        return (float) $data;
+        return (string) $data;
     }
 }

@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\ScalarInteger;
+use Tigris\Types\Scalar\ScalarInteger;
 
 class ScalarIntegerTest extends PHPUnit_Framework_TestCase
 {

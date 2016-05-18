@@ -6,6 +6,7 @@ namespace Tigris\Types;
 
 use Tigris\Exceptions\TelegramApiException;
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Scalar\ScalarInteger;
 
 /**
  * Class Update
