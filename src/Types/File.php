@@ -10,8 +10,9 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class File
- * @package Tigris\Types
+ * This object represents a file ready to be downloaded.
  *
+ * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#file
  *
  * @property ScalarString $file_id
@@ -29,6 +30,16 @@ class File extends BaseObject
             'file_id' => ScalarString::class,
             'file_size' => ScalarInteger::class,
             'file_path' => ScalarString::class,
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected static function requiredFields()
+    {
+        return [
+            'file_id',
         ];
     }
 }
