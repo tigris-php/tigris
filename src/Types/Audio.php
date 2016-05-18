@@ -10,8 +10,9 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class Audio
- * @package Tigris\Types
+ * This object represents an audio file to be treated as music by the Telegram clients.
  *
+ * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#audio
  *
  * @property ScalarString $file_id

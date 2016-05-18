@@ -10,8 +10,9 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class Chat
- * @package Tigris\Types
+ * This object represents a chat.
  *
+ * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#chat
  *
  * @property ScalarInteger $id
