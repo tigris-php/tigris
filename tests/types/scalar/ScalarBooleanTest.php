@@ -22,10 +22,6 @@ class ScalarBooleanTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ScalarBoolean::class, $a);
         $this->assertAttributeSame(true, 'value', $a);
 
-        $b = ScalarBoolean::build(false);
-        $this->assertInstanceOf(ScalarBoolean::class, $b);
-        $this->assertAttributeSame(false, 'value', $b);
-
         $z = ScalarBoolean::build(null);
         $this->assertNull($z);
     }
