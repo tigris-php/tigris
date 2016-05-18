@@ -12,6 +12,8 @@ use Tigris\Types\Scalar\ScalarString;
  * Class Chat
  * @package Tigris\Types
  *
+ * @link https://core.telegram.org/bots/api#chat
+ *
  * @property ScalarInteger $id
  * @property ScalarString $type
  * @property ScalarString $title
@@ -21,6 +23,14 @@ use Tigris\Types\Scalar\ScalarString;
  */
 class Chat extends BaseObject
 {
+    const TYPE_PRIVATE = 'private';
+    const TYPE_GROUP = 'group';
+    const TYPE_SUPERGROUP = 'supergroup';
+    const TYPE_CHANNEL = 'channel';
+
+    /**
+     * @inheritdoc
+     */
     protected static function fields()
     {
         return [
@@ -30,6 +40,17 @@ class Chat extends BaseObject
             'username' => ScalarString::class,
             'first_name' => ScalarString::class,
             'last_name' => ScalarString::class,
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected static function requiredFields()
+    {
+        return [
+            'id',
+            'type',
         ];
     }
 }
