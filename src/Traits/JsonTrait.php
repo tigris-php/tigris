@@ -4,12 +4,12 @@
  */
 namespace Tigris\Traits;
 
-use Tigris\Helpers\ArrayHelper;
+use Tigris\Helpers\TypeHelper;
 
 trait JsonTrait
 {
     public function toJson()
     {
-        return ArrayHelper::jsonEncode($this);
+        return TypeHelper::jsonEncode($this);
     }
 }

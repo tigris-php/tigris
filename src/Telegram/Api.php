@@ -7,7 +7,7 @@ namespace Tigris\Telegram;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Tigris\Exceptions\TelegramApiException;
-use Tigris\Helpers\ArrayHelper;
+use Tigris\Helpers\TypeHelper;
 use Tigris\Types\Chat;
 use Tigris\Types\File;
 use Tigris\Types\Interfaces\TypeInterface;
@@ -472,7 +472,7 @@ class Api
         // converting existing types to arrays if needed
         array_walk($query, function (&$item) {
             if ($item instanceof TypeInterface) {
-                $item = ArrayHelper::jsonEncode($item, false);
+                $item = TypeHelper::jsonEncode($item, false);
             }
         });
 

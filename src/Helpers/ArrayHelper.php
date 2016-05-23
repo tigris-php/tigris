@@ -28,23 +28,4 @@ class ArrayHelper
 
         return isset($data[$key]) ? $data[$key] : $default;
     }
-
-    public static function jsonEncode($obj, $encode = true)
-    {
-        $result = null;
-
-        if ($obj instanceof BaseScalar) {
-            $result = $obj->value;
-        }
-
-        if ($obj instanceof BaseObject || $obj instanceof BaseArray) {
-            $array = $obj->getArrayCopy();
-            array_walk($array, function(&$item) {
-                $item = static::jsonEncode($item, false);
-            });
-            $result = array_filter($array);
-        }
-
-        return $encode ? json_encode($result) : $result;
-    }
 }
