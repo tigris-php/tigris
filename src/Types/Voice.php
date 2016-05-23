@@ -13,7 +13,12 @@ use Tigris\Types\Scalar\ScalarString;
  * This object represents a voice note.
  *
  * @package Tigris\Types
- * @link https://core.telegram.org/bots/api#venue
+ * @link https://core.telegram.org/bots/api#voice
+ *
+ * @property ScalarString $file_id
+ * @property ScalarInteger $duration
+ * @property ScalarString $mime_type
+ * @property ScalarInteger $file_size
  */
 class Voice extends BaseObject
 {
