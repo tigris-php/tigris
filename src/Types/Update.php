@@ -6,6 +6,7 @@ namespace Tigris\Types;
 
 use Tigris\Exceptions\TelegramApiException;
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Inline\InlineQuery;
 use Tigris\Types\Scalar\ScalarInteger;
 
 /**
@@ -13,9 +14,11 @@ use Tigris\Types\Scalar\ScalarInteger;
  * This object represents an incoming update.
  * 
  * @package Tigris\Types
+ * @link https://core.telegram.org/bots/api#update
  *
  * @property ScalarInteger $update_id
  * @property Message $message
+ * @property InlineQuery $inline_query
  */
 class Update extends BaseObject
 {
@@ -46,7 +49,7 @@ class Update extends BaseObject
         return [
             'update_id' => ScalarInteger::class,
             'message' => Message::class,
-//            'inline_query' => InlineQuery::class,
+            'inline_query' => InlineQuery::class,
 //            'chosen_inline_result' => ChosenInlineResult::class,
 //            'callback_query' => CallbackQuery::class,
         ];

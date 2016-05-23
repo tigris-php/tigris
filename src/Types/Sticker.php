@@ -14,6 +14,13 @@ use Tigris\Types\Scalar\ScalarString;
  *
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#sticker
+ *
+ * @property ScalarString $file_id
+ * @property ScalarInteger $width
+ * @property ScalarInteger $height
+ * @property PhotoSize $thumb
+ * @property ScalarString $emoji
+ * @property ScalarInteger $file_size
  */
 class Sticker extends BaseObject
 {

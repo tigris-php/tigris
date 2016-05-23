@@ -10,7 +10,14 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class MessageEntity
+ *
  * @package Tigris\Types
+ * @link https://core.telegram.org/bots/api#messageentity
+ *
+ * @property ScalarString $type
+ * @property ScalarInteger $offset
+ * @property ScalarInteger $length
+ * @property ScalarInteger $url
  */
 class MessageEntity extends BaseObject
 {

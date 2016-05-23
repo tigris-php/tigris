@@ -6,6 +6,7 @@ namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
 use Tigris\Types\Scalar\ScalarFloat;
+use Tigris\Types\Scalar\ScalarInteger;
 
 /**
  * Class Location
@@ -13,6 +14,9 @@ use Tigris\Types\Scalar\ScalarFloat;
  *
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#location
+ *
+ * @property ScalarFloat $longitude
+ * @property ScalarFloat $latitude
  */
 class Location extends BaseObject
 {
