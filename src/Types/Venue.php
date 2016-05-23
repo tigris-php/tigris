@@ -12,7 +12,12 @@ use Tigris\Types\Scalar\ScalarString;
  * This object represents a venue.
  *
  * @package Tigris\Types
- * @link https://core.telegram.org/bots/api#location
+ * @link https://core.telegram.org/bots/api#venue
+ *
+ * @property Location $location
+ * @property ScalarString $title
+ * @property ScalarString $address
+ * @property ScalarString $foursquare_id
  */
 class Venue extends BaseObject
 {
