@@ -9,9 +9,12 @@ use Tigris\Types\Scalar\ScalarInteger;
 
 /**
  * Class UserProfilePhotos
- * @package Tigris\Types
  *
+ * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#userprofilephotos
+ *
+ * @property ScalarInteger $total_count
+ * @property PhotoSizeMatrix photos
  */
 class UserProfilePhotos extends BaseObject
 {
