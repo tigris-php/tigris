@@ -5,6 +5,7 @@
 use Tigris\Types\Audio;
 use Tigris\Types\Scalar\ScalarString;
 use Tigris\Types\Scalar\ScalarInteger;
+use Tigris\Exceptions\TelegramTypeException;
 
 class AudioTest extends PHPUnit_Framework_TestCase
 {
@@ -24,21 +25,19 @@ class AudioTest extends PHPUnit_Framework_TestCase
 
         $z = Audio::build(null);
         $this->assertNull($z);
-    }
 
-    /**
-     * @expectedException \Tigris\Exceptions\TelegramTypeException
-     */
-    public function testBuildScalar()
-    {
-        Audio::build(123);
-    }
+        try {
+            Audio::build(123);
+            $this->fail('Expected exception not thrown');
+        } catch (\Exception $e) {
+            $this->assertInstanceOf(TelegramTypeException::class, $e);
+        }
 
-    /**
-     * @expectedException \Tigris\Exceptions\TelegramTypeException
-     */
-    public function testBuildEmptyArray()
-    {
-        Audio::build([]);
+        try {
+            Audio::build([]);
+            $this->fail('Expected exception not thrown');
+        } catch (\Exception $e) {
+            $this->assertInstanceOf(TelegramTypeException::class, $e);
+        }
     }
 }
