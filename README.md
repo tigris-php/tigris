@@ -1,5 +1,6 @@
 # Tigris Bot Framework #
 
+[![Build Status](https://travis-ci.org/tigris-php/tigris.svg?branch=master)](https://travis-ci.org/tigris-php/tigris)
 [![Join the chat at https://gitter.im/tigris-php/tigris](https://badges.gitter.im/tigris-php/tigris.svg)](https://gitter.im/tigris-php/tigris?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Tigris is modern Telegram bot framework written in PHP.
