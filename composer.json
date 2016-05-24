@@ -1,5 +1,12 @@
 {
     "name": "tigris/tigris",
+    "description": "Tigris is a modern Telegram bot framework written in PHP",
+    "keywords": [
+        "telegram",
+        "bot",
+        "api",
+        "framework"
+    ],
     "license": "MIT",
     "authors": [
         {
