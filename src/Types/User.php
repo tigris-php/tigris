@@ -10,7 +10,10 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class User
+ * This object represents a Telegram user or bot.
+ *
  * @package Tigris\Types
+ * @link https://core.telegram.org/bots/api#user
  *
  * @property ScalarInteger $id
  * @property ScalarString $first_name
@@ -19,6 +22,9 @@ use Tigris\Types\Scalar\ScalarString;
  */
 class User extends BaseObject
 {
+    /**
+     * @inheritdoc
+     */
     protected static function fields()
     {
         return [
@@ -26,6 +32,17 @@ class User extends BaseObject
             'first_name' => ScalarString::class,
             'last_name' => ScalarString::class,
             'username' => ScalarString::class,
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected static function requiredFields()
+    {
+        return [
+            'id',
+            'first_name',
         ];
     }
 }
