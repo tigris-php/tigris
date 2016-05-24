@@ -32,14 +32,4 @@ class File extends BaseObject
             'file_path' => ScalarString::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'file_id',
-        ];
-    }
 }

@@ -43,14 +43,4 @@ class ReplyKeyboardMarkup extends BaseObject
             'selective' => ScalarBoolean::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'keyboard',
-        ];
-    }
 }

@@ -33,16 +33,4 @@ class Venue extends BaseObject
             'foursquare_id' => ScalarString::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'location',
-            'title',
-            'address',
-        ];
-    }
 }

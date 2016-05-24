@@ -37,15 +37,4 @@ class InlineQuery extends BaseObject
             'offset' => ScalarString::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'id',
-            'from',
-        ];
-    }
 }

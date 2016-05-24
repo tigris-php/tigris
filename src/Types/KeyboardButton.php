@@ -58,14 +58,4 @@ class KeyboardButton extends BaseObject
             'request_location' => ScalarBoolean::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'text',
-        ];
-    }
 }

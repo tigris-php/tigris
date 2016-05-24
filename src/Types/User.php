@@ -34,15 +34,4 @@ class User extends BaseObject
             'username' => ScalarString::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'id',
-            'first_name',
-        ];
-    }
 }

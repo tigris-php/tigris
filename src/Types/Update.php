@@ -56,16 +56,6 @@ class Update extends BaseObject
     }
 
     /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'update_id',
-        ];
-    }
-
-    /**
      * Detects update type
      *
      * @param $data

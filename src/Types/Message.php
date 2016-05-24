@@ -128,18 +128,6 @@ class Message extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'message_id',
-            'date',
-            'chat',
-        ];
-    }
-
-    /**
      * Detects message type
      *
      * @param $data

@@ -15,9 +15,4 @@ interface TypeInterface
      * @return null|static
      */
     public static function build($data);
-
-    /**
-     * @return string|null
-     */
-    public function toJson();
 }

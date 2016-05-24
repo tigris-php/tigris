@@ -30,15 +30,4 @@ class Location extends BaseObject
             'latitude' => ScalarFloat::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'longitude',
-            'latitude',
-        ];
-    }
 }

@@ -34,15 +34,4 @@ class Contact extends BaseObject
             'user_id' => ScalarInteger::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'phone_number',
-            'first_name',
-        ];
-    }
 }

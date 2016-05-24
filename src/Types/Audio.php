@@ -38,15 +38,4 @@ class Audio extends BaseObject
             'file_size' => ScalarInteger::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'file_id',
-            'duration',
-        ];
-    }
 }

@@ -37,14 +37,4 @@ class ReplyKeyboardHide extends BaseObject
             'selective' => ScalarBoolean::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'hide_keyboard',
-        ];
-    }
 }

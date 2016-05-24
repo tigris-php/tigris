@@ -37,14 +37,4 @@ class ForceReply extends BaseObject
             'selective' => ScalarBoolean::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'force_reply',
-        ];
-    }
 }

@@ -43,15 +43,4 @@ class Chat extends BaseObject
             'last_name' => ScalarString::class,
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function requiredFields()
-    {
-        return [
-            'id',
-            'type',
-        ];
-    }
 }

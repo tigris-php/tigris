@@ -38,12 +38,11 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
             throw new TelegramTypeException('Input must be an array');
         }
 
-        $obj = new static;
-        
-        $missingFields = array_diff(static::requiredFields(), array_keys($data));
-        if (!empty($missingFields)) {
-            throw new TelegramTypeException('Missing required fields: ' . implode(', ', $missingFields));
+        if (count($data) == null) {
+            throw new TelegramTypeException('Unexpected empty array');
         }
+
+        $obj = new static;
 
         foreach (static::fields() as $field => $className) {
             /** @var $className BaseObject */
@@ -57,14 +56,6 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
      * @return array
      */
     protected static function fields()
-    {
-        return [];
-    }
-
-    /**
-     * @return array
-     */
-    protected static function requiredFields()
     {
         return [];
     }
