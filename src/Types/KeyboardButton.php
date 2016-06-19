@@ -30,6 +30,10 @@ class KeyboardButton extends BaseObject
      */
     public static function create($text, $request = null)
     {
+        if (empty($text)) {
+            throw new \InvalidArgumentException('Empty button text');
+        }
+        
         switch ($request) {
             case null:
             case static::REQUEST_CONTACT:
