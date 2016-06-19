@@ -2,13 +2,11 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\Audio;
-use Tigris\Types\Scalar\ScalarString;
-use Tigris\Types\Scalar\ScalarInteger;
 use Tigris\Exceptions\TelegramTypeException;
 use Tigris\Types\Inline\InlineQuery;
-use Tigris\Types\User;
 use Tigris\Types\Location;
+use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\User;
 
 class InlineQueryTest extends PHPUnit_Framework_TestCase
 {
@@ -29,7 +27,7 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
             'query' => 'foo',
             'offset' => 'bar',
         ]);
-        
+
         $this->assertInstanceOf(InlineQuery::class, $a);
         $this->assertAttributeInstanceOf(ScalarString::class, 'id', $a);
         $this->assertAttributeInstanceOf(User::class, 'from', $a);
