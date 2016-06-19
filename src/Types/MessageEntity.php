@@ -10,6 +10,7 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class MessageEntity
+ * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  *
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#messageentity
@@ -18,11 +19,12 @@ use Tigris\Types\Scalar\ScalarString;
  * @property ScalarInteger $offset
  * @property ScalarInteger $length
  * @property ScalarInteger $url
+ * @property User $user
  */
 class MessageEntity extends BaseObject
 {
     const TYPE_MENTION = 'mention';
-    const TYPE_HASH_TAG = 'hashtag';
+    const TYPE_HASHTAG = 'hashtag';
     const TYPE_BOT_COMMAND = 'bot_command';
     const TYPE_URL = 'url';
     const TYPE_EMAIL = 'email';
@@ -31,6 +33,7 @@ class MessageEntity extends BaseObject
     const TYPE_CODE = 'code';
     const TYPE_PRE = 'pre';
     const TYPE_TEXT_LINK = 'text_link';
+    const TYPE_TEXT_MENTION = 'text_mention';
 
     protected static function fields()
     {
@@ -39,6 +42,7 @@ class MessageEntity extends BaseObject
             'offset' => ScalarInteger::class,
             'length' => ScalarInteger::class,
             'url' => ScalarInteger::class,
+            'user' => User::class,
         ];
     }
 }

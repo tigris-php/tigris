@@ -18,6 +18,7 @@ use Tigris\Types\Scalar\ScalarInteger;
  *
  * @property ScalarInteger $update_id
  * @property Message $message
+ * @property Message $edited_message
  * @property InlineQuery $inline_query
  */
 class Update extends BaseObject
@@ -49,6 +50,7 @@ class Update extends BaseObject
         return [
             'update_id' => ScalarInteger::class,
             'message' => Message::class,
+            'edited_message' => Message::class,
             'inline_query' => InlineQuery::class,
 //            'chosen_inline_result' => ChosenInlineResult::class,
 //            'callback_query' => CallbackQuery::class,

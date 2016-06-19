@@ -25,6 +25,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property Chat $forward_from_chat
  * @property integer $forward_date
  * @property Message $reply_to_message
+ * @property ScalarInteger $edit_date
  * @property string $text
  * @property MessageEntity[] $entities
  * @property Audio $audio
@@ -101,6 +102,7 @@ class Message extends BaseObject
             'forward_from_chat' => Chat::class,
             'forward_date' => ScalarInteger::class,
             'reply_to_message' => Message::class,
+            'edit_date' => ScalarInteger::class,
             'text' => ScalarString::class,
             'entities' => MessageEntityArray::class,
             'audio' => Audio::class,
