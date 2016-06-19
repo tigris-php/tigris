@@ -10,6 +10,7 @@ use Tigris\Types\Scalar\ScalarString;
 
 /**
  * Class PhotoSize
+ * This object represents one size of a photo or a file / sticker thumbnail.
  *
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#photosize

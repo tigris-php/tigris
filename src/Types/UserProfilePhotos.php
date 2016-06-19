@@ -9,6 +9,7 @@ use Tigris\Types\Scalar\ScalarInteger;
 
 /**
  * Class UserProfilePhotos
+ * This object represent a user's profile pictures.
  *
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#userprofilephotos

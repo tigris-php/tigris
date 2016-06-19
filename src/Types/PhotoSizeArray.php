@@ -12,5 +12,5 @@ use Tigris\Types\Base\BaseArray;
  */
 class PhotoSizeArray extends BaseArray
 {
-    const ENTITY_CLASS = PhotoSizeArray::class;
+    const ENTITY_CLASS = PhotoSize::class;
 }
