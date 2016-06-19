@@ -48,4 +48,18 @@ class ChatTest extends PHPUnit_Framework_TestCase
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
     }
+
+    public function testToString()
+    {
+        $a = Chat::build([
+            'id' => 100500,
+            'type' => 'channel',
+            'title' => 'Some Channel',
+            'username' => '@tigrisbot',
+            'first_name' => 'Tigris',
+            'last_name' => 'Bot',
+        ]);
+
+        $this->assertSame('100500', (string) $a);
+    }
 }
