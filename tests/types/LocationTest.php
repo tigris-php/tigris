@@ -5,7 +5,6 @@
 use Tigris\Exceptions\TelegramTypeException;
 use Tigris\Types\Location;
 use Tigris\Types\Scalar\ScalarFloat;
-use Tigris\Types\Video;
 
 class LocationTest extends PHPUnit_Framework_TestCase
 {
