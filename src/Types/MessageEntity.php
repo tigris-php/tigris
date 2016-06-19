@@ -41,7 +41,7 @@ class MessageEntity extends BaseObject
             'type' => ScalarString::class,
             'offset' => ScalarInteger::class,
             'length' => ScalarInteger::class,
-            'url' => ScalarInteger::class,
+            'url' => ScalarString::class,
             'user' => User::class,
         ];
     }
