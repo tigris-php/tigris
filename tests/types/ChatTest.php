@@ -3,42 +3,46 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Types\Chat;
 use Tigris\Types\Scalar\ScalarInteger;
 use Tigris\Types\Scalar\ScalarString;
-use Tigris\Types\User;
 
-class UserTest extends PHPUnit_Framework_TestCase
+class ChatTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = User::build([
+        $a = Chat::build([
             'id' => 100500,
+            'type' => 'channel',
+            'title' => 'Some Channel',
+            'username' => '@tigrisbot',
             'first_name' => 'Tigris',
             'last_name' => 'Bot',
-            'username' => '@tigrisbot',
         ]);
 
-        $this->assertInstanceOf(User::class, $a);
+        $this->assertInstanceOf(Chat::class, $a);
         $this->assertAttributeInstanceOf(ScalarInteger::class, 'id', $a);
+        $this->assertAttributeInstanceOf(ScalarString::class, 'type', $a);
+        $this->assertAttributeInstanceOf(ScalarString::class, 'title', $a);
+        $this->assertAttributeInstanceOf(ScalarString::class, 'username', $a);
         $this->assertAttributeInstanceOf(ScalarString::class, 'first_name', $a);
         $this->assertAttributeInstanceOf(ScalarString::class, 'last_name', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'username', $a);
 
-        $b = User::build($a);
+        $b = Chat::build($a);
         $this->assertSame($a, $b);
 
-        $z = User::build(null);
+        $z = Chat::build(null);
         $this->assertNull($z);
 
         try {
-            User::build('scalar');
+            Chat::build('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            User::build([]);
+            Chat::build([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
