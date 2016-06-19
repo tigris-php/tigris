@@ -5,6 +5,7 @@
 namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Scalar\ScalarBoolean;
 
 /**
@@ -18,8 +19,17 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @property ScalarBoolean $one_time_keyboard
  * @property ScalarBoolean $selective
  */
-class ReplyKeyboardMarkup extends BaseObject
+class ReplyKeyboardMarkup extends BaseObject implements ReplyMarkupInterface
 {
+    /**
+     * Constructor
+     * 
+     * @param Keyboard $keyboard
+     * @param bool $resizeKeyboard
+     * @param bool $oneTimeKeyboard
+     * @param bool $selective
+     * @return static
+     */
     public static function create($keyboard, $resizeKeyboard = false, $oneTimeKeyboard = false, $selective = false)
     {
         $data = [

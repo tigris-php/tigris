@@ -10,6 +10,7 @@ use Tigris\Exceptions\TelegramApiException;
 use Tigris\Helpers\TypeHelper;
 use Tigris\Types\Chat;
 use Tigris\Types\File;
+use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Interfaces\TypeInterface;
 use Tigris\Types\Message;
 use Tigris\Types\Update;
@@ -119,7 +120,7 @@ class Api
         $disableWebPagePreview = null,
         $disableNotification = null,
         $replyToMessageId = null,
-        $replyMarkup = null
+        ReplyMarkupInterface $replyMarkup = null
     ) {
         $params = [
             'chat_id' => $chatId,

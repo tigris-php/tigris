@@ -5,6 +5,7 @@
 namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Scalar\ScalarBoolean;
 
 /**
@@ -16,8 +17,14 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @property ScalarBoolean $force_reply
  * @property ScalarBoolean $selective
  */
-class ForceReply extends BaseObject
+class ForceReply extends BaseObject implements ReplyMarkupInterface
 {
+    /**
+     * Constructor
+     * 
+     * @param bool $selective
+     * @return static
+     */
     public static function create($selective = false)
     {
         $data = [

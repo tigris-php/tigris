@@ -5,6 +5,7 @@
 namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Scalar\ScalarBoolean;
 
 /**
@@ -16,8 +17,14 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @property boolean $hide_keyboard
  * @property boolean $selective
  */
-class ReplyKeyboardHide extends BaseObject
+class ReplyKeyboardHide extends BaseObject implements ReplyMarkupInterface
 {
+    /**
+     * Constructor
+     *
+     * @param bool $selective
+     * @return static
+     */
     public static function create($selective = false)
     {
         $data = [
