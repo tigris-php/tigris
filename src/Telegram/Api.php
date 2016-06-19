@@ -93,6 +93,8 @@ class Api
     }
 
     /**
+     * @link https://core.telegram.org/bots/api#getme
+     *
      * @return User
      */
     public function getMe()
@@ -104,13 +106,13 @@ class Api
     /**
      * @link https://core.telegram.org/bots/api#sendmessage
      *
-     * @param $chatId
-     * @param $text
+     * @param integer|string|Chat $chatId
+     * @param string $text
      * @param string|null $parseMode
      * @param boolean|null $disableWebPagePreview
      * @param boolean|null $disableNotification
-     * @param integer|null $replyToMessageId
-     * @param mixed|null $replyMarkup
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
      * @return Message
      */
     public function sendMessage(
@@ -138,10 +140,10 @@ class Api
     /**
      * @link https://core.telegram.org/bots/api#forwardmessage
      *
-     * @param integer|string $chatId
-     * @param integer|string $fromChatId
-     * @param integer $messageId
-     * @param bool $disableNotification
+     * @param integer|string|Chat $chatId
+     * @param integer|string|Chat $fromChatId
+     * @param integer|Message $messageId
+     * @param boolean|null $disableNotification
      * @return Message
      */
     public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false)
@@ -159,21 +161,21 @@ class Api
     /**
      * @link https://core.telegram.org/bots/api#sendphoto
      *
-     * @param $chatId
-     * @param $photo
-     * @param $caption
+     * @param integer|string|Chat $chatId
+     * @param string|resource $photo
+     * @param string|null $caption
      * @param boolean|null $disableNotification
-     * @param integer|null $replyToMessageId
-     * @param mixed|null $replyMarkup
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
      * @return Message
      */
     public function sendPhoto(
         $chatId,
         $photo,
-        $caption,
+        $caption = null,
         $disableNotification = null,
         $replyToMessageId = null,
-        $replyMarkup = null
+        ReplyMarkupInterface $replyMarkup = null
     ) {
         $params = [
             'chat_id' => $chatId,
@@ -187,6 +189,19 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * @link https://core.telegram.org/bots/api#sendaudio
+     *
+     * @param integer|string|Chat $chatId
+     * @param string|resource $audio
+     * @param integer|null $duration
+     * @param string|null $performer
+     * @param string|null $title
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendAudio(
         $chatId,
         $audio,
@@ -195,7 +210,7 @@ class Api
         $title = null,
         $disableNotification = null,
         $replyToMessageId = null,
-        $replyMarkup = null
+        ReplyMarkupInterface $replyMarkup = null
     ) {
         $params = [
             'chat_id' => $chatId,
@@ -211,13 +226,24 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * @link https://core.telegram.org/bots/api#senddocument
+     *
+     * @param integer|string|Chat $chatId
+     * @param string|resource $document
+     * @param string|null $caption
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendDocument(
         $chatId,
         $document,
         $caption = null,
         $disableNotification = null,
         $replyToMessageId = null,
-        $replyMarkup = null
+        ReplyMarkupInterface $replyMarkup = null
     ) {
         $params = [
             'chat_id' => $chatId,

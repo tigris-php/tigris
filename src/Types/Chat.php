@@ -43,4 +43,12 @@ class Chat extends BaseObject
             'last_name' => ScalarString::class,
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function __toString()
+    {
+        return (string) $this->offsetGet('id');
+    }
 }

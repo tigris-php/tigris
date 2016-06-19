@@ -165,4 +165,12 @@ class Message extends BaseObject
         }
         return static::TYPE_UNKNOWN;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function __toString()
+    {
+        return (string) $this->offsetGet('message_id');
+    }
 }
