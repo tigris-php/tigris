@@ -19,37 +19,39 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#message
  *
- * @property integer $message_id
- * @property User $from
- * @property integer $date
- * @property Chat $chat
- * @property User $forward_from
- * @property Chat $forward_from_chat
- * @property integer $forward_date
- * @property Message $reply_to_message
- * @property ScalarInteger $edit_date
- * @property string $text
- * @property MessageEntity[] $entities
- * @property Audio $audio
- * @property Document $document
- * @property PhotoSize[] $photos
- * @property Sticker $sticker
- * @property Video $voice
- * @property string $caption
- * @property Contact $contact
- * @property Location $location
- * @property Venue $venue
- * @property User $new_chat_member
- * @property User $left_chat_member
- * @property string $new_chat_title
- * @property PhotoSize[] $new_chat_photo
- * @property boolean $delete_chat_photo
- * @property boolean $group_chat_created
- * @property boolean $supergroup_chat_created
- * @property boolean $channel_chat_created
- * @property integer $migrate_to_chat_id
- * @property integer $migrate_from_chat_id
- * @property Message $pinned_message
+ * @property integer $message_id Unique message identifier
+ * @property User $from Optional. Sender, can be empty for messages sent to channels.
+ * @property integer $date Date the message was sent in Unix time.
+ * @property Chat $chat Conversation the message belongs to.
+ * @property User $forward_from Optional. For forwarded messages, sender of the original message.
+ * @property Chat $forward_from_chat Optional. For messages forwarded from a channel, information about the original channel.
+ * @property integer $forward_date Optional. For forwarded messages, date the original message was sent in Unix time.
+ * @property Message $reply_to_message Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+ * @property integer $edit_date Optional. Date the message was last edited in Unix time.
+ * @property string $text Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters.
+ * @property MessageEntity[] $entities Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
+ * @property Audio $audio Optional. Message is an audio file, information about the file.
+ * @property Document $document Optional. Message is a general file, information about the file.
+ * @property Game $game Optional. Message is a game, information about the game.
+ * @property PhotoSize[] $photos Optional. Message is a photo, available sizes of the photo.
+ * @property Sticker $sticker Optional. Message is a sticker, information about the sticker.
+ * @property Video $video Optional. Message is a video, information about the video.
+ * @property Voice $voice Optional. Message is a voice message, information about the file.
+ * @property string $caption Optional. Caption for the document, photo or video, 0-200 characters.
+ * @property Contact $contact Optional. Message is a shared contact, information about the contact.
+ * @property Location $location Optional. Message is a shared location, information about the location.
+ * @property Venue $venue Optional. Message is a venue, information about the venue.
+ * @property User $new_chat_member Optional. A new member was added to the group, information about them (this member may be the bot itself).
+ * @property User $left_chat_member Optional. A member was removed from the group, information about them (this member may be the bot itself).
+ * @property string $new_chat_title Optional. A chat title was changed to this value.
+ * @property PhotoSize[] $new_chat_photo Optional. A chat photo was change to this value.
+ * @property boolean $delete_chat_photo Optional. Service message: the chat photo was deleted.
+ * @property boolean $group_chat_created Optional. Service message: the group has been created.
+ * @property boolean $supergroup_chat_created Optional. Service message: the supergroup has been created.
+ * @property boolean $channel_chat_created Optional. Service message: the channel has been created.
+ * @property integer $migrate_to_chat_id Optional. The group has been migrated to a supergroup with the specified identifier.
+ * @property integer $migrate_from_chat_id Optional. The supergroup has been migrated from a group with the specified identifier.
+ * @property Message $pinned_message Optional. Specified message was pinned.
  */
 class Message extends BaseObject
 {
@@ -109,6 +111,7 @@ class Message extends BaseObject
             'entities' => MessageEntityArray::class,
             'audio' => Audio::class,
             'document' => Document::class,
+            'game' => Game::class,
             'photo' => PhotoSizeArray::class,
             'sticker' => Sticker::class,
             'video' => Video::class,
