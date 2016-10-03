@@ -14,7 +14,7 @@ class StickerTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = Sticker::build([
-            'file_id' => 'foobar',
+            'file_id' => '123',
             'width' => 640,
             'height' => 480,
             'thumb' => [
@@ -23,17 +23,17 @@ class StickerTest extends PHPUnit_Framework_TestCase
                 'height' => 480,
                 'file_size' => 1024,
             ],
-            'emoji' => 'foobar',
+            'emoji' => 'emoji',
             'file_size' => 1024,
         ]);
 
         $this->assertInstanceOf(Sticker::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_id', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'width', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'height', $a);
+        $this->assertAttributeSame('123', 'file_id', $a);
+        $this->assertAttributeSame(640, 'width', $a);
+        $this->assertAttributeSame(480, 'height', $a);
         $this->assertAttributeInstanceOf(PhotoSize::class, 'thumb', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'emoji', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'file_size', $a);
+        $this->assertAttributeSame('emoji', 'emoji', $a);
+        $this->assertAttributeSame(1024, 'file_size', $a);
 
         $b = Sticker::build($a);
         $this->assertSame($a, $b);

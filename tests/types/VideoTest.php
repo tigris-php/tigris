@@ -13,9 +13,9 @@ class VideoTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = Video::build([
-            'file_id' => 'foobar',
-            'width' => 400,
-            'height' => 300,
+            'file_id' => '123',
+            'width' => 640,
+            'height' => 480,
             'duration' => 60,
             'thumb' => [
                 'file_id' => 'foobar',
@@ -28,13 +28,13 @@ class VideoTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertInstanceOf(Video::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_id', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'width', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'height', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'duration', $a);
+        $this->assertAttributeSame('123', 'file_id', $a);
+        $this->assertAttributeSame(640, 'width', $a);
+        $this->assertAttributeSame(480, 'height', $a);
+        $this->assertAttributeSame(60, 'duration', $a);
         $this->assertAttributeInstanceOf(PhotoSize::class, 'thumb', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'mime_type', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'file_size', $a);
+        $this->assertAttributeSame('video/mp4', 'mime_type', $a);
+        $this->assertAttributeSame(1024, 'file_size', $a);
 
         $b = Video::build($a);
         $this->assertSame($a, $b);

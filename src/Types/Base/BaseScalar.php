@@ -9,12 +9,9 @@ use Tigris\Types\Interfaces\TypeInterface;
 
 abstract class BaseScalar implements TypeInterface
 {
-    use JsonTrait;
-
-    public $value;
-
     /**
      * @inheritdoc
+     * @return mixed
      */
     public static function build($data)
     {
@@ -26,21 +23,11 @@ abstract class BaseScalar implements TypeInterface
             return null;
         }
 
-        $obj = new static;
-        $obj->value = static::readData($data);
-        return $obj;
+        return static::readData($data);
     }
 
     public static function readData($data)
     {
         return $data;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function __toString()
-    {
-        return (string) $this->value;
     }
 }

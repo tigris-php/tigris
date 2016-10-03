@@ -16,8 +16,6 @@ class TypeHelper
 
         if (is_scalar($value)) {
             $result = $value;
-        } elseif ($value instanceof BaseScalar) {
-            $result = $value->value;
         } elseif ($value instanceof BaseObject || $value instanceof BaseArray) {
             $array = $value->getArrayCopy();
             array_walk($array, function(&$item) {

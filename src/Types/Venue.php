@@ -14,10 +14,10 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#venue
  *
- * @property Location $location
- * @property ScalarString $title
- * @property ScalarString $address
- * @property ScalarString $foursquare_id
+ * @property Location $location Venue location.
+ * @property string $title Name of the venue.
+ * @property string $address Address of the venue.
+ * @property string $foursquare_id Optional. Foursquare identifier of the venue.
  */
 class Venue extends BaseObject
 {

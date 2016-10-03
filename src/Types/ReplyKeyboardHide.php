@@ -14,8 +14,8 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#replykeyboardhide
  *
- * @property ScalarBoolean $hide_keyboard
- * @property ScalarBoolean $selective
+ * @property boolean $hide_keyboard
+ * @property boolean $selective
  */
 class ReplyKeyboardHide extends BaseObject implements ReplyMarkupInterface
 {

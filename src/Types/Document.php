@@ -15,11 +15,11 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#document
  *
- * @property ScalarString $file_id
- * @property PhotoSize $thumb
- * @property ScalarString $file_name
- * @property ScalarString $mime_type
- * @property ScalarInteger $file_size
+ * @property string $file_id Unique file identifier.
+ * @property PhotoSize $thumb Optional. Document thumbnail as defined by sender.
+ * @property string $file_name Optional. Original filename as defined by sender.
+ * @property string $mime_type Optional. MIME type of the file as defined by sender.
+ * @property integer $file_size Optional. File size.
  */
 class Document extends BaseObject
 {

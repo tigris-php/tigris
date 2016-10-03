@@ -13,7 +13,7 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = InlineQuery::build([
-            'id' => 'foobar',
+            'id' => '123',
             'from' => [
                 'id' => 100500,
                 'first_name' => 'Tigris',
@@ -29,11 +29,11 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertInstanceOf(InlineQuery::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'id', $a);
+        $this->assertAttributeSame('123', 'id', $a);
         $this->assertAttributeInstanceOf(User::class, 'from', $a);
         $this->assertAttributeInstanceOf(Location::class, 'location', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'query', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'offset', $a);
+        $this->assertAttributeSame('foo', 'query', $a);
+        $this->assertAttributeSame('bar', 'offset', $a);
 
         $b = InlineQuery::build($a);
         $this->assertSame($a, $b);

@@ -14,9 +14,9 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#keyboardbutton
  *
- * @property ScalarString $text
- * @property ScalarBoolean $request_contact
- * @property ScalarBoolean $request_location
+ * @property string $text Text of the button. If none of the optional fields are used, it will be sent to the bot as a message when the button is pressed.
+ * @property boolean $request_contact Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only.
+ * @property boolean $request_location Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only.
  */
 class KeyboardButton extends BaseObject
 {

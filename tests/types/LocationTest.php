@@ -16,8 +16,8 @@ class LocationTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertInstanceOf(Location::class, $a);
-        $this->assertAttributeInstanceOf(ScalarFloat::class, 'longitude', $a);
-        $this->assertAttributeInstanceOf(ScalarFloat::class, 'latitude', $a);
+        $this->assertAttributeSame(0.5, 'longitude', $a);
+        $this->assertAttributeSame(0.5, 'latitude', $a);
 
         $b = Location::build($a);
         $this->assertSame($a, $b);

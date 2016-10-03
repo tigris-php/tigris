@@ -12,7 +12,7 @@ class ForceReplyTest extends PHPUnit_Framework_TestCase
         $a = ForceReply::create(true);
         $this->assertInstanceOf(ReplyMarkupInterface::class, $a);
         $this->assertInstanceOf(ForceReply::class, $a);
-        $this->assertSame(true, $a->force_reply->value, $a);
-        $this->assertSame(true, $a->selective->value, $a);
+        $this->assertSame(true, $a->force_reply, $a);
+        $this->assertSame(true, $a->selective, $a);
     }
 }

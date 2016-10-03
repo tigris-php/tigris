@@ -15,10 +15,10 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#user
  *
- * @property ScalarInteger $id
- * @property ScalarString $first_name
- * @property ScalarString $last_name
- * @property ScalarString $username
+ * @property integer $id Unique identifier for this user or bot.
+ * @property string $first_name User‘s or bot’s first name.
+ * @property string $last_name Optional. User‘s or bot’s last name.
+ * @property string $username Optional. User‘s or bot’s username.
  */
 class User extends BaseObject
 {

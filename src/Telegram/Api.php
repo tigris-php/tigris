@@ -14,7 +14,7 @@ use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Interfaces\TypeInterface;
 use Tigris\Types\Message;
 use Tigris\Types\Update;
-use Tigris\Types\UpdateArray;
+use Tigris\Types\Arrays\UpdateArray;
 use Tigris\Types\User;
 use Tigris\Types\UserProfilePhotos;
 

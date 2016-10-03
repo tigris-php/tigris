@@ -21,8 +21,8 @@ class PollingReceiver extends AbstractReceiver
             $updates = $this->bot->getApi()->getUpdates($this->offset);
 
             foreach ($updates as $update) {
-                $this->offset = $update->update_id->value + 1;
-                $this->bot->getUpdatesQueue()->insert($update, $update->update_id->value);
+                $this->offset = $update->update_id + 1;
+                $this->bot->getUpdatesQueue()->insert($update, $update->update_id);
             }
         });
     }

@@ -12,13 +12,13 @@ class VoiceTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = Voice::build([
-            'file_id' => 'foobar',
-            'duration' => 123,
+            'file_id' => '123',
+            'duration' => 456,
         ]);
         
         $this->assertInstanceOf(Voice::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_id', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'duration', $a);
+        $this->assertAttributeSame('123', 'file_id', $a);
+        $this->assertAttributeSame(456, 'duration', $a);
 
         $b = Voice::build($a);
         $this->assertSame($a, $b);

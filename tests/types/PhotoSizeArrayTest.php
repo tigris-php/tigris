@@ -6,7 +6,7 @@ use Tigris\Exceptions\TelegramTypeException;
 use Tigris\Types\PhotoSize;
 use Tigris\Types\Scalar\ScalarInteger;
 use Tigris\Types\Scalar\ScalarString;
-use Tigris\Types\PhotoSizeArray;
+use Tigris\Types\Arrays\PhotoSizeArray;
 
 class PhotoSizeArrayTest extends PHPUnit_Framework_TestCase
 {

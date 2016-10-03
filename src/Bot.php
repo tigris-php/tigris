@@ -4,6 +4,7 @@
  */
 namespace Tigris;
 
+use Evenement\EventEmitterTrait;
 use GuzzleHttp\Client;
 use React\Dns\Resolver\Factory as ResolverFactory;
 use React\EventLoop\Factory as EventLoopFactory;
@@ -11,10 +12,15 @@ use React\EventLoop\LoopInterface;
 use Tigris\Receivers\AbstractReceiver;
 use Tigris\Telegram\Api;
 use Tigris\Types\Message;
+use Tigris\Types\MessageEntity;
 use Tigris\Types\Update;
 
 abstract class Bot
 {
+    const EVENT_TEXT_MESSAGE_RECEIVED = 'onTextMessageReceived';
+
+    use EventEmitterTrait;
+
     protected $apiToken;
 
     protected $loop;
@@ -24,6 +30,8 @@ abstract class Bot
     protected $updater;
     /** @var Client */
     protected $client;
+
+    protected $emitter;
 
     /** @var Api */
     protected $api;
@@ -136,6 +144,14 @@ abstract class Bot
 
     public function onTextMessage(Message $message)
     {
+        $this->emit(static::EVENT_TEXT_MESSAGE_RECEIVED, [$message]);
+
+        array_walk($message->entities, function(MessageEntity $entity) use ($message) {
+            if ($entity->type === MessageEntity::TYPE_BOT_COMMAND) {
+                $command = substr($message->text, $entity->offset, $entity->length);
+                var_dump($command);
+            }
+        });
     }
 
     public function onAudioMessage(Message $message)

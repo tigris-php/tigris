@@ -15,8 +15,8 @@ use Tigris\Types\Scalar\ScalarInteger;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#location
  *
- * @property ScalarFloat $longitude
- * @property ScalarFloat $latitude
+ * @property float $longitude Longitude as defined by sender.
+ * @property float $latitude Latitude as defined by sender.
  */
 class Location extends BaseObject
 {

@@ -5,6 +5,7 @@
 namespace Tigris\Types;
 
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Scalar\ScalarBoolean;
 use Tigris\Types\Scalar\ScalarInteger;
 use Tigris\Types\Scalar\ScalarString;
 
@@ -15,12 +16,13 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#chat
  *
- * @property ScalarInteger $id
- * @property ScalarString $type
- * @property ScalarString $title
- * @property ScalarString $username
- * @property ScalarString $first_name
- * @property ScalarString $last_name
+ * @property integer $id Unique identifier for this chat.
+ * @property string $type Type of chat.
+ * @property string $title Optional. Title, for supergroups, channels and group chats.
+ * @property string $username Optional. Username, for private chats, supergroups and channels if available.
+ * @property string $first_name Optional. First name of the other party in a private chat.
+ * @property string $last_name Optional. Last name of the other party in a private chat.
+ * @property boolean $all_members_are_administrators Optional. True if a group has ‘All Members Are Admins’ enabled.
  */
 class Chat extends BaseObject
 {
@@ -41,6 +43,7 @@ class Chat extends BaseObject
             'username' => ScalarString::class,
             'first_name' => ScalarString::class,
             'last_name' => ScalarString::class,
+            'all_members_are_administrators' => ScalarBoolean::class,
         ];
     }
 

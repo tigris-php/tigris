@@ -2,9 +2,10 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Types;
+namespace Tigris\Types\Arrays;
 
 use Tigris\Types\Base\BaseMatrix;
+use Tigris\Types\PhotoSize;
 
 /**
  * Class PhotoSizeMatrix

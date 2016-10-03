@@ -15,10 +15,10 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#contact
  *
- * @property ScalarString $phone_number
- * @property ScalarString $first_name
- * @property ScalarString $last_name
- * @property ScalarInteger $user_id
+ * @property string $phone_number Contact's phone number.
+ * @property string $first_name Contact's first name.
+ * @property string $last_name Optional. Contact's last name.
+ * @property integer $user_id Optional. Contact's user identifier in Telegram.
  */
 class Contact extends BaseObject
 {

@@ -16,16 +16,16 @@ class VenueTest extends PHPUnit_Framework_TestCase
                 'longitude' => 0.5,
                 'latitude' => 0.5,
             ],
-            'title' => 123,
-            'address' => 123,
-            'foursquare_id' => 123,
+            'title' => 'some title',
+            'address' => 'some address',
+            'foursquare_id' => '123',
         ]);
 
         $this->assertInstanceOf(Venue::class, $a);
         $this->assertAttributeInstanceOf(Location::class, 'location', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'title', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'address', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'foursquare_id', $a);
+        $this->assertAttributeSame('some title', 'title', $a);
+        $this->assertAttributeSame('some address', 'address', $a);
+        $this->assertAttributeSame('123', 'foursquare_id', $a);
 
         $b = Venue::build($a);
         $this->assertSame($a, $b);

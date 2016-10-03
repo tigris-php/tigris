@@ -4,6 +4,7 @@
  */
 namespace Tigris\Types;
 
+use Tigris\Types\Arrays\PhotoSizeMatrix;
 use Tigris\Types\Base\BaseObject;
 use Tigris\Types\Scalar\ScalarInteger;
 
@@ -14,8 +15,8 @@ use Tigris\Types\Scalar\ScalarInteger;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#userprofilephotos
  *
- * @property ScalarInteger $total_count
- * @property PhotoSizeMatrix photos
+ * @property integer $total_count Total number of profile pictures the target user has.
+ * @property PhotoSizeMatrix $photos Requested profile pictures (in up to 4 sizes each).
  */
 class UserProfilePhotos extends BaseObject
 {

@@ -9,10 +9,8 @@ use Tigris\Types\Base\BaseScalar;
 /**
  * Class ScalarInteger
  * @package Tigris\Types
- *
- * @property integer $value
  */
-class ScalarInteger extends BaseScalar
+abstract class ScalarInteger extends BaseScalar
 {
     /**
      * @inheritdoc

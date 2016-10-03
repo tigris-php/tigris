@@ -18,7 +18,8 @@
     "require": {
         "php": ">=5.5.0",
         "react/react": "^0.4.2",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "evenement/evenement": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"

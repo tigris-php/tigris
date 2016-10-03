@@ -16,11 +16,11 @@ use Tigris\Types\User;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#inlinequery
  *
- * @property ScalarInteger $id
+ * @property string $id
  * @property User $from
  * @property Location $location
- * @property ScalarString $query
- * @property ScalarString $offset
+ * @property string $query
+ * @property string $offset
  */
 class InlineQuery extends BaseObject
 {

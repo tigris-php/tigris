@@ -14,8 +14,8 @@ class MessageEntityTest extends PHPUnit_Framework_TestCase
     {
         $a = MessageEntity::build([
             'type' => 'text_mention',
-            'offset' => '0',
-            'length' => '100',
+            'offset' => 123,
+            'length' => 456,
             'url' => 'https://telegram.me',
             'user' => [
                 'id' => 100500,
@@ -26,10 +26,10 @@ class MessageEntityTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertInstanceOf(MessageEntity::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'type', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'offset', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'length', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'url', $a);
+        $this->assertAttributeSame('text_mention', 'type', $a);
+        $this->assertAttributeSame(123, 'offset', $a);
+        $this->assertAttributeSame(456, 'length', $a);
+        $this->assertAttributeSame('https://telegram.me', 'url', $a);
         $this->assertAttributeInstanceOf(User::class, 'user', $a);
 
         $b = MessageEntity::build($a);

@@ -10,17 +10,17 @@ class KeyboardButtonTest extends PHPUnit_Framework_TestCase
     {
         $a = KeyboardButton::create('test');
         $this->assertInstanceOf(KeyboardButton::class, $a);
-        $this->assertSame('test', $a->text->value);
+        $this->assertSame('test', $a->text);
 
         $b = KeyboardButton::create('test', KeyboardButton::REQUEST_LOCATION);
         $this->assertInstanceOf(KeyboardButton::class, $b);
-        $this->assertSame('test', $a->text->value, $a);
-        $this->assertSame(true, $b->request_location->value);
+        $this->assertSame('test', $a->text, $a);
+        $this->assertSame(true, $b->request_location);
 
         $c = KeyboardButton::create('test', KeyboardButton::REQUEST_CONTACT);
         $this->assertInstanceOf(KeyboardButton::class, $c);
-        $this->assertSame('test', $c->text->value);
-        $this->assertSame(true, $c->request_contact->value);
+        $this->assertSame('test', $c->text);
+        $this->assertSame(true, $c->request_contact);
 
         try {
             KeyboardButton::create('');

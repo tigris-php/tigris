@@ -15,14 +15,14 @@ class ContactTest extends PHPUnit_Framework_TestCase
             'phone_number' => '+100500',
             'first_name' => 'Tigris',
             'last_name' => 'Bot',
-            'user_id' => 100500,
+            'user_id' => 123,
         ]);
 
         $this->assertInstanceOf(Contact::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'phone_number', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'first_name', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'last_name', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'user_id', $a);
+        $this->assertAttributeSame('+100500', 'phone_number', $a);
+        $this->assertAttributeSame('Tigris', 'first_name', $a);
+        $this->assertAttributeSame('Bot', 'last_name', $a);
+        $this->assertAttributeSame(123, 'user_id', $a);
 
         $b = Contact::build($a);
         $this->assertSame($a, $b);

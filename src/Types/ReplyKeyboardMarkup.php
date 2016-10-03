@@ -15,9 +15,9 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @link https://core.telegram.org/bots/api#replykeyboardmarkup
  *
  * @property Keyboard $keyboard
- * @property ScalarBoolean $resize_keyboard
- * @property ScalarBoolean $one_time_keyboard
- * @property ScalarBoolean $selective
+ * @property boolean $resize_keyboard
+ * @property boolean $one_time_keyboard
+ * @property boolean $selective
  */
 class ReplyKeyboardMarkup extends BaseObject implements ReplyMarkupInterface
 {
@@ -25,9 +25,9 @@ class ReplyKeyboardMarkup extends BaseObject implements ReplyMarkupInterface
      * Constructor
      * 
      * @param Keyboard $keyboard
-     * @param bool $resizeKeyboard
-     * @param bool $oneTimeKeyboard
-     * @param bool $selective
+     * @param boolean $resizeKeyboard
+     * @param boolean $oneTimeKeyboard
+     * @param boolean $selective
      * @return static
      */
     public static function create($keyboard, $resizeKeyboard = false, $oneTimeKeyboard = false, $selective = false)

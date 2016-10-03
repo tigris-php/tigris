@@ -14,8 +14,8 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#forcereply
  *
- * @property ScalarBoolean $force_reply
- * @property ScalarBoolean $selective
+ * @property boolean $force_reply
+ * @property boolean $selective
  */
 class ForceReply extends BaseObject implements ReplyMarkupInterface
 {

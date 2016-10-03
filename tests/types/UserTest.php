@@ -19,10 +19,10 @@ class UserTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertInstanceOf(User::class, $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'id', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'first_name', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'last_name', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'username', $a);
+        $this->assertAttributeSame(100500, 'id', $a);
+        $this->assertAttributeSame('Tigris', 'first_name', $a);
+        $this->assertAttributeSame('Bot', 'last_name', $a);
+        $this->assertAttributeSame('@tigrisbot', 'username', $a);
 
         $b = User::build($a);
         $this->assertSame($a, $b);

@@ -15,10 +15,10 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#messageentity
  *
- * @property ScalarString $type
- * @property ScalarInteger $offset
- * @property ScalarInteger $length
- * @property ScalarInteger $url
+ * @property string $type
+ * @property integer $offset
+ * @property integer $length
+ * @property integer $url
  * @property User $user
  */
 class MessageEntity extends BaseObject

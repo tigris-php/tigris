@@ -16,7 +16,7 @@ use Tigris\Types\Scalar\ScalarInteger;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#update
  *
- * @property ScalarInteger $update_id
+ * @property integer $update_id
  * @property Message $message
  * @property Message $edited_message
  * @property InlineQuery $inline_query

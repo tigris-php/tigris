@@ -15,10 +15,10 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#voice
  *
- * @property ScalarString $file_id
- * @property ScalarInteger $duration
- * @property ScalarString $mime_type
- * @property ScalarInteger $file_size
+ * @property string $file_id Unique identifier for this file.
+ * @property integer $duration Duration of the audio in seconds as defined by sender.
+ * @property string $mime_type Optional. MIME type of the file as defined by sender.
+ * @property integer $file_size Optional. File size.
  */
 class Voice extends BaseObject
 {

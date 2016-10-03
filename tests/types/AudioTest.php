@@ -12,13 +12,13 @@ class AudioTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = Audio::build([
-            'file_id' => 'foobar',
+            'file_id' => 'foo',
             'duration' => 123,
         ]);
         
         $this->assertInstanceOf(Audio::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_id', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'duration', $a);
+        $this->assertAttributeSame('foo', 'file_id', $a);
+        $this->assertAttributeSame(123, 'duration', $a);
 
         $b = Audio::build($a);
         $this->assertSame($a, $b);

@@ -12,15 +12,15 @@ class FileTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = File::build([
-            'file_id' => 'foobar',
+            'file_id' => '123',
             'file_size' => 1024,
-            'file_path' => 'foobar',
+            'file_path' => 'path',
         ]);
 
         $this->assertInstanceOf(File::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_id', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'file_size', $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_path', $a);
+        $this->assertAttributeSame('123', 'file_id', $a);
+        $this->assertAttributeSame(1024, 'file_size', $a);
+        $this->assertAttributeSame('path', 'file_path', $a);
 
         $b = File::build($a);
         $this->assertSame($a, $b);

@@ -12,17 +12,4 @@ class ScalarBooleanTest extends PHPUnit_Framework_TestCase
         $this->assertSame(ScalarBoolean::readData(0), false);
         $this->assertSame(ScalarBoolean::readData(1), true);
     }
-
-    /**
-     * @depends testReadData
-     */
-    public function testBuild()
-    {
-        $a = ScalarBoolean::build(true);
-        $this->assertInstanceOf(ScalarBoolean::class, $a);
-        $this->assertAttributeSame(true, 'value', $a);
-
-        $z = ScalarBoolean::build(null);
-        $this->assertNull($z);
-    }
 }

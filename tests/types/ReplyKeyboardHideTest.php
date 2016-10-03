@@ -12,7 +12,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
         $a = ReplyKeyboardHide::create(true);
         $this->assertInstanceOf(ReplyMarkupInterface::class, $a);
         $this->assertInstanceOf(ReplyKeyboardHide::class, $a);
-        $this->assertSame(true, $a->hide_keyboard->value, $a);
-        $this->assertSame(true, $a->selective->value, $a);
+        $this->assertSame(true, $a->hide_keyboard, $a);
+        $this->assertSame(true, $a->selective, $a);
     }
 }

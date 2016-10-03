@@ -15,13 +15,13 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#video
  *
- * @property ScalarString $file_id
- * @property ScalarInteger $width
- * @property ScalarInteger $height
- * @property ScalarInteger $duration
- * @property PhotoSize $thumb
- * @property ScalarString $mime_type
- * @property ScalarInteger $file_size
+ * @property string $file_id Unique identifier for this file.
+ * @property integer $width Video width as defined by sender.
+ * @property integer $height Video height as defined by sender.
+ * @property integer $duration Duration of the video in seconds as defined by sender.
+ * @property PhotoSize $thumb Optional. Video thumbnail.
+ * @property string $mime_type Optional. Mime type of a file as defined by sender.
+ * @property integer $file_size Optional. File size.
  */
 class Video extends BaseObject
 {

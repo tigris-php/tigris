@@ -3,8 +3,8 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Types\PhotoSize;
-use Tigris\Types\PhotoSizeArray;
-use Tigris\Types\PhotoSizeMatrix;
+use Tigris\Types\Arrays\PhotoSizeArray;
+use Tigris\Types\Arrays\PhotoSizeMatrix;
 
 class PhotoSizeMatrixTest extends PHPUnit_Framework_TestCase
 {

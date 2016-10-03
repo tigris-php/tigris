@@ -15,9 +15,9 @@ use Tigris\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#file
  *
- * @property ScalarString $file_id
- * @property ScalarInteger $file_size
- * @property ScalarString $file_path
+ * @property string $file_id Unique identifier for this file.
+ * @property integer $file_size Optional. File size, if known.
+ * @property string $file_path Optional. File path.
  */
 class File extends BaseObject
 {

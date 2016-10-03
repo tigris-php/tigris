@@ -12,17 +12,17 @@ class PhotoSizeTest extends PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $a = PhotoSize::build([
-            'file_id' => 'foobar',
+            'file_id' => '123',
             'width' => 640,
             'height' => 480,
             'file_size' => 1024,
         ]);
 
         $this->assertInstanceOf(PhotoSize::class, $a);
-        $this->assertAttributeInstanceOf(ScalarString::class, 'file_id', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'width', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'height', $a);
-        $this->assertAttributeInstanceOf(ScalarInteger::class, 'file_size', $a);
+        $this->assertAttributeSame('123', 'file_id', $a);
+        $this->assertAttributeSame(640, 'width', $a);
+        $this->assertAttributeSame(480, 'height', $a);
+        $this->assertAttributeSame(1024, 'file_size', $a);
 
         $b = PhotoSize::build($a);
         $this->assertSame($a, $b);
