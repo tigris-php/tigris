@@ -257,6 +257,18 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * Use this method to send .webp stickers. On success, the sent Message is returned.
+     *
+     * @link https://core.telegram.org/bots/api#sendsticker
+     *
+     * @param integer|string|Chat $chatId
+     * @param string|resource $sticker
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendSticker(
         $chatId,
         $sticker,
@@ -275,6 +287,24 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document).
+     * On success, the sent {@link \Tigris\Types\Message} is returned. Bots can currently send video files of up to
+     * 50 MB in size, this limit may be changed in the future.
+     *
+     * @link https://core.telegram.org/bots/api#sendvideo
+     *
+     * @param integer|string|Chat $chatId
+     * @param string|resource $video
+     * @param integer|null $duration
+     * @param integer|null $width
+     * @param integer|null $height
+     * @param string|null $caption
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendVideo(
         $chatId,
         $video,
@@ -301,6 +331,17 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * @link https://core.telegram.org/bots/api#sendvoice
+     *
+     * @param integer|string|Chat $chatId
+     * @param string|resource $voice
+     * @param integer|null $duration
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendVoice(
         $chatId,
         $voice,
@@ -321,6 +362,17 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * @link https://core.telegram.org/bots/api#sendlocation
+     *
+     * @param integer|string|Chat $chatId
+     * @param float $latitude
+     * @param float $longitude
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendLocation(
         $chatId,
         $latitude,
@@ -341,6 +393,20 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * @link https://core.telegram.org/bots/api#sendvenue
+     *
+     * @param integer|string|Chat $chatId
+     * @param float $latitude
+     * @param float $longitude
+     * @param string $title
+     * @param string $address
+     * @param string $foursquareId
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendVenue(
         $chatId,
         $latitude,
@@ -367,11 +433,23 @@ class Api
         return Message::build($data);
     }
 
+    /**
+     * @link https://core.telegram.org/bots/api#sendcontact
+     *
+     * @param integer|string|Chat $chatId
+     * @param string $phoneNumber
+     * @param string $firstName
+     * @param string|null $lastName
+     * @param boolean|null $disableNotification
+     * @param integer|Message|null $replyToMessageId
+     * @param ReplyMarkupInterface|null $replyMarkup
+     * @return Message
+     */
     public function sendContact(
         $chatId,
         $phoneNumber,
         $firstName,
-        $lastName,
+        $lastName = null,
         $disableNotification = null,
         $replyToMessageId = null,
         $replyMarkup = null
