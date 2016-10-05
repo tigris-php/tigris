@@ -8,13 +8,15 @@ use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Tigris\Exceptions\TelegramApiException;
 use Tigris\Helpers\TypeHelper;
+use Tigris\Types\Arrays\ChatMemberArray;
+use Tigris\Types\Arrays\UpdateArray;
 use Tigris\Types\Chat;
+use Tigris\Types\ChatMember;
 use Tigris\Types\File;
 use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Interfaces\TypeInterface;
 use Tigris\Types\Message;
 use Tigris\Types\Update;
-use Tigris\Types\Arrays\UpdateArray;
 use Tigris\Types\User;
 use Tigris\Types\UserProfilePhotos;
 
@@ -69,12 +71,14 @@ class Api
     }
 
     /**
-     * Use this method to receive incoming updates using long polling. An Array of Update objects is returned.
+     * Use this method to receive incoming updates using long polling.
+     * {@see \Tigris\Types\Arrays\UpdateArray} object is returned.
+     *
      * @link https://core.telegram.org/bots/api/#getting-updates
      *
-     * @param null $offset
-     * @param null $limit
-     * @param null $timeout
+     * @param integer|null $offset
+     * @param integer|null $limit
+     * @param integer|null $timeout
      * @return Update[]|UpdateArray
      */
     public function getUpdates(
@@ -93,6 +97,9 @@ class Api
     }
 
     /**
+     * A simple method for testing your bot's auth token. Requires no parameters.
+     * Returns basic information about the bot in form of a {@see \Tigris\Types\User} object.
+     *
      * @link https://core.telegram.org/bots/api#getme
      *
      * @return User
@@ -104,6 +111,9 @@ class Api
     }
 
     /**
+     * Use this method to send text messages.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     *
      * @link https://core.telegram.org/bots/api#sendmessage
      *
      * @param integer|string|Chat $chatId
@@ -138,6 +148,9 @@ class Api
     }
 
     /**
+     * Use this method to forward messages of any kind.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     *
      * @link https://core.telegram.org/bots/api#forwardmessage
      *
      * @param integer|string|Chat $chatId
@@ -159,6 +172,9 @@ class Api
     }
 
     /**
+     * Use this method to send photos.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     *
      * @link https://core.telegram.org/bots/api#sendphoto
      *
      * @param integer|string|Chat $chatId
@@ -190,6 +206,10 @@ class Api
     }
 
     /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player.
+     * Your audio must be in the .mp3 format. On success, the sent {@see \Tigris\Types\Message} is returned.
+     * Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     *
      * @link https://core.telegram.org/bots/api#sendaudio
      *
      * @param integer|string|Chat $chatId
@@ -227,6 +247,9 @@ class Api
     }
 
     /**
+     * Use this method to send general files. On success, the sent {@see \Tigris\Types\Message} is returned.
+     * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     *
      * @link https://core.telegram.org/bots/api#senddocument
      *
      * @param integer|string|Chat $chatId
@@ -258,7 +281,8 @@ class Api
     }
 
     /**
-     * Use this method to send .webp stickers. On success, the sent Message is returned.
+     * Use this method to send .webp stickers.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendsticker
      *
@@ -288,8 +312,9 @@ class Api
     }
 
     /**
-     * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document).
-     * On success, the sent {@link \Tigris\Types\Message} is returned. Bots can currently send video files of up to
+     * Use this method to send video files, Telegram clients support mp4 videos
+     * (other formats may be sent as {@see Tigris\Types\Document}).
+     * On success, the sent {@see \Tigris\Types\Message} is returned. Bots can currently send video files of up to
      * 50 MB in size, this limit may be changed in the future.
      *
      * @link https://core.telegram.org/bots/api#sendvideo
@@ -332,6 +357,12 @@ class Api
     }
 
     /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice
+     * message. For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent
+     * as {@see \Tigris\Types\Audio} or {@see \Tigris\Types\Document}).
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     *
      * @link https://core.telegram.org/bots/api#sendvoice
      *
      * @param integer|string|Chat $chatId
@@ -363,6 +394,9 @@ class Api
     }
 
     /**
+     * Use this method to send point on the map.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     *
      * @link https://core.telegram.org/bots/api#sendlocation
      *
      * @param integer|string|Chat $chatId
@@ -394,6 +428,9 @@ class Api
     }
 
     /**
+     * Use this method to send information about a venue.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     *
      * @link https://core.telegram.org/bots/api#sendvenue
      *
      * @param integer|string|Chat $chatId
@@ -434,6 +471,9 @@ class Api
     }
 
     /**
+     * Use this method to send phone contacts.
+     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     *
      * @link https://core.telegram.org/bots/api#sendcontact
      *
      * @param integer|string|Chat $chatId
@@ -468,6 +508,9 @@ class Api
     }
 
     /**
+     * Use this method when you need to tell the user that something is happening on the bot's side. The status
+     * is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status).
+     *
      * @link https://core.telegram.org/bots/api#sendchataction
      *
      * @param integer|Chat $chatId
@@ -486,6 +529,9 @@ class Api
     }
 
     /**
+     * Use this method to get a list of profile pictures for a user.
+     * Returns a {@see \Tigris\Types\UserProfilePhotos} object.
+     *
      * @link https://core.telegram.org/bots/api#getuserprofilephotos
      *
      * @param integer $userId
@@ -508,6 +554,10 @@ class Api
     }
 
     /**
+     * Use this method to get basic info about a file and prepare it for downloading.
+     * For the moment, bots can download files of up to 20MB in size.
+     * On success, a File object is returned.
+     *
      * @link https://core.telegram.org/bots/api#getfile
      *
      * @param integer $fileId
@@ -524,10 +574,14 @@ class Api
     }
 
     /**
+     * Use this method to kick a user from a group or a supergroup. In the case of supergroups, the user will not
+     * be able to return to the group on their own using invite links, etc., unless unbanned first. The bot must be
+     * an administrator in the group for this to work. Returns True on success.
+     *
      * @link https://core.telegram.org/bots/api#kickchatmember
      *
-     * @param integer|string $chatId
-     * @param integer $userId
+     * @param integer|string|Chat $chatId
+     * @param integer|User $userId
      * @return true
      */
     public function kickChatMember(
@@ -538,10 +592,32 @@ class Api
             'chat_id' => $chatId,
             'user_id' => $userId,
         ];
-        return (bool) $this->call('unbanChatMember', $params);
+        return (bool) $this->call('kickChatMember', $params);
     }
 
     /**
+     * Use this method for your bot to leave a group, supergroup or channel.
+     * Returns True on success.
+     *
+     * @link https://core.telegram.org/bots/api#leavechat
+     *
+     * @param integer|string|Chat $chatId
+     * @return true
+     */
+    public function leaveChat(
+        $chatId
+    ) {
+        $params = [
+            'chat_id' => $chatId,
+        ];
+        return (bool) $this->call('leaveChat', $params);
+    }
+
+    /**
+     * Use this method to unban a previously kicked user in a supergroup. The user will not return to the group
+     * automatically, but will be able to join via link, etc. The bot must be an administrator in the group for this
+     * to work. Returns True on success.
+     *
      * @link https://core.telegram.org/bots/api#unbanchatmember
      *
      * @param integer|string $chatId
@@ -557,6 +633,111 @@ class Api
             'user_id' => $userId,
         ];
         return (bool) $this->call('unbanChatMember', $params);
+    }
+
+    /**
+     * Use this method to get up to date information about the chat (current name of the user for one-on-one
+     * conversations, current username of a user, group or channel, etc.).
+     * Returns a {@see \Tigris\Types\Chat} object on success.
+     *
+     * @link https://core.telegram.org/bots/api#getchat
+     *
+     * @param integer|string|Chat $chatId
+     * @return Chat
+     */
+    public function getChat(
+        $chatId
+    ) {
+        $params = [
+            'chat_id' => $chatId,
+        ];
+        return Chat::build($this->call('getChat', $params));
+    }
+
+    /**
+     * Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects
+     * that contains information about all chat administrators except other bots. If the chat is a group or a
+     * supergroup and no administrators were appointed, only the creator will be returned.
+     *
+     * @link https://core.telegram.org/bots/api#getchatadministrators
+     *
+     * @param integer|string|Chat $chatId
+     * @return ChatMemberArray
+     */
+    public function getChatAdministrators(
+        $chatId
+    ) {
+        $params = [
+            'chat_id' => $chatId,
+        ];
+        return ChatMemberArray::build($this->call('getChatAdministrators', $params));
+    }
+
+    /**
+     * Use this method to get the number of members in a chat.
+     * Returns Int on success.
+     *
+     * @link https://core.telegram.org/bots/api#getchatmemberscount
+     *
+     * @param integer|string|Chat $chatId
+     * @return integer
+     */
+    public function getChatMembersCount(
+        $chatId
+    ) {
+        $params = [
+            'chat_id' => $chatId,
+        ];
+        return (integer) $this->call('getChatMembersCount', $params);
+    }
+
+    /**
+     * Use this method to get information about a member of a chat.
+     * Returns a {@see \Tigris\Types\ChatMember} object on success.
+     *
+     * @link https://core.telegram.org/bots/api#getchatmember
+     *
+     * @param integer|string|Chat $chatId
+     * @param integer|string|User $userId
+     * @return ChatMember
+     */
+    public function getChatMember(
+        $chatId,
+        $userId
+    ) {
+        $params = [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+        ];
+        return ChatMember::build($this->call('getChatMember', $params));
+    }
+
+    /**
+     * Use this method to send answers to callback queries sent from inline keyboards.
+     * The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
+     * On success, True is returned.
+     *
+     * @link https://core.telegram.org/bots/api#answercallbackquery
+     *
+     * @param string $callbackQueryId
+     * @param string $text
+     * @param boolean $showAlert
+     * @param string $url
+     * @return true
+     */
+    public function answerCallbackQuery(
+        $callbackQueryId,
+        $text,
+        $showAlert,
+        $url = null
+    ) {
+        $params = [
+            'callback_query_id' => $callbackQueryId,
+            'text' => $text,
+            'show_alert' => $showAlert,
+            'url' => $url,
+        ];
+        return (bool) $this->call('answerCallbackQuery', $params);
     }
 
     /**

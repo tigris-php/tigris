@@ -9,7 +9,6 @@ use Tigris\Types\Base\BaseObject;
 use Tigris\Types\Scalar\ScalarInteger;
 
 /**
- * Class UserProfilePhotos
  * This object represent a user's profile pictures.
  *
  * @package Tigris\Types
