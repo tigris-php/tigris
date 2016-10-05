@@ -17,9 +17,20 @@ use Tigris\Types\Update;
 
 abstract class Bot
 {
-    const EVENT_TEXT_MESSAGE_RECEIVED = 'onTextMessageReceived';
-
     use EventEmitterTrait;
+
+    const EVENT_AUDIO_MESSAGE_RECEIVED = 'onAudioMessageReceived';
+    const EVENT_CONTACT_MESSAGE_RECEIVED = 'onContactMessageReceived';
+    const EVENT_DOCUMENT_MESSAGE_RECEIVED = 'onDocumentMessageReceived';
+    const EVENT_LOCATION_MESSAGE_RECEIVED = 'onLocationMessageReceived';
+    const EVENT_PHOTO_MESSAGE_RECEIVED = 'onPhotoMessageReceived';
+    const EVENT_STICKER_MESSAGE_RECEIVED = 'onStickerMessageReceived';
+    const EVENT_TEXT_MESSAGE_RECEIVED = 'onTextMessageReceived';
+    const EVENT_VIDEO_MESSAGE_RECEIVED = 'onVideoMessageReceived';
+    const EVENT_VENUE_MESSAGE_RECEIVED = 'onVenueMessageReceived';
+    const EVENT_VOICE_MESSAGE_RECEIVED = 'onVoiceMessageReceived';
+    const EVENT_SERVICE_MESSAGE_RECEIVED = 'onServiceMessageReceived';
+    const EVENT_UNKNOWN_TYPE_MESSAGE_RECEIVED = 'onUnknownTypeMessageReceived';
 
     protected $apiToken;
 
@@ -27,12 +38,9 @@ abstract class Bot
     protected $resolver;
 
     /** @var AbstractReceiver */
-    protected $updater;
+    protected $receiver;
     /** @var Client */
     protected $client;
-
-    protected $emitter;
-
     /** @var Api */
     protected $api;
 
@@ -69,44 +77,69 @@ abstract class Bot
         $this->loop->run();
     }
 
-    public final function onUpdateReceived(Update $update)
+    /**
+     * @param Update $update
+     */
+    protected final function onUpdateReceived(Update $update)
     {
         switch ($update->type) {
             case $update::TYPE_MESSAGE:
                 $this->onMessageReceived($update->message);
                 break;
+            // TODO: add support for other update types
             default:
         }
     }
 
-    final public function onMessageReceived(Message $message)
+    /**
+     * @param Message $message
+     */
+    protected final function onMessageReceived(Message $message)
     {
         switch ($message->type) {
-            case $message::TYPE_TEXT:
-                $this->onTextMessage($message);
+            case Message::TYPE_AUDIO:
+                $this->emit(self::EVENT_AUDIO_MESSAGE_RECEIVED, [$message]);
                 break;
-            case $message::TYPE_AUDIO:
-                $this->onAudioMessage($message);
+            case Message::TYPE_CONTACT:
+                $this->emit(self::EVENT_CONTACT_MESSAGE_RECEIVED, [$message]);
                 break;
-            case $message::TYPE_DOCUMENT:
-                $this->onDocumentMessage($message);
+            case Message::TYPE_DOCUMENT:
+                $this->emit(self::EVENT_DOCUMENT_MESSAGE_RECEIVED, [$message]);
                 break;
-            case $message::TYPE_PHOTO:
-                $this->onPhotoMessage($message);
+            case Message::TYPE_LOCATION:
+                $this->emit(self::EVENT_LOCATION_MESSAGE_RECEIVED, [$message]);
                 break;
-            case $message::TYPE_NEW_CHAT_MEMBER:
-            case $message::TYPE_LEFT_CHAT_MEMBER:
-            case $message::TYPE_NEW_CHAT_TITLE:
-            case $message::TYPE_NEW_CHAT_PHOTO:
-            case $message::TYPE_DELETE_CHAT_PHOTO:
-            case $message::TYPE_GROUP_CHAT_CREATED:
-            case $message::TYPE_SUPERGROUP_CHAT_CREATED:
-            case $message::TYPE_CHANNEL_CHAT_CREATED:
-            case $message::TYPE_MESSAGE_PINNED:
-                $this->onServiceMessage($message);
+            case Message::TYPE_PHOTO:
+                $this->emit(self::EVENT_PHOTO_MESSAGE_RECEIVED, [$message]);
+                break;
+            case Message::TYPE_STICKER:
+                $this->emit(self::EVENT_STICKER_MESSAGE_RECEIVED, [$message]);
+                break;
+            case Message::TYPE_TEXT:
+                $this->emit(self::EVENT_TEXT_MESSAGE_RECEIVED, [$message]);
+                break;
+            case Message::TYPE_VENUE:
+                $this->emit(self::EVENT_VENUE_MESSAGE_RECEIVED, [$message]);
+                break;
+            case Message::TYPE_VIDEO:
+                $this->emit(self::EVENT_VIDEO_MESSAGE_RECEIVED, [$message]);
+                break;
+            case Message::TYPE_VOICE:
+                $this->emit(self::EVENT_VOICE_MESSAGE_RECEIVED, [$message]);
+                break;
+            case Message::TYPE_NEW_CHAT_MEMBER:
+            case Message::TYPE_LEFT_CHAT_MEMBER:
+            case Message::TYPE_NEW_CHAT_TITLE:
+            case Message::TYPE_NEW_CHAT_PHOTO:
+            case Message::TYPE_DELETE_CHAT_PHOTO:
+            case Message::TYPE_GROUP_CHAT_CREATED:
+            case Message::TYPE_SUPERGROUP_CHAT_CREATED:
+            case Message::TYPE_CHANNEL_CHAT_CREATED:
+            case Message::TYPE_MESSAGE_PINNED:
+                $this->emit(self::EVENT_SERVICE_MESSAGE_RECEIVED, [$message]);
                 break;
             default:
-                $this->onUnknownTypeMessage($message);
+                $this->emit(self::EVENT_UNKNOWN_TYPE_MESSAGE_RECEIVED, [$message]);
         }
     }
 
@@ -134,67 +167,24 @@ abstract class Bot
         return $this->api;
     }
 
-    public function setReceiver(AbstractReceiver $updater)
+    /**
+     * @param AbstractReceiver $receiver
+     */
+    public function setReceiver(AbstractReceiver $receiver)
     {
-        $this->updater = $updater;
-        $this->updater->setBot($this);
+        $this->receiver = $receiver;
+        $this->receiver->setBot($this);
     }
 
-    // Callbacks
+    // TODO: move to plugin
 
     public function onTextMessage(Message $message)
     {
-        $this->emit(static::EVENT_TEXT_MESSAGE_RECEIVED, [$message]);
-
         array_walk($message->entities, function(MessageEntity $entity) use ($message) {
             if ($entity->type === MessageEntity::TYPE_BOT_COMMAND) {
                 $command = substr($message->text, $entity->offset, $entity->length);
                 var_dump($command);
             }
         });
-    }
-
-    public function onAudioMessage(Message $message)
-    {
-    }
-
-    public function onDocumentMessage(Message $message)
-    {
-    }
-
-    public function onPhotoMessage(Message $message)
-    {
-    }
-
-    public function onStickerMessage(Message $message)
-    {
-    }
-
-    public function onVideoMessage(Message $message)
-    {
-    }
-
-    public function onVoiceMessage(Message $message)
-    {
-    }
-
-    public function onContactMessage(Message $message)
-    {
-    }
-
-    public function onLocationMessage(Message $message)
-    {
-    }
-
-    public function onVenueMessage(Message $message)
-    {
-    }
-
-    public function onServiceMessage(Message $message)
-    {
-    }
-
-    public function onUnknownTypeMessage(Message $message)
-    {
     }
 }
