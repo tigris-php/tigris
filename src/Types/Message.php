@@ -24,12 +24,16 @@ use Tigris\Types\Scalar\ScalarString;
  * @property integer $date Date the message was sent in Unix time.
  * @property Chat $chat Conversation the message belongs to.
  * @property User $forward_from Optional. For forwarded messages, sender of the original message.
- * @property Chat $forward_from_chat Optional. For messages forwarded from a channel, information about the original channel.
+ * @property Chat $forward_from_chat Optional. For messages forwarded from a channel, information about
+ *  the original channel.
  * @property integer $forward_date Optional. For forwarded messages, date the original message was sent in Unix time.
- * @property Message $reply_to_message Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+ * @property Message $reply_to_message Optional. For replies, the original message.
+ *  Note that the Message object in this field will not contain further reply_to_message fields even if it
+ *  itself is a reply.
  * @property integer $edit_date Optional. Date the message was last edited in Unix time.
  * @property string $text Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters.
- * @property MessageEntity[] $entities Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
+ * @property MessageEntity[] $entities Optional. For text messages, special entities like usernames, URLs,
+ *  bot commands, etc. that appear in the text.
  * @property Audio $audio Optional. Message is an audio file, information about the file.
  * @property Document $document Optional. Message is a general file, information about the file.
  * @property Game $game Optional. Message is a game, information about the game.
@@ -41,17 +45,32 @@ use Tigris\Types\Scalar\ScalarString;
  * @property Contact $contact Optional. Message is a shared contact, information about the contact.
  * @property Location $location Optional. Message is a shared location, information about the location.
  * @property Venue $venue Optional. Message is a venue, information about the venue.
- * @property User $new_chat_member Optional. A new member was added to the group, information about them (this member may be the bot itself).
- * @property User $left_chat_member Optional. A member was removed from the group, information about them (this member may be the bot itself).
+ * @property User $new_chat_member Optional. A new member was added to the group, information about them
+ *  (this member may be the bot itself).
+ * @property User $left_chat_member Optional. A member was removed from the group, information about them
+ *  (this member may be the bot itself).
  * @property string $new_chat_title Optional. A chat title was changed to this value.
  * @property PhotoSize[] $new_chat_photo Optional. A chat photo was change to this value.
  * @property boolean $delete_chat_photo Optional. Service message: the chat photo was deleted.
  * @property boolean $group_chat_created Optional. Service message: the group has been created.
  * @property boolean $supergroup_chat_created Optional. Service message: the supergroup has been created.
+ *  This field can‘t be received in a message coming through updates, because bot can’t be a member of a supergroup
+ *  when it is created. It can only be found in reply_to_message if someone replies to a very first message
+ *  in a directly created supergroup.
  * @property boolean $channel_chat_created Optional. Service message: the channel has been created.
- * @property integer $migrate_to_chat_id Optional. The group has been migrated to a supergroup with the specified identifier.
- * @property integer $migrate_from_chat_id Optional. The supergroup has been migrated from a group with the specified identifier.
- * @property Message $pinned_message Optional. Specified message was pinned.
+ *  This field can‘t be received in a message coming through updates, because bot can’t be a member of a channel
+ *  when it is created. It can only be found in reply_to_message if someone replies to a very first message
+ *  in a channel.
+ * @property integer $migrate_to_chat_id Optional. The group has been migrated to a supergroup with the specified
+ *  identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent
+ *  defects in interpreting it. But it smaller than 52 bits, so a signed 64 bit integer or double-precision float
+ *  type are safe for storing this identifier.
+ * @property integer $migrate_from_chat_id Optional. The supergroup has been migrated from a group with the
+ *  specified identifier. This number may be greater than 32 bits and some programming languages may have
+ *  difficulty/silent defects in interpreting it. But it smaller than 52 bits, so a signed 64 bit integer or
+ *  double-precision float type are safe for storing this identifier.
+ * @property Message $pinned_message Optional. Specified message was pinned. Note that the Message object in
+ *  this field will not contain further reply_to_message fields even if it is itself a reply.
  */
 class Message extends BaseObject
 {
@@ -61,6 +80,7 @@ class Message extends BaseObject
     const TYPE_TEXT = 'text';
     const TYPE_AUDIO = 'audio';
     const TYPE_DOCUMENT = 'document';
+    const TYPE_GAME = 'game';
     const TYPE_PHOTO = 'photo';
     const TYPE_STICKER = 'sticker';
     const TYPE_VIDEO = 'video';
@@ -147,6 +167,7 @@ class Message extends BaseObject
             self::TYPE_TEXT,
             self::TYPE_AUDIO,
             self::TYPE_DOCUMENT,
+            self::TYPE_GAME,
             self::TYPE_PHOTO,
             self::TYPE_STICKER,
             self::TYPE_VIDEO,
