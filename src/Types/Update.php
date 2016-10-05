@@ -6,6 +6,7 @@ namespace Tigris\Types;
 
 use Tigris\Exceptions\TelegramApiException;
 use Tigris\Types\Base\BaseObject;
+use Tigris\Types\Inline\ChosenInlineResult;
 use Tigris\Types\Inline\InlineQuery;
 use Tigris\Types\Scalar\ScalarInteger;
 
@@ -24,6 +25,7 @@ use Tigris\Types\Scalar\ScalarInteger;
 class Update extends BaseObject
 {
     const TYPE_MESSAGE = 'message';
+    const TYPE_EDITED_MESSAGE = 'edited_message';
     const TYPE_INLINE_QUERY = 'inline_query';
     const TYPE_CHOSEN_INLINE_RESULT = 'chosen_inline_result';
     const TYPE_CALLBACK_QUERY = 'callback_query';
@@ -52,8 +54,8 @@ class Update extends BaseObject
             'message' => Message::class,
             'edited_message' => Message::class,
             'inline_query' => InlineQuery::class,
-//            'chosen_inline_result' => ChosenInlineResult::class,
-//            'callback_query' => CallbackQuery::class,
+            'chosen_inline_result' => ChosenInlineResult::class,
+            'callback_query' => CallbackQuery::class,
         ];
     }
 
@@ -68,6 +70,7 @@ class Update extends BaseObject
     {
         foreach([
             self::TYPE_MESSAGE,
+            self::TYPE_EDITED_MESSAGE,
             self::TYPE_INLINE_QUERY,
             self::TYPE_CHOSEN_INLINE_RESULT,
             self::TYPE_CALLBACK_QUERY,
