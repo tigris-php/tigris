@@ -22,19 +22,6 @@ abstract class Bot
 {
     use EventEmitterTrait;
 
-    const EVENT_AUDIO_MESSAGE_RECEIVED = 'onAudioMessageReceived';
-    const EVENT_CONTACT_MESSAGE_RECEIVED = 'onContactMessageReceived';
-    const EVENT_DOCUMENT_MESSAGE_RECEIVED = 'onDocumentMessageReceived';
-    const EVENT_LOCATION_MESSAGE_RECEIVED = 'onLocationMessageReceived';
-    const EVENT_PHOTO_MESSAGE_RECEIVED = 'onPhotoMessageReceived';
-    const EVENT_STICKER_MESSAGE_RECEIVED = 'onStickerMessageReceived';
-    const EVENT_TEXT_MESSAGE_RECEIVED = 'onTextMessageReceived';
-    const EVENT_VIDEO_MESSAGE_RECEIVED = 'onVideoMessageReceived';
-    const EVENT_VENUE_MESSAGE_RECEIVED = 'onVenueMessageReceived';
-    const EVENT_VOICE_MESSAGE_RECEIVED = 'onVoiceMessageReceived';
-    const EVENT_SERVICE_MESSAGE_RECEIVED = 'onServiceMessageReceived';
-    const EVENT_UNKNOWN_TYPE_MESSAGE_RECEIVED = 'onUnknownTypeMessageReceived';
-
     const DEFAULT_PLUGINS = [
         DefaultUpdateHandler::class,
         DefaultCommandParser::class,
