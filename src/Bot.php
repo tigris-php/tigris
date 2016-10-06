@@ -9,6 +9,9 @@ use GuzzleHttp\Client;
 use React\Dns\Resolver\Factory as ResolverFactory;
 use React\EventLoop\Factory as EventLoopFactory;
 use React\EventLoop\LoopInterface;
+use Tigris\Events\UpdateEvent;
+use Tigris\Plugins\DefaultCommandParser;
+use Tigris\Plugins\DefaultUpdateHandler;
 use Tigris\Receivers\AbstractReceiver;
 use Tigris\Telegram\Api;
 use Tigris\Types\Message;
@@ -32,6 +35,11 @@ abstract class Bot
     const EVENT_SERVICE_MESSAGE_RECEIVED = 'onServiceMessageReceived';
     const EVENT_UNKNOWN_TYPE_MESSAGE_RECEIVED = 'onUnknownTypeMessageReceived';
 
+    const DEFAULT_PLUGINS = [
+        DefaultUpdateHandler::class,
+        DefaultCommandParser::class,
+    ];
+
     protected $apiToken;
 
     protected $loop;
@@ -43,9 +51,10 @@ abstract class Bot
     protected $client;
     /** @var Api */
     protected $api;
-
     /** @var UpdatesQueue */
     protected $updatesQueue;
+    /** @var BotPlugin[]  */
+    protected $plugins = [];
 
     final protected function __construct()
     {
@@ -62,6 +71,13 @@ abstract class Bot
     {
         $bot = new static();
         $bot->api = Api::create($apiToken);
+
+        // loading default plugins
+        foreach (static::DEFAULT_PLUGINS as $pluginClass) {
+            $bot->addPlugin($pluginClass);
+        }
+
+        $bot->bootstrap();
         return $bot;
     }
 
@@ -70,77 +86,11 @@ abstract class Bot
         $this->loop->addPeriodicTimer(0.1, function () {
             while (!$this->updatesQueue->isEmpty()) {
                 $item = $this->updatesQueue->extract();
-                $this->onUpdateReceived($item);
+                $this->emit(UpdateEvent::EVENT_UPDATE_RECEIVED, [UpdateEvent::create($item)]);
             }
         });
 
         $this->loop->run();
-    }
-
-    /**
-     * @param Update $update
-     */
-    protected final function onUpdateReceived(Update $update)
-    {
-        switch ($update->type) {
-            case $update::TYPE_MESSAGE:
-                $this->onMessageReceived($update->message);
-                break;
-            // TODO: add support for other update types
-            default:
-        }
-    }
-
-    /**
-     * @param Message $message
-     */
-    protected final function onMessageReceived(Message $message)
-    {
-        switch ($message->type) {
-            case Message::TYPE_AUDIO:
-                $this->emit(self::EVENT_AUDIO_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_CONTACT:
-                $this->emit(self::EVENT_CONTACT_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_DOCUMENT:
-                $this->emit(self::EVENT_DOCUMENT_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_LOCATION:
-                $this->emit(self::EVENT_LOCATION_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_PHOTO:
-                $this->emit(self::EVENT_PHOTO_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_STICKER:
-                $this->emit(self::EVENT_STICKER_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_TEXT:
-                $this->emit(self::EVENT_TEXT_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_VENUE:
-                $this->emit(self::EVENT_VENUE_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_VIDEO:
-                $this->emit(self::EVENT_VIDEO_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_VOICE:
-                $this->emit(self::EVENT_VOICE_MESSAGE_RECEIVED, [$message]);
-                break;
-            case Message::TYPE_NEW_CHAT_MEMBER:
-            case Message::TYPE_LEFT_CHAT_MEMBER:
-            case Message::TYPE_NEW_CHAT_TITLE:
-            case Message::TYPE_NEW_CHAT_PHOTO:
-            case Message::TYPE_DELETE_CHAT_PHOTO:
-            case Message::TYPE_GROUP_CHAT_CREATED:
-            case Message::TYPE_SUPERGROUP_CHAT_CREATED:
-            case Message::TYPE_CHANNEL_CHAT_CREATED:
-            case Message::TYPE_MESSAGE_PINNED:
-                $this->emit(self::EVENT_SERVICE_MESSAGE_RECEIVED, [$message]);
-                break;
-            default:
-                $this->emit(self::EVENT_UNKNOWN_TYPE_MESSAGE_RECEIVED, [$message]);
-        }
     }
 
     /**
@@ -176,15 +126,31 @@ abstract class Bot
         $this->receiver->setBot($this);
     }
 
-    // TODO: move to plugin
-
-    public function onTextMessage(Message $message)
+    /**
+     * @param string $className
+     * @throws \InvalidArgumentException
+     */
+    public function addPlugin($className)
     {
-        array_walk($message->entities, function(MessageEntity $entity) use ($message) {
-            if ($entity->type === MessageEntity::TYPE_BOT_COMMAND) {
-                $command = substr($message->text, $entity->offset, $entity->length);
-                var_dump($command);
-            }
-        });
+        if (!class_exists($className)) {
+            throw new \InvalidArgumentException("Unknown plugin className {$className}");
+        }
+
+        if (isset($this->plugins[$className])) {
+            return;
+        }
+
+        /** @var BotPlugin $plugin */
+        $plugin = new $className;
+        $plugin->setBot($this);
+        $this->plugins[$className] = $plugin;
+        $plugin->bootstrap();
+    }
+
+    /**
+     * Override this method to extend the functionality.
+     */
+    protected function bootstrap()
+    {
     }
 }
