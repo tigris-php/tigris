@@ -5,6 +5,7 @@
 namespace Tigris\Plugins;
 
 use Tigris\BotPlugin;
+use Tigris\Events\CommandEvent;
 use Tigris\Events\MessageEvent;
 use Tigris\Types\MessageEntity;
 
@@ -27,8 +28,19 @@ class DefaultCommandParser extends BotPlugin
 
         array_walk($message->entities, function(MessageEntity $entity) use ($message) {
             if ($entity->type === MessageEntity::TYPE_BOT_COMMAND) {
-                $command = substr($message->text, $entity->offset, $entity->length);
-                var_dump($command);
+                $command = mb_substr($message->text, $entity->offset, $entity->length);
+                $parts = explode('@', $command);
+                if (count($parts)>1) {
+                    if ($parts[1] == $this->bot->getUserInfo()->username) {
+                        $command = $parts[0];
+                    } else {
+                        return;
+                    }
+                }
+                $command = mb_substr($command, 1);
+                $payload = mb_substr($message->text, $entity->offset + $entity->length);
+                $payload = mb_substr($payload, 1);
+                $this->bot->emit(CommandEvent::EVENT_COMMAND_RECEIVED, [CommandEvent::create($message, $command, $payload)]);
             }
         });
     }

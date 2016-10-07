@@ -17,6 +17,7 @@ use Tigris\Telegram\Api;
 use Tigris\Types\Message;
 use Tigris\Types\MessageEntity;
 use Tigris\Types\Update;
+use Tigris\Types\User;
 
 abstract class Bot
 {
@@ -31,6 +32,8 @@ abstract class Bot
 
     protected $loop;
     protected $resolver;
+
+    protected $userInfo;
 
     /** @var AbstractReceiver */
     protected $receiver;
@@ -63,6 +66,8 @@ abstract class Bot
         foreach (static::DEFAULT_PLUGINS as $pluginClass) {
             $bot->addPlugin($pluginClass);
         }
+        // loading bot information
+        $bot->refreshUserInfo();
 
         $bot->bootstrap();
         return $bot;
@@ -132,6 +137,22 @@ abstract class Bot
         $plugin->setBot($this);
         $this->plugins[$className] = $plugin;
         $plugin->bootstrap();
+    }
+
+    /**
+     * Refreshes user model
+     */
+    public function refreshUserInfo()
+    {
+        $this->userInfo = $this->api->getMe();
+    }
+
+    /**
+     * @return User
+     */
+    public function getUserInfo()
+    {
+       return $this->userInfo;
     }
 
     /**
