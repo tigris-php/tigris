@@ -2,9 +2,11 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris;
+namespace Tigris\Events;
 
-abstract class BotEvent
+use YarCode\Event\Event;
+
+abstract class AbstractEvent extends Event
 {
     /**
      * BotEvent constructor.

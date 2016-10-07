@@ -4,10 +4,10 @@
  */
 namespace Tigris\Events;
 
-use Tigris\BotEvent;
+use Tigris\Events\AbstractEvent;
 use Tigris\Types\Message;
 
-class MessageEvent extends BotEvent
+class MessageEvent extends AbstractEvent
 {
     // generic event
     const EVENT_MESSAGE_RECEIVED = 'onMessageReceived';

@@ -4,11 +4,11 @@
  */
 namespace Tigris\Events;
 
-use Tigris\BotEvent;
+use Tigris\Events\AbstractEvent;
 use Tigris\Types\Message;
 use Tigris\Types\Update;
 
-class UpdateEvent extends BotEvent
+class UpdateEvent extends AbstractEvent
 {
     const EVENT_UPDATE_RECEIVED = 'onUpdateReceived';
 

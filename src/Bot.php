@@ -4,7 +4,6 @@
  */
 namespace Tigris;
 
-use Evenement\EventEmitterTrait;
 use GuzzleHttp\Client;
 use React\Dns\Resolver\Factory as ResolverFactory;
 use React\EventLoop\Factory as EventLoopFactory;
@@ -13,11 +12,13 @@ use Tigris\Events\UpdateEvent;
 use Tigris\Plugins\DefaultCommandParser;
 use Tigris\Plugins\DefaultUpdateHandler;
 use Tigris\Receivers\AbstractReceiver;
+use Tigris\Receivers\PollingReceiver;
+use Tigris\Session\AbstractSession;
+use Tigris\Session\AbstractSessionFactory;
+use Tigris\Session\InMemorySessionFactory;
 use Tigris\Telegram\Api;
-use Tigris\Types\Message;
-use Tigris\Types\MessageEntity;
-use Tigris\Types\Update;
 use Tigris\Types\User;
+use YarCode\Event\EventEmitterTrait;
 
 abstract class Bot
 {
@@ -43,6 +44,9 @@ abstract class Bot
     protected $api;
     /** @var UpdatesQueue */
     protected $updatesQueue;
+    /** @var AbstractSessionFactory */
+    protected $chatSessionFactory;
+
     /** @var BotPlugin[]  */
     protected $plugins = [];
 
@@ -75,10 +79,18 @@ abstract class Bot
 
     final public function run()
     {
+        if (empty($this->receiver)) {
+            $this->setReceiver(new PollingReceiver());
+        }
+
+        if (empty($this->chatSessionFactory)) {
+            $this->setChatSessionFactory(new InMemorySessionFactory());
+        }
+
         $this->loop->addPeriodicTimer(0.1, function () {
             while (!$this->updatesQueue->isEmpty()) {
                 $item = $this->updatesQueue->extract();
-                $this->emit(UpdateEvent::EVENT_UPDATE_RECEIVED, [UpdateEvent::create($item)]);
+                $this->emit(UpdateEvent::EVENT_UPDATE_RECEIVED, UpdateEvent::create($item));
             }
         });
 
@@ -153,6 +165,23 @@ abstract class Bot
     public function getUserInfo()
     {
        return $this->userInfo;
+    }
+
+    /**
+     * @param AbstractSessionFactory $factory
+     */
+    public function setChatSessionFactory(AbstractSessionFactory $factory)
+    {
+        $this->chatSessionFactory = $factory;
+    }
+
+    /**
+     * @param integer $chatId
+     * @return AbstractSession
+     */
+    public function getChatSession($chatId)
+    {
+        return $this->chatSessionFactory->getSession($chatId);
     }
 
     /**

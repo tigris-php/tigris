@@ -4,10 +4,10 @@
  */
 namespace Tigris\Events;
 
-use Tigris\BotEvent;
+use Tigris\Events\AbstractEvent;
 use Tigris\Types\Message;
 
-class CommandEvent extends BotEvent
+class CommandEvent extends AbstractEvent
 {
     const EVENT_COMMAND_RECEIVED = 'onCommandReceived';
 

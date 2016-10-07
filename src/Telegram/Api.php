@@ -134,6 +134,10 @@ class Api
         $replyToMessageId = null,
         ReplyMarkupInterface $replyMarkup = null
     ) {
+        if ($chatId instanceof Chat) {
+            $chatId = (string) $chatId;
+        }
+
         $params = [
             'chat_id' => $chatId,
             'text' => $text,
