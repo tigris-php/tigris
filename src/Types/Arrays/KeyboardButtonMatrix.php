@@ -2,15 +2,16 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Types;
+namespace Tigris\Types\Arrays;
 
 use Tigris\Types\Base\BaseMatrix;
+use Tigris\Types\KeyboardButton;
 
 /**
  * Class Keyboard
  * @package Tigris\Types
  */
-class Keyboard extends BaseMatrix
+class KeyboardButtonMatrix extends BaseMatrix
 {
     const ENTITY_CLASS = KeyboardButton::class;
 

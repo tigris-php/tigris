@@ -9,8 +9,9 @@ use React\Dns\Resolver\Factory as ResolverFactory;
 use React\EventLoop\Factory as EventLoopFactory;
 use React\EventLoop\LoopInterface;
 use Tigris\Events\UpdateEvent;
-use Tigris\Plugins\DefaultCommandParser;
-use Tigris\Plugins\DefaultUpdateHandler;
+use Tigris\Plugins\Menu\MenuHandler;
+use Tigris\Plugins\CommandHandler;
+use Tigris\Plugins\UpdateHandler;
 use Tigris\Receivers\AbstractReceiver;
 use Tigris\Receivers\PollingReceiver;
 use Tigris\Session\AbstractSession;
@@ -25,9 +26,12 @@ abstract class Bot
     use EventEmitterTrait;
 
     const DEFAULT_PLUGINS = [
-        DefaultUpdateHandler::class,
-        DefaultCommandParser::class,
+        UpdateHandler::class,
+        CommandHandler::class,
+        MenuHandler::class,
     ];
+
+    protected static $instance;
 
     protected $apiToken;
 
@@ -60,10 +64,15 @@ abstract class Bot
     /**
      * @param string $apiToken
      * @return static
+     * @throws \BadMethodCallException
      */
     final public static function create($apiToken)
     {
-        $bot = new static();
+        if (isset(static::$instance)) {
+            throw new \BadMethodCallException('Bot instance is already created');
+        }
+        static::$instance = $bot = new static();
+
         $bot->api = Api::create($apiToken);
 
         // loading default plugins
@@ -75,6 +84,18 @@ abstract class Bot
 
         $bot->bootstrap();
         return $bot;
+    }
+
+    /**
+     * @return static
+     * @throw BadMethodCallException
+     */
+    final public static function getInstance()
+    {
+        if (!isset(static::$instance)) {
+            throw new \BadMethodCallException('Bot instance was not created');
+        }
+        return static::$instance;
     }
 
     final public function run()
@@ -149,6 +170,18 @@ abstract class Bot
         $plugin->setBot($this);
         $this->plugins[$className] = $plugin;
         $plugin->bootstrap();
+    }
+
+    /**
+     * @param $className
+     * @return BotPlugin
+     */
+    public function getPlugin($className)
+    {
+        if (isset($this->plugins[$className])) {
+            throw new \InvalidArgumentException('Plugin is missing: ' . $className);
+        }
+        return $this->plugins[$className];
     }
 
     /**

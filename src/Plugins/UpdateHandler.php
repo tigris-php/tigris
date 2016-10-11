@@ -9,7 +9,7 @@ use Tigris\Events\MessageEvent;
 use Tigris\Events\UpdateEvent;
 use Tigris\Types\Message;
 
-class DefaultUpdateHandler extends BotPlugin
+class UpdateHandler extends BotPlugin
 {
     /**
      * @inheritdoc

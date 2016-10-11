@@ -4,6 +4,7 @@
  */
 namespace Tigris\Types;
 
+use Tigris\Types\Arrays\KeyboardButtonMatrix;
 use Tigris\Types\Base\BaseObject;
 use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Scalar\ScalarBoolean;
@@ -14,7 +15,7 @@ use Tigris\Types\Scalar\ScalarBoolean;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#replykeyboardmarkup
  *
- * @property Keyboard $keyboard
+ * @property KeyboardButtonMatrix $keyboard
  * @property boolean $resize_keyboard
  * @property boolean $one_time_keyboard
  * @property boolean $selective
@@ -24,7 +25,7 @@ class ReplyKeyboardMarkup extends BaseObject implements ReplyMarkupInterface
     /**
      * Constructor
      * 
-     * @param Keyboard $keyboard
+     * @param KeyboardButtonMatrix $keyboard
      * @param boolean $resizeKeyboard
      * @param boolean $oneTimeKeyboard
      * @param boolean $selective
@@ -47,7 +48,7 @@ class ReplyKeyboardMarkup extends BaseObject implements ReplyMarkupInterface
     protected static function fields()
     {
         return [
-            'keyboard' => Keyboard::class,
+            'keyboard' => KeyboardButtonMatrix::class,
             'resize_keyboard' => ScalarBoolean::class,
             'one_time_keyboard' => ScalarBoolean::class,
             'selective' => ScalarBoolean::class,

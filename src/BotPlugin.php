@@ -18,6 +18,14 @@ abstract class BotPlugin
     }
 
     /**
+     * @return static
+     */
+    public static function getInstance()
+    {
+        return Bot::getInstance()->getPlugin(static::class);
+    }
+
+    /**
      * Implement this method and register plugin's event handlers
      */
     abstract public function bootstrap();

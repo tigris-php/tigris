@@ -9,7 +9,7 @@ use Tigris\Events\CommandEvent;
 use Tigris\Events\MessageEvent;
 use Tigris\Types\MessageEntity;
 
-class DefaultCommandParser extends BotPlugin
+class CommandHandler extends BotPlugin
 {
     /**
      * @inheritdoc
