@@ -4,10 +4,10 @@
  */
 namespace Tigris\Plugins\Menu;
 
-use Tigris\BotPlugin;
+use Tigris\Plugins\AbstractPlugin;
 use Tigris\Events\MessageEvent;
 
-class MenuHandler extends BotPlugin
+class MenuHandler extends AbstractPlugin
 {
     const STATE_PREFIX = 'menu_';
 

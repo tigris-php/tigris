@@ -2,9 +2,11 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris;
+namespace Tigris\Plugins;
 
-abstract class BotPlugin
+use Tigris\Bot;
+
+abstract class AbstractPlugin
 {
     /** @var Bot */
     protected $bot;

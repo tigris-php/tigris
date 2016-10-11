@@ -4,12 +4,11 @@
  */
 namespace Tigris\Plugins;
 
-use Tigris\BotPlugin;
 use Tigris\Events\MessageEvent;
 use Tigris\Events\UpdateEvent;
 use Tigris\Types\Message;
 
-class UpdateHandler extends BotPlugin
+class UpdateHandler extends AbstractPlugin
 {
     /**
      * @inheritdoc

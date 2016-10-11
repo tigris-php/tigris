@@ -9,6 +9,7 @@ use React\Dns\Resolver\Factory as ResolverFactory;
 use React\EventLoop\Factory as EventLoopFactory;
 use React\EventLoop\LoopInterface;
 use Tigris\Events\UpdateEvent;
+use Tigris\Plugins\AbstractPlugin;
 use Tigris\Plugins\Menu\MenuHandler;
 use Tigris\Plugins\Command\CommandHandler;
 use Tigris\Plugins\UpdateHandler;
@@ -51,7 +52,7 @@ abstract class Bot
     /** @var AbstractSessionFactory */
     protected $chatSessionFactory;
 
-    /** @var BotPlugin[]  */
+    /** @var AbstractPlugin[]  */
     protected $plugins = [];
 
     final protected function __construct()
@@ -165,7 +166,7 @@ abstract class Bot
             return;
         }
 
-        /** @var BotPlugin $plugin */
+        /** @var AbstractPlugin $plugin */
         $plugin = new $className;
         $plugin->setBot($this);
         $this->plugins[$className] = $plugin;
@@ -174,7 +175,7 @@ abstract class Bot
 
     /**
      * @param $className
-     * @return BotPlugin
+     * @return AbstractPlugin
      */
     public function getPlugin($className)
     {

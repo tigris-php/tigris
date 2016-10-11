@@ -4,11 +4,11 @@
  */
 namespace Tigris\Plugins\Command;
 
-use Tigris\BotPlugin;
+use Tigris\Plugins\AbstractPlugin;
 use Tigris\Events\MessageEvent;
 use Tigris\Types\MessageEntity;
 
-class CommandHandler extends BotPlugin
+class CommandHandler extends AbstractPlugin
 {
     /**
      * @inheritdoc
