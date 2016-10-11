@@ -4,7 +4,6 @@
  */
 namespace Tigris\Events;
 
-use Tigris\Events\AbstractEvent;
 use Tigris\Types\Message;
 
 class MessageEvent extends AbstractEvent

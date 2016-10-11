@@ -6,7 +6,6 @@ namespace Tigris\Helpers;
 
 use Tigris\Types\Base\BaseArray;
 use Tigris\Types\Base\BaseObject;
-use Tigris\Types\Base\BaseScalar;
 
 class TypeHelper
 {

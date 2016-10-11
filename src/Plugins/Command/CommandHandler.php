@@ -2,10 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Plugins;
+namespace Tigris\Plugins\Command;
 
 use Tigris\BotPlugin;
-use Tigris\Events\CommandEvent;
 use Tigris\Events\MessageEvent;
 use Tigris\Types\MessageEntity;
 

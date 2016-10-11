@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Events;
+namespace Tigris\Plugins\Command;
 
 use Tigris\Events\AbstractEvent;
 use Tigris\Types\Message;

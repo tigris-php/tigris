@@ -4,7 +4,6 @@
  */
 namespace Tigris\Types\Base;
 
-use Tigris\Traits\JsonTrait;
 use Tigris\Types\Interfaces\TypeInterface;
 
 abstract class BaseScalar implements TypeInterface

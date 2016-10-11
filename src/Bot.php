@@ -10,7 +10,7 @@ use React\EventLoop\Factory as EventLoopFactory;
 use React\EventLoop\LoopInterface;
 use Tigris\Events\UpdateEvent;
 use Tigris\Plugins\Menu\MenuHandler;
-use Tigris\Plugins\CommandHandler;
+use Tigris\Plugins\Command\CommandHandler;
 use Tigris\Plugins\UpdateHandler;
 use Tigris\Receivers\AbstractReceiver;
 use Tigris\Receivers\PollingReceiver;

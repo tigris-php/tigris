@@ -4,8 +4,6 @@
  */
 namespace Tigris\Events;
 
-use Tigris\Events\AbstractEvent;
-use Tigris\Types\Message;
 use Tigris\Types\Update;
 
 class UpdateEvent extends AbstractEvent
