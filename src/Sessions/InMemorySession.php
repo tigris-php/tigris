@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Session;
+namespace Tigris\Sessions;
 
 class InMemorySession extends AbstractSession
 {
