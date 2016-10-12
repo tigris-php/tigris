@@ -4,8 +4,7 @@
 [![Join the chat at https://gitter.im/tigris-php/tigris](https://badges.gitter.im/tigris-php/tigris.svg)](https://gitter.im/tigris-php/tigris?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/tigris-php/tigris/master/LICENSE.md)
 
-Tigris is a modern Telegram bot framework written in PHP.
-Currently it is in a deep alpha, so it's api is very unstable.
+Tigris is a modern reactive event-driven Telegram bot framework written in PHP.
 
 ## Usage
 
@@ -13,17 +12,20 @@ Currently it is in a deep alpha, so it's api is very unstable.
 ```php
 class SampleBot extends \Tigris\Bot
 {
-    public function onTextMessage(Message $message)
+    // bootstraping your bot
+    public function bootstrap()
     {
-        $this->api->sendMessage($message->chat->id, 'Hello World!');
+        // registering event callback
+        $this->addListener(MessageEvent::EVENT_TEXT_MESSAGE_RECEIVED, function(MessageEvent $event) {
+            // sending your first message
+            $this->api->sendMessage($event->message->chat->id, 'Hello World!');
+        });   
     }
 }
 ```
 *Run the bot instance*
 ```php
 $bot = SampleBot::create($apiToken);
-$receiver = new \Tigris\Receivers\PollingReceiver();
-$bot->setReceiver($receiver);
 $bot->run();
 ```
 
