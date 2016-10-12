@@ -17,6 +17,8 @@ use Tigris\Types\Inline\InlineQueryResult;
 use Tigris\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Types\Interfaces\TypeInterface;
 use Tigris\Types\Message;
+use Tigris\Types\Scalar\ScalarBoolean;
+use Tigris\Types\Scalar\ScalarInteger;
 use Tigris\Types\Update;
 use Tigris\Types\User;
 use Tigris\Types\UserProfilePhotos;
@@ -87,13 +89,7 @@ class Api
         $limit = null,
         $timeout = null
     ) {
-        $params = [
-            'offset' => $offset,
-            'limit' => $limit,
-            'timeout' => $timeout,
-        ];
-
-        $data = $this->call('getUpdates', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return UpdateArray::build($data);
     }
 
@@ -117,38 +113,25 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendmessage
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string $text
-     * @param string|null $parseMode
-     * @param boolean|null $disableWebPagePreview
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param string|null $parse_mode
+     * @param boolean|null $disable_web_page_preview
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendMessage(
-        $chatId,
+        $chat_id,
         $text,
-        $parseMode = null,
-        $disableWebPagePreview = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        ReplyMarkupInterface $replyMarkup = null
+        $parse_mode = null,
+        $disable_web_page_preview = null,
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        ReplyMarkupInterface $reply_markup = null
     ) {
-        if ($chatId instanceof Chat) {
-            $chatId = (string) $chatId;
-        }
-
-        $params = [
-            'chat_id' => $chatId,
-            'text' => $text,
-            'parse_mode' => $parseMode,
-            'disable_web_page_preview' => $disableWebPagePreview,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendMessage', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -158,21 +141,15 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#forwardmessage
      *
-     * @param integer|string|Chat $chatId
-     * @param integer|string|Chat $fromChatId
-     * @param integer|Message $messageId
-     * @param boolean|null $disableNotification
+     * @param integer|string $chat_id
+     * @param integer|string $from_chat_id
+     * @param integer $message_id
+     * @param boolean|null $disable_notification
      * @return Message
      */
-    public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false)
+    public function forwardMessage($chat_id, $from_chat_id, $message_id, $disable_notification = null)
     {
-        $params = [
-            'chat_id' => $chatId,
-            'from_chat_id' => $fromChatId,
-            'disable_notification' => $disableNotification,
-            'message_id' => $messageId,
-        ];
-        $data = $this->call('forwardMessage', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -182,31 +159,23 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendphoto
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string|resource $photo
      * @param string|null $caption
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendPhoto(
-        $chatId,
+        $chat_id,
         $photo,
         $caption = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        ReplyMarkupInterface $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        ReplyMarkupInterface $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'photo' => $photo,
-            'caption' => $caption,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendPhoto', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -217,37 +186,27 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendaudio
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string|resource $audio
      * @param integer|null $duration
      * @param string|null $performer
      * @param string|null $title
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendAudio(
-        $chatId,
+        $chat_id,
         $audio,
         $duration = null,
         $performer = null,
         $title = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        ReplyMarkupInterface $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        ReplyMarkupInterface $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'audio' => $audio,
-            'duration' => $duration,
-            'performer' => $performer,
-            'title' => $title,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendAudio', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -257,31 +216,23 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#senddocument
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string|resource $document
      * @param string|null $caption
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendDocument(
-        $chatId,
+        $chat_id,
         $document,
         $caption = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        ReplyMarkupInterface $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        ReplyMarkupInterface $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'document' => $document,
-            'caption' => $caption,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendDocument', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -291,28 +242,21 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendsticker
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string|resource $sticker
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendSticker(
-        $chatId,
+        $chat_id,
         $sticker,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'sticker' => $sticker,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendSticker', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -324,40 +268,29 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendvideo
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string|resource $video
      * @param integer|null $duration
      * @param integer|null $width
      * @param integer|null $height
      * @param string|null $caption
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendVideo(
-        $chatId,
+        $chat_id,
         $video,
         $duration = null,
         $width = null,
         $height = null,
         $caption = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'video' => $video,
-            'duration' => $duration,
-            'width' => $width,
-            'height' => $height,
-            'caption' => $caption,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendVideo', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -370,31 +303,23 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendvoice
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param string|resource $voice
      * @param integer|null $duration
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendVoice(
-        $chatId,
+        $chat_id,
         $voice,
         $duration = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'voice' => $voice,
-            'duration' => $duration,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendVoice', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -404,31 +329,23 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendlocation
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param float $latitude
      * @param float $longitude
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendLocation(
-        $chatId,
+        $chat_id,
         $latitude,
         $longitude,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        $replyMarkup = null
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendLocation', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -438,40 +355,29 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendvenue
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @param float $latitude
      * @param float $longitude
      * @param string $title
      * @param string $address
-     * @param string $foursquareId
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param string $foursquare_id
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendVenue(
-        $chatId,
+        $chat_id,
         $latitude,
         $longitude,
         $title,
         $address,
-        $foursquareId,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        $replyMarkup = null
+        $foursquare_id,
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'title' => $title,
-            'address' => $address,
-            'foursquare_id' => $foursquareId,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendVenue', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -481,34 +387,25 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendcontact
      *
-     * @param integer|string|Chat $chatId
-     * @param string $phoneNumber
-     * @param string $firstName
-     * @param string|null $lastName
-     * @param boolean|null $disableNotification
-     * @param integer|Message|null $replyToMessageId
-     * @param ReplyMarkupInterface|null $replyMarkup
+     * @param integer|string $chat_id
+     * @param string $phone_number
+     * @param string $first_name
+     * @param string|null $last_name
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
      * @return Message
      */
     public function sendContact(
-        $chatId,
-        $phoneNumber,
-        $firstName,
-        $lastName = null,
-        $disableNotification = null,
-        $replyToMessageId = null,
-        $replyMarkup = null
+        $chat_id,
+        $phone_number,
+        $first_name,
+        $last_name = null,
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        $reply_markup = null
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'phone_number' => $phoneNumber,
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'disable_notification' => $disableNotification,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup,
-        ];
-        $data = $this->call('sendContact', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::build($data);
     }
 
@@ -518,19 +415,16 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#sendchataction
      *
-     * @param integer|Chat $chatId
+     * @param integer|Chat $chat_id
      * @param string $action
      * @return true
      */
     public function sendChatAction(
-        $chatId,
+        $chat_id,
         $action
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'action' => $action,
-        ];
-        return (bool) $this->call('sendChatAction', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarBoolean::build($data);
     }
 
     /**
@@ -539,22 +433,17 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#getuserprofilephotos
      *
-     * @param integer $userId
+     * @param integer $user_id
      * @param integer $offset
      * @param integer $limit
      * @return UserProfilePhotos
      */
     public function getUserProfilePhotos(
-        $userId,
+        $user_id,
         $offset = null,
         $limit = null
     ) {
-        $params = [
-            'user_id' => $userId,
-            'offset' => $offset,
-            'limit' => $limit,
-        ];
-        $data = $this->call('sendChatAction', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return UserProfilePhotos::build($data);
     }
 
@@ -565,16 +454,13 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#getfile
      *
-     * @param integer $fileId
+     * @param integer $file_id
      * @return File
      */
     public function getFile(
-        $fileId
+        $file_id
     ) {
-        $params = [
-            'file_id' => $fileId,
-        ];
-        $data = $this->call('getFile', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return File::build($data);
     }
 
@@ -585,19 +471,16 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#kickchatmember
      *
-     * @param integer|string|Chat $chatId
-     * @param integer|User $userId
+     * @param integer|string $chat_id
+     * @param integer $user_id
      * @return true
      */
     public function kickChatMember(
-        $chatId,
-        $userId
+        $chat_id,
+        $user_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'user_id' => $userId,
-        ];
-        return (bool) $this->call('kickChatMember', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarBoolean::build($data);
     }
 
     /**
@@ -606,16 +489,14 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#leavechat
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @return true
      */
     public function leaveChat(
-        $chatId
+        $chat_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-        ];
-        return (bool) $this->call('leaveChat', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarBoolean::build($data);
     }
 
     /**
@@ -625,19 +506,16 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#unbanchatmember
      *
-     * @param integer|string $chatId
-     * @param integer $userId
+     * @param integer|string $chat_id
+     * @param integer $user_id
      * @return true
      */
     public function unbanChatMember(
-        $chatId,
-        $userId
+        $chat_id,
+        $user_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'user_id' => $userId,
-        ];
-        return (bool) $this->call('unbanChatMember', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarBoolean::build($data);
     }
 
     /**
@@ -647,16 +525,14 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#getchat
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @return Chat
      */
     public function getChat(
-        $chatId
+        $chat_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-        ];
-        return Chat::build($this->call('getChat', $params));
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return Chat::build($data);
     }
 
     /**
@@ -666,16 +542,14 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#getchatadministrators
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @return ChatMemberArray
      */
     public function getChatAdministrators(
-        $chatId
+        $chat_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-        ];
-        return ChatMemberArray::build($this->call('getChatAdministrators', $params));
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ChatMemberArray::build($data);
     }
 
     /**
@@ -684,16 +558,14 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#getchatmemberscount
      *
-     * @param integer|string|Chat $chatId
+     * @param integer|string $chat_id
      * @return integer
      */
     public function getChatMembersCount(
-        $chatId
+        $chat_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-        ];
-        return (integer) $this->call('getChatMembersCount', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarInteger::build($data);
     }
 
     /**
@@ -702,19 +574,16 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#getchatmember
      *
-     * @param integer|string|Chat $chatId
-     * @param integer|string|User $userId
+     * @param integer|string $chat_id
+     * @param integer|string $user_id
      * @return ChatMember
      */
     public function getChatMember(
-        $chatId,
-        $userId
+        $chat_id,
+        $user_id
     ) {
-        $params = [
-            'chat_id' => $chatId,
-            'user_id' => $userId,
-        ];
-        return ChatMember::build($this->call('getChatMember', $params));
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ChatMember::build($data);
     }
 
     /**
@@ -724,25 +593,20 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#answercallbackquery
      *
-     * @param string $callbackQueryId
+     * @param string $callback_query_id
      * @param string $text
-     * @param boolean $showAlert
+     * @param boolean $show_alert
      * @param string $url
      * @return true
      */
     public function answerCallbackQuery(
-        $callbackQueryId,
+        $callback_query_id,
         $text,
-        $showAlert,
+        $show_alert,
         $url = null
     ) {
-        $params = [
-            'callback_query_id' => $callbackQueryId,
-            'text' => $text,
-            'show_alert' => $showAlert,
-            'url' => $url,
-        ];
-        return (bool) $this->call('answerCallbackQuery', $params);
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarBoolean::build($data);
     }
 
     /**
@@ -752,20 +616,13 @@ class Api
      *
      * @link https://core.telegram.org/bots/api#answerinlinequery
      *
-     * @param string $inline_query_id Unique identifier for the answered query.
-     * @param InlineQueryResult[] $results A JSON-serialized array of results for the inline query.
-     * @param integer $cache_time Optional. The maximum amount of time in seconds that the result of the inline query
-     *  may be cached on the server. Defaults to 300.
-     * @param boolean $is_personal Optional. Pass True, if results may be cached on the server side only for the user
-     *  that sent the query. By default, results may be returned to any user who sends the same query
-     * @param string $next_offset Optional. Pass the offset that a client should send in the next query with the same
-     *  text to receive more results. Pass an empty string if there are no more results or if you don‘t support
-     *  pagination. Offset length can’t exceed 64 bytes.
-     * @param string $switch_pm_text Optional. If passed, clients will display a button with specified text that
-     *  switches the user to a private chat with the bot and sends the bot a start message with the parameter
-     *  switch_pm_parameter
-     * @param string $switch_pm_parameter Parameter for the start message sent to the bot when user presses the
-     *  switch button
+     * @param string $inline_query_id
+     * @param InlineQueryResult[] $results
+     * @param integer|null $cache_time
+     * @param boolean|null $is_personal
+     * @param string|null $next_offset
+     * @param string|null $switch_pm_text
+     * @param string|null $switch_pm_parameter
      * @return true
      */
     public function answerInlineQuery(
@@ -777,19 +634,20 @@ class Api
         $switch_pm_text = null,
         $switch_pm_parameter = null
     ) {
-        return (bool) $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return ScalarBoolean::build($data);
     }
 
     /**
-     * @param $method
+     * @param $methodName
      * @param array $args
      * @return array
      */
-    protected function parseArgs($method, array $args)
+    protected function parseArgs($methodName, array $args)
     {
-        $method =  new \ReflectionMethod(static::class, $method);
+        $method =  new \ReflectionMethod(static::class, $methodName);
         $result = [];
-        foreach ($method->getParameters() as $i=>$p) {
+        foreach ($method->getParameters() as $i=> $p) {
             $result[$p->getName()] = isset($args[$i]) ? $args[$i] : null;
         }
         return $result;
