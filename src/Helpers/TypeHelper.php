@@ -21,6 +21,11 @@ class TypeHelper
                 $item = static::jsonEncode($item, false);
             });
             $result = array_filter($array);
+        } elseif (is_array($value)) {
+            array_walk($array, function(&$item) {
+                $item = static::jsonEncode($item, false);
+            });
+            $result = array_filter($array);
         }
 
         return $encode ? json_encode($result) : $result;
