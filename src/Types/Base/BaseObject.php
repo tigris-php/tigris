@@ -19,6 +19,7 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
 
     /**
      * @inheritdoc
+     * @return BaseObject|static
      */
     public static function build($data)
     {

@@ -5,18 +5,18 @@
 namespace Tigris\Types\Arrays;
 
 use Tigris\Types\Base\BaseMatrix;
-use Tigris\Types\KeyboardButton;
+use Tigris\Types\InlineKeyboardButton;
 
 /**
  * @package Tigris\Types
  */
-class KeyboardButtonMatrix extends BaseMatrix
+class InlineKeyboardButtonMatrix extends BaseMatrix
 {
-    const ENTITY_CLASS = KeyboardButton::class;
+    const ENTITY_CLASS = InlineKeyboardButton::class;
 
     /**
-     * @param KeyboardButton[][] $buttons
-     * @return KeyboardButtonMatrix
+     * @param InlineKeyboardButton[][] $buttons
+     * @return InlineKeyboardButtonMatrix
      */
     public static function create($buttons)
     {
