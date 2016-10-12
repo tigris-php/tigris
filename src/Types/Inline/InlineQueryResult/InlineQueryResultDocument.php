@@ -26,7 +26,7 @@ use Tigris\Types\Scalar\ScalarString;
  */
 class InlineQueryResultDocument extends AbstractInlineQueryResult
 {
-    const TYPE = 'article';
+    const TYPE = 'document';
 
     protected static function extraFields()
     {
