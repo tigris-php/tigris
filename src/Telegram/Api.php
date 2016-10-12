@@ -638,6 +638,32 @@ class Api
         return ScalarBoolean::build($data);
     }
 
+    // Games endpoints
+
+    /**
+     * Use this method to send a game.
+     * On success, the sent Message is returned.
+     *
+     * @link https://core.telegram.org/bots/api#sendgame
+     *
+     * @param integer|string $chat_id
+     * @param string $game_short_name
+     * @param boolean|null $disable_notification
+     * @param integer|null $reply_to_message_id
+     * @param ReplyMarkupInterface|null $reply_markup
+     * @return Message
+     */
+    public function sendGame(
+        $chat_id,
+        $game_short_name,
+        $disable_notification = null,
+        $reply_to_message_id = null,
+        ReplyMarkupInterface $reply_markup = null
+    ) {
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        return Message::build($data);
+    }
+
     /**
      * @param $methodName
      * @param array $args
