@@ -3,9 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a link to a file. By default, this file will be sent by the user with an optional caption.
@@ -24,21 +22,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property integer $thumb_width Optional. Thumbnail width.
  * @property integer $thumb_height Optional. Thumbnail height.
  */
-class InlineQueryResultDocument extends AbstractInlineQueryResult
+class InlineQueryResultDocument extends InlineQueryResult
 {
     const TYPE = 'document';
-
-    protected static function extraFields()
-    {
-        return [
-            'title' => ScalarString::class,
-            'caption' => ScalarString::class,
-            'document_url' => ScalarString::class,
-            'mime_type' => ScalarString::class,
-            'description' => ScalarString::class,
-            'thumb_url' => ScalarString::class,
-            'thumb_width' => ScalarInteger::class,
-            'thumb_height' => ScalarInteger::class,
-        ];
-    }
 }

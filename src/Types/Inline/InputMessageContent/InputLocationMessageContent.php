@@ -4,7 +4,7 @@
  */
 namespace Tigris\Types\Inline\InputMessageContent;
 
-use Tigris\Types\Scalar\ScalarFloat;
+use Tigris\Types\Inline\InputMessageContent;
 
 /**
  * Represents the content of a location message to be sent as the result of an inline query.
@@ -15,13 +15,7 @@ use Tigris\Types\Scalar\ScalarFloat;
  * @property float $latitude Latitude of the location in degrees.
  * @property float $longitude Longitude of the location in degrees.
  */
-class InputLocationMessageContent extends AbstractInputMessageContent
+class InputLocationMessageContent extends InputMessageContent
 {
-    protected static function fields()
-    {
-        return [
-            'latitude' => ScalarFloat::class,
-            'longitude' => ScalarFloat::class,
-        ];
-    }
+
 }

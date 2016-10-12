@@ -3,9 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a link to an animated GIF file.
@@ -22,19 +20,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $title Optional. Title for the result.
  * @property string $caption Optional. Caption of the GIF file to be sent, 0-200 characters.
  */
-class InlineQueryResultGif extends AbstractInlineQueryResult
+class InlineQueryResultGif extends InlineQueryResult
 {
     const TYPE = 'gif';
-
-    protected static function extraFields()
-    {
-        return [
-            'gif_url' => ScalarString::class,
-            'gif_width' => ScalarInteger::class,
-            'gif_height' => ScalarInteger::class,
-            'thumb_url' => ScalarString::class,
-            'title' => ScalarString::class,
-            'caption' => ScalarString::class,
-        ];
-    }
 }

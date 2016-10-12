@@ -2,10 +2,12 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Types\Inline\InlineQueryResult;
+namespace Tigris\Types\Inline;
 
 use Tigris\Types\Base\BaseObject;
-use Tigris\Types\Inline\InputMessageContent\AbstractInputMessageContent;
+use Tigris\Types\Inline\InlineQueryResult\InlineQueryResultArticle;
+use Tigris\Types\Inline\InlineQueryResult\InlineQueryResultAudio;
+use Tigris\Types\Inline\InlineQueryResult\InlineQueryResultContact;
 use Tigris\Types\InlineKeyboardMarkup;
 
 /**
@@ -16,10 +18,10 @@ use Tigris\Types\InlineKeyboardMarkup;
  *
  * @property string $type Type of the result.
  * @property string $id Unique identifier for this result, 1-64 Bytes.
- * @property AbstractInputMessageContent $input_message_content Content of the message to be sent.
  * @property InlineKeyboardMarkup $reply_markup Optional. Inline keyboard attached to the message.
+ * @property InputMessageContent $input_message_content Content of the message to be sent.
  */
-abstract class AbstractInlineQueryResult extends BaseObject
+abstract class InlineQueryResult extends BaseObject
 {
     const TYPE = null;
 
@@ -28,27 +30,13 @@ abstract class AbstractInlineQueryResult extends BaseObject
      */
     public static function build($data)
     {
+        if (static::TYPE === null) {
+            throw new \LogicException('Please set the TYPE constant');
+        }
+
         $result = parent::build($data);
         $result->offsetSet('type', static::TYPE);
+
         return $result;
     }
-
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
-    {
-        $fields = [
-            'type',
-            'id',
-            'reply_markup',
-        ];
-
-        return array_merge($fields, static::extraFields());
-    }
-
-    /**
-     * @return array
-     */
-    abstract protected static function extraFields();
 }

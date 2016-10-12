@@ -4,8 +4,7 @@
  */
 namespace Tigris\Types\Inline\InputMessageContent;
 
-use Tigris\Types\Scalar\ScalarFloat;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InputMessageContent;
 
 /**
  * Represents the content of a venue message to be sent as the result of an inline query.
@@ -19,16 +18,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $address Address of the venue.
  * @property string $foursquare_id Optional. Foursquare identifier of the venue, if known.
  */
-class InputVenueMessageContent extends AbstractInputMessageContent
+class InputVenueMessageContent extends InputMessageContent
 {
-    protected static function fields()
-    {
-        return [
-            'latitude' => ScalarFloat::class,
-            'longitude' => ScalarFloat::class,
-            'title' => ScalarString::class,
-            'address' => ScalarString::class,
-            'foursquare_id' => ScalarString::class,
-        ];
-    }
+
 }

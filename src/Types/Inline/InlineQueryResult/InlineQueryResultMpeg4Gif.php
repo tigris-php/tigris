@@ -3,9 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
@@ -22,19 +20,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $title Optional. Title for the result.
  * @property string $caption Optional. Caption of the MPEG-4 file to be sent, 0-200 characters.
  */
-class InlineQueryResultMpeg4Gif extends AbstractInlineQueryResult
+class InlineQueryResultMpeg4Gif extends InlineQueryResult
 {
     const TYPE = 'mpeg4_gif';
-
-    protected static function extraFields()
-    {
-        return [
-            'mpeg4_url' => ScalarString::class,
-            'mpeg4_width' => ScalarInteger::class,
-            'mpeg4_height' => ScalarInteger::class,
-            'thumb_url' => ScalarString::class,
-            'title' => ScalarString::class,
-            'caption' => ScalarString::class,
-        ];
-    }
 }

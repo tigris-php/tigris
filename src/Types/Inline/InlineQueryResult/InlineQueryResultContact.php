@@ -3,9 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a contact with a phone number. By default, this contact will be sent by the user.
@@ -21,19 +19,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $thumb_width Optional. Thumbnail width.
  * @property string $thumb_height Optional. Thumbnail height.
  */
-class InlineQueryResultContact extends AbstractInlineQueryResult
+class InlineQueryResultContact extends InlineQueryResult
 {
     const TYPE = 'contact';
-
-    protected static function extraFields()
-    {
-        return [
-            'phone_number' => ScalarString::class,
-            'first_name' => ScalarString::class,
-            'last_name' => ScalarString::class,
-            'thumb_url' => ScalarString::class,
-            'thumb_width' => ScalarInteger::class,
-            'thumb_height' => ScalarInteger::class,
-        ];
-    }
 }

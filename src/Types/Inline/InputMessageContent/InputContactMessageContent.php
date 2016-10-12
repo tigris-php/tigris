@@ -4,7 +4,7 @@
  */
 namespace Tigris\Types\Inline\InputMessageContent;
 
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InputMessageContent;
 
 /**
  * Represents the content of a contact message to be sent as the result of an inline query.
@@ -16,14 +16,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $first_name Contact's first name.
  * @property string $last_name Optional. Contact's last name.
  */
-class InputContactMessageContent extends AbstractInputMessageContent
+class InputContactMessageContent extends InputMessageContent
 {
-    protected static function fields()
-    {
-        return [
-            'phone_number' => ScalarString::class,
-            'first_name' => ScalarString::class,
-            'last_name' => ScalarString::class,
-        ];
-    }
+
 }

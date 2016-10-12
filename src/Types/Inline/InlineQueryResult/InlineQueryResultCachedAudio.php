@@ -3,8 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a link to an mp3 audio file stored on the Telegram servers.
@@ -17,15 +16,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $audio_file_id A valid file identifier for the audio file.
  * @property string $caption Optional. Caption, 0-200 characters.
  */
-class InlineQueryResultCachedAudio extends AbstractInlineQueryResult
+class InlineQueryResultCachedAudio extends InlineQueryResult
 {
     const TYPE = 'audio';
-
-    protected static function extraFields()
-    {
-        return [
-            'audio_file_id' => ScalarString::class,
-            'caption' => ScalarString::class,
-        ];
-    }
 }

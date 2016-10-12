@@ -3,9 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a link to a voice recording in an .ogg container encoded with OPUS.
@@ -21,17 +19,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $caption Optional. Caption, 0-200 characters.
  * @property integer $voice_duration Optional. Recording duration in seconds.
  */
-class InlineQueryResultVoice extends AbstractInlineQueryResult
+class InlineQueryResultVoice extends InlineQueryResult
 {
     const TYPE = 'voice';
-
-    protected static function extraFields()
-    {
-        return [
-            'voice_url' => ScalarString::class,
-            'title' => ScalarString::class,
-            'caption' => ScalarString::class,
-            'voice_duration' => ScalarInteger::class,
-        ];
-    }
 }

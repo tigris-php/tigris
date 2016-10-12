@@ -4,8 +4,7 @@
  */
 namespace Tigris\Types\Inline\InputMessageContent;
 
-use Tigris\Types\Scalar\ScalarBoolean;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InputMessageContent;
 
 /**
  * Represents the content of a text message to be sent as the result of an inline query.
@@ -18,14 +17,7 @@ use Tigris\Types\Scalar\ScalarString;
  *  fixed-width text or inline URLs in your bot's message.
  * @property bool $disable_web_page_preview Optional. Disables link previews for links in the sent message.
  */
-class InputTextMessageContent extends AbstractInputMessageContent
+class InputTextMessageContent extends InputMessageContent
 {
-    protected static function fields()
-    {
-        return [
-            'message_text' => ScalarString::class,
-            'parse_mode' => ScalarString::class,
-            'disable_web_page_preview' => ScalarBoolean::class,
-        ];
-    }
+
 }

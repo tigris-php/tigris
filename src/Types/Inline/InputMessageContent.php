@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Types\Inline\InputMessageContent;
+namespace Tigris\Types\Inline;
 
 use Tigris\Types\Base\BaseObject;
 
@@ -12,7 +12,7 @@ use Tigris\Types\Base\BaseObject;
  * @package Tigris\Types\Inline
  * @link https://core.telegram.org/bots/api#inputmessagecontent
  */
-abstract class AbstractInputMessageContent extends BaseObject
+abstract class InputMessageContent extends BaseObject
 {
 
 }

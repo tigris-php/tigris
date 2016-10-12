@@ -3,9 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
-
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Types\Inline\InlineQueryResult;
 
 /**
  * Represents a link to a page containing an embedded video player or a video file.
@@ -25,22 +23,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property integer $video_duration Optional. Video duration in seconds.
  * @property string $description Optional. Short description of the result.
  */
-class InlineQueryResultVideo extends AbstractInlineQueryResult
+class InlineQueryResultVideo extends InlineQueryResult
 {
     const TYPE = 'video';
-
-    protected static function extraFields()
-    {
-        return [
-            'video_url' => ScalarString::class,
-            'mime_type' => ScalarString::class,
-            'thumb_url' => ScalarString::class,
-            'title' => ScalarString::class,
-            'caption' => ScalarString::class,
-            'video_width' => ScalarInteger::class,
-            'video_height' => ScalarInteger::class,
-            'video_duration' => ScalarInteger::class,
-            'description' => ScalarString::class,
-        ];
-    }
 }
