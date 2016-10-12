@@ -107,7 +107,7 @@ class Api
      */
     public function getMe()
     {
-        $data = $this->call('getMe');
+        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return User::build($data);
     }
 
@@ -777,7 +777,7 @@ class Api
         $switch_pm_text = null,
         $switch_pm_parameter = null
     ) {
-        return (bool) $this->call(__METHOD__, $this->parseArgs(__METHOD__, func_get_args()));
+        return (bool) $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
     }
 
     /**
