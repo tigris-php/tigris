@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Types\Inline;
+namespace Tigris\Types\Inline\InlineQueryResult;
 use Tigris\Types\Scalar\ScalarString;
 
 /**
@@ -16,7 +16,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $audio_file_id A valid file identifier for the audio file.
  * @property string $caption Optional. Caption, 0-200 characters.
  */
-class InlineQueryResultCachedAudio extends InlineQueryResult
+class InlineQueryResultCachedAudio extends AbstractInlineQueryResult
 {
     const TYPE = 'audio';
 
