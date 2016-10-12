@@ -19,7 +19,7 @@ use Tigris\Types\Scalar\ScalarString;
  * @property string $voice_url A valid URL for the voice recording.
  * @property string $title Recording title.
  * @property string $caption Optional. Caption, 0-200 characters.
- * @property string $voice_duration Optional. Recording duration in seconds.
+ * @property integer $voice_duration Optional. Recording duration in seconds.
  */
 class InlineQueryResultVoice extends AbstractInlineQueryResult
 {
