@@ -3,6 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 namespace Tigris\Types\Inline\InlineQueryResult;
+
 use Tigris\Types\Scalar\ScalarBoolean;
 use Tigris\Types\Scalar\ScalarInteger;
 use Tigris\Types\Scalar\ScalarString;
