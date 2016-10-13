@@ -12,7 +12,7 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = InlineQuery::build([
+        $a = InlineQuery::parse([
             'id' => '123',
             'from' => [
                 'id' => 100500,
@@ -35,21 +35,21 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('foo', 'query', $a);
         $this->assertAttributeSame('bar', 'offset', $a);
 
-        $b = InlineQuery::build($a);
+        $b = InlineQuery::parse($a);
         $this->assertSame($a, $b);
 
-        $z = InlineQuery::build(null);
+        $z = InlineQuery::parse(null);
         $this->assertNull($z);
 
         try {
-            InlineQuery::build(123);
+            InlineQuery::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            InlineQuery::build([]);
+            InlineQuery::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

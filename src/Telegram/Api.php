@@ -90,7 +90,7 @@ class Api
         $timeout = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return UpdateArray::build($data);
+        return UpdateArray::parse($data);
     }
 
     /**
@@ -104,7 +104,7 @@ class Api
     public function getMe()
     {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return User::build($data);
+        return User::parse($data);
     }
 
     /**
@@ -132,7 +132,7 @@ class Api
         ReplyMarkupInterface $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -150,7 +150,7 @@ class Api
     public function forwardMessage($chat_id, $from_chat_id, $message_id, $disable_notification = null)
     {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -176,7 +176,7 @@ class Api
         ReplyMarkupInterface $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -207,7 +207,7 @@ class Api
         ReplyMarkupInterface $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -233,7 +233,7 @@ class Api
         ReplyMarkupInterface $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -257,7 +257,7 @@ class Api
         $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -291,7 +291,7 @@ class Api
         $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -320,7 +320,7 @@ class Api
         $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -346,7 +346,7 @@ class Api
         $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -378,7 +378,7 @@ class Api
         $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -406,7 +406,7 @@ class Api
         $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**
@@ -424,7 +424,7 @@ class Api
         $action
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::build($data);
+        return ScalarBoolean::parse($data);
     }
 
     /**
@@ -444,7 +444,7 @@ class Api
         $limit = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return UserProfilePhotos::build($data);
+        return UserProfilePhotos::parse($data);
     }
 
     /**
@@ -461,7 +461,7 @@ class Api
         $file_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return File::build($data);
+        return File::parse($data);
     }
 
     /**
@@ -480,7 +480,7 @@ class Api
         $user_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::build($data);
+        return ScalarBoolean::parse($data);
     }
 
     /**
@@ -496,7 +496,7 @@ class Api
         $chat_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::build($data);
+        return ScalarBoolean::parse($data);
     }
 
     /**
@@ -515,7 +515,7 @@ class Api
         $user_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::build($data);
+        return ScalarBoolean::parse($data);
     }
 
     /**
@@ -532,7 +532,7 @@ class Api
         $chat_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Chat::build($data);
+        return Chat::parse($data);
     }
 
     /**
@@ -543,13 +543,13 @@ class Api
      * @link https://core.telegram.org/bots/api#getchatadministrators
      *
      * @param integer|string $chat_id
-     * @return ChatMemberArray
+     * @return ChatMember[]|ChatMemberArray
      */
     public function getChatAdministrators(
         $chat_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ChatMemberArray::build($data);
+        return ChatMemberArray::parse($data);
     }
 
     /**
@@ -565,7 +565,7 @@ class Api
         $chat_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarInteger::build($data);
+        return ScalarInteger::parse($data);
     }
 
     /**
@@ -583,7 +583,7 @@ class Api
         $user_id
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ChatMember::build($data);
+        return ChatMember::parse($data);
     }
 
     /**
@@ -606,7 +606,7 @@ class Api
         $url = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::build($data);
+        return ScalarBoolean::parse($data);
     }
 
     /**
@@ -635,7 +635,7 @@ class Api
         $switch_pm_parameter = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::build($data);
+        return ScalarBoolean::parse($data);
     }
 
     // Games endpoints
@@ -661,7 +661,7 @@ class Api
         ReplyMarkupInterface $reply_markup = null
     ) {
         $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::build($data);
+        return Message::parse($data);
     }
 
     /**

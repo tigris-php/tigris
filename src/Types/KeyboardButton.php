@@ -42,24 +42,10 @@ class KeyboardButton extends BaseObject
             default:
                 throw new \InvalidArgumentException('Invalid $request value: ' . $request);
         }
-        $data = [
-            'text' => $text,
-        ];
+        $data = compact('text');
         if ($request) {
             $data[$request] = true;
         }
         return static::build($data);
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
-    {
-        return [
-            'text' => ScalarString::class,
-            'request_contact' => ScalarBoolean::class,
-            'request_location' => ScalarBoolean::class,
-        ];
     }
 }

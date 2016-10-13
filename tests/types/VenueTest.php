@@ -11,7 +11,7 @@ class VenueTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Venue::build([
+        $a = Venue::parse([
             'location' => [
                 'longitude' => 0.5,
                 'latitude' => 0.5,
@@ -27,21 +27,21 @@ class VenueTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('some address', 'address', $a);
         $this->assertAttributeSame('123', 'foursquare_id', $a);
 
-        $b = Venue::build($a);
+        $b = Venue::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Venue::build(null);
+        $z = Venue::parse(null);
         $this->assertNull($z);
 
         try {
-            Venue::build(123);
+            Venue::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Venue::build([]);
+            Venue::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

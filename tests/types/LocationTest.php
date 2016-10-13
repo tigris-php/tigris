@@ -10,7 +10,7 @@ class LocationTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Location::build([
+        $a = Location::parse([
             'longitude' => 0.5,
             'latitude' => 0.5,
         ]);
@@ -19,21 +19,21 @@ class LocationTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame(0.5, 'longitude', $a);
         $this->assertAttributeSame(0.5, 'latitude', $a);
 
-        $b = Location::build($a);
+        $b = Location::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Location::build(null);
+        $z = Location::parse(null);
         $this->assertNull($z);
 
         try {
-            Location::build(123);
+            Location::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Location::build([]);
+            Location::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

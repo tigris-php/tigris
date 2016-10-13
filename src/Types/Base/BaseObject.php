@@ -18,10 +18,10 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
 //    }
 
     /**
-     * @inheritdoc
-     * @return BaseObject|static
-     */
-    public static function build($data)
+ * @inheritdoc
+ * @return static
+ */
+    public static function parse($data)
     {
         if (is_null($data)) {
             return null;
@@ -43,14 +43,32 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
             throw new TelegramTypeException('Unexpected empty array');
         }
 
-        $obj = new static;
+        $result = new static;
 
         foreach (static::fields() as $field => $className) {
-            /** @var $className BaseObject */
-            $obj->offsetSet($field, $className::build(ArrayHelper::getValue($data, $field)));
+            /** @var $className TypeInterface */
+            $result->offsetSet($field, $className::parse(ArrayHelper::getValue($data, $field)));
         }
 
-        return $obj;
+        return $result;
+    }
+
+    /**
+     * Builds object from array of field values indexed by field name.
+     *
+     * @param array $values
+     * @return static
+     */
+    public static function build(array $values)
+    {
+        $result = new static;
+
+        foreach ($values as $field=> $value) {
+            /** @var $className TypeInterface */
+            $result->$field = $value;
+        }
+
+        return $result;
     }
 
     /**

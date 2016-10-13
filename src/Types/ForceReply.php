@@ -27,21 +27,8 @@ class ForceReply extends BaseObject implements ReplyMarkupInterface
      */
     public static function create($selective = false)
     {
-        $data = [
-            'force_reply' => true,
-            'selective' => $selective,
-        ];
+        $data = compact('selective');
+        $data['force_reply'] = true;
         return static::build($data);
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
-    {
-        return [
-            'force_reply' => ScalarBoolean::class,
-            'selective' => ScalarBoolean::class,
-        ];
     }
 }

@@ -22,6 +22,7 @@ class TypeHelper
             });
             $result = array_filter($array);
         } elseif (is_array($value)) {
+            $array = $value;
             array_walk($array, function(&$item) {
                 $item = static::jsonEncode($item, false);
             });

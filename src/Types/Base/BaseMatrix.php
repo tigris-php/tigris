@@ -16,7 +16,7 @@ abstract class BaseMatrix extends BaseArray implements TypeInterface
     /**
      * @inheritdoc
      */
-    public static function build($data)
+    public static function parse($data)
     {
         if (static::ENTITY_CLASS == null) {
             throw new \LogicException('Please override ENTITY_CLASS constant in ' . __CLASS__);
@@ -26,19 +26,17 @@ abstract class BaseMatrix extends BaseArray implements TypeInterface
             return $data;
         }
 
-        $obj = new static;
+        $result = new static;
 
         if (empty($data) || !is_array($data)) {
-            return $obj;
+            return $result;
         }
-
-        $className = static::ENTITY_CLASS;
 
         foreach ($data as $item) {
-            /** @var $className BaseObject */
-            $obj->append(parent::build($item));
+            // calling parent constructor to build a row of entities
+            $result->append(parent::parse($item));
         }
 
-        return $obj;
+        return $result;
     }
 }

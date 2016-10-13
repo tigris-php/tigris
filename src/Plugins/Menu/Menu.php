@@ -6,7 +6,7 @@ namespace Tigris\Plugins\Menu;
 
 use Tigris\Bot;
 use Tigris\Helpers\ArrayHelper;
-use Tigris\Types\Arrays\KeyboardButtonMatrix;
+use Tigris\Types\KeyboardButton;
 use Tigris\Types\ReplyKeyboardMarkup;
 
 class Menu
@@ -81,18 +81,15 @@ class Menu
     }
 
     /**
-     * @return KeyboardButtonMatrix
+     * @return KeyboardButton[][]
      */
     public function toKeyboard()
     {
-        $matrix = [];
-        foreach ($this->items as $row) {
-            $newRow = [];
-            foreach ($row as $item) {
-                $newRow[] = $item->toKeyboardButton();
-            }
-            $matrix[] = $newRow;
-        }
-        return KeyboardButtonMatrix::create($matrix);
+        /** @var KeyboardButton[][] $result */
+        $result = $this->items;
+        array_walk_recursive($result, function(MenuItem &$item) {
+            $item = $item->toKeyboardButton();
+        });
+        return $result;
     }
 }

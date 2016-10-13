@@ -10,7 +10,7 @@ class PhotoSizeMatrixTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = PhotoSizeMatrix::build([
+        $a = PhotoSizeMatrix::parse([
             [
                 [
                     'file_id' => 'foobar',
@@ -47,10 +47,10 @@ class PhotoSizeMatrixTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(PhotoSize::class, $a[1][0]);
         $this->assertInstanceOf(PhotoSize::class, $a[1][1]);
 
-        $b = PhotoSizeArray::build($a);
+        $b = PhotoSizeArray::parse($a);
         $this->assertSame($a, $b);
 
-        $z = PhotoSize::build(null);
+        $z = PhotoSize::parse(null);
         $this->assertNull($z);
     }
 }

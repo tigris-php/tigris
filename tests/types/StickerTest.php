@@ -13,7 +13,7 @@ class StickerTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Sticker::build([
+        $a = Sticker::parse([
             'file_id' => '123',
             'width' => 640,
             'height' => 480,
@@ -35,21 +35,21 @@ class StickerTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('emoji', 'emoji', $a);
         $this->assertAttributeSame(1024, 'file_size', $a);
 
-        $b = Sticker::build($a);
+        $b = Sticker::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Sticker::build(null);
+        $z = Sticker::parse(null);
         $this->assertNull($z);
 
         try {
-            Sticker::build('scalar');
+            Sticker::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Sticker::build([]);
+            Sticker::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

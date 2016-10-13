@@ -12,7 +12,7 @@ class VideoTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Video::build([
+        $a = Video::parse([
             'file_id' => '123',
             'width' => 640,
             'height' => 480,
@@ -36,21 +36,21 @@ class VideoTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('video/mp4', 'mime_type', $a);
         $this->assertAttributeSame(1024, 'file_size', $a);
 
-        $b = Video::build($a);
+        $b = Video::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Video::build(null);
+        $z = Video::parse(null);
         $this->assertNull($z);
 
         try {
-            Video::build(123);
+            Video::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Video::build([]);
+            Video::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

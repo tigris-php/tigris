@@ -11,7 +11,7 @@ class UserTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = User::build([
+        $a = User::parse([
             'id' => 100500,
             'first_name' => 'Tigris',
             'last_name' => 'Bot',
@@ -24,21 +24,21 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('Bot', 'last_name', $a);
         $this->assertAttributeSame('@tigrisbot', 'username', $a);
 
-        $b = User::build($a);
+        $b = User::parse($a);
         $this->assertSame($a, $b);
 
-        $z = User::build(null);
+        $z = User::parse(null);
         $this->assertNull($z);
 
         try {
-            User::build('scalar');
+            User::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            User::build([]);
+            User::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

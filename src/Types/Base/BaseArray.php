@@ -15,8 +15,9 @@ abstract class BaseArray extends \ArrayObject implements TypeInterface
     
     /**
      * @inheritdoc
+     * @return static|array
      */
-    public static function build($data)
+    public static function parse($data)
     {
         if (static::ENTITY_CLASS == null) {
             throw new \LogicException('Please override ENTITY_CLASS constant in ' . __CLASS__);
@@ -26,19 +27,19 @@ abstract class BaseArray extends \ArrayObject implements TypeInterface
             return $data;
         }
 
-        $obj = new static;
+        $result = new static;
 
         if (empty($data) || !is_array($data)) {
-            return $obj;
+            return $result;
         }
 
         $className = static::ENTITY_CLASS;
 
         foreach ($data as $item) {
-            /** @var $className BaseObject */
-            $obj->append($className::build($item));
+            /** @var $className TypeInterface */
+            $result->append($className::parse($item));
         }
 
-        return $obj;
+        return $result;
     }
 }

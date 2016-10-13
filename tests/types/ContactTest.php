@@ -11,7 +11,7 @@ class ContactTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Contact::build([
+        $a = Contact::parse([
             'phone_number' => '+100500',
             'first_name' => 'Tigris',
             'last_name' => 'Bot',
@@ -24,21 +24,21 @@ class ContactTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('Bot', 'last_name', $a);
         $this->assertAttributeSame(123, 'user_id', $a);
 
-        $b = Contact::build($a);
+        $b = Contact::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Contact::build(null);
+        $z = Contact::parse(null);
         $this->assertNull($z);
 
         try {
-            Contact::build('scalar');
+            Contact::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Contact::build([]);
+            Contact::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

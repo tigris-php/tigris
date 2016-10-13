@@ -12,7 +12,7 @@ class DocumentTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Document::build([
+        $a = Document::parse([
             'file_id' => '123',
             'thumb' => [
                 'file_id' => 'foobar',
@@ -32,21 +32,21 @@ class DocumentTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('bar', 'mime_type', $a);
         $this->assertAttributeSame(1024, 'file_size', $a);
 
-        $b = Document::build($a);
+        $b = Document::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Document::build(null);
+        $z = Document::parse(null);
         $this->assertNull($z);
 
         try {
-            Document::build('scalar');
+            Document::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Document::build([]);
+            Document::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

@@ -11,7 +11,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = File::build([
+        $a = File::parse([
             'file_id' => '123',
             'file_size' => 1024,
             'file_path' => 'path',
@@ -22,21 +22,21 @@ class FileTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame(1024, 'file_size', $a);
         $this->assertAttributeSame('path', 'file_path', $a);
 
-        $b = File::build($a);
+        $b = File::parse($a);
         $this->assertSame($a, $b);
 
-        $z = File::build(null);
+        $z = File::parse(null);
         $this->assertNull($z);
 
         try {
-            File::build('scalar');
+            File::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            File::build([]);
+            File::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

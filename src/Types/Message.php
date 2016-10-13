@@ -104,10 +104,10 @@ class Message extends BaseObject
     /**
      * @inheritdoc
      */
-    public static function build($data)
+    public static function parse($data)
     {
         /** @var static $obj */
-        $obj = parent::build($data);
+        $obj = parent::parse($data);
         if (!$obj) {
             return $obj;
         }

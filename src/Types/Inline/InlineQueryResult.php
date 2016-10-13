@@ -5,9 +5,6 @@
 namespace Tigris\Types\Inline;
 
 use Tigris\Types\Base\BaseObject;
-use Tigris\Types\Inline\InlineQueryResult\InlineQueryResultArticle;
-use Tigris\Types\Inline\InlineQueryResult\InlineQueryResultAudio;
-use Tigris\Types\Inline\InlineQueryResult\InlineQueryResultContact;
 use Tigris\Types\InlineKeyboardMarkup;
 
 /**
@@ -18,25 +15,43 @@ use Tigris\Types\InlineKeyboardMarkup;
  *
  * @property string $type Type of the result.
  * @property string $id Unique identifier for this result, 1-64 Bytes.
- * @property InlineKeyboardMarkup $reply_markup Optional. Inline keyboard attached to the message.
- * @property InputMessageContent $input_message_content Content of the message to be sent.
+ * @property InlineKeyboardMarkup|null $reply_markup Optional. Inline keyboard attached to the message.
+ * @property InputMessageContent|null $input_message_content Content of the message to be sent.
  */
 abstract class InlineQueryResult extends BaseObject
 {
+    // override this constant in the child classes
     const TYPE = null;
 
     /**
      * @inheritdoc
      */
-    public static function build($data)
+    public static function parse($data)
     {
         if (static::TYPE === null) {
-            throw new \LogicException('Please set the TYPE constant');
+            throw new \LogicException('Please override TYPE constant in ' . __CLASS__);
         }
+        // setting type
+        $data['type'] = static::TYPE;
+        // calling parent constructor to get static instance
+        return parent::parse($data);
+    }
 
-        $result = parent::build($data);
-        $result->offsetSet('type', static::TYPE);
-
+    /**
+     * @param $id
+     * @param InlineKeyboardMarkup|null $reply_markup
+     * @param InputMessageContent|null $input_message_content
+     * @return static
+     */
+    public static function create(
+        $id,
+        InlineKeyboardMarkup $reply_markup = null,
+        InputMessageContent $input_message_content = null
+    ){
+        /** @var static $result */
+        $result = static::build(compact(
+            'id', 'reply_markup', 'input_message_content'
+        ));
         return $result;
     }
 }

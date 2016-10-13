@@ -12,7 +12,7 @@ class MessageEntityTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = MessageEntity::build([
+        $a = MessageEntity::parse([
             'type' => 'text_mention',
             'offset' => 123,
             'length' => 456,
@@ -32,21 +32,21 @@ class MessageEntityTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('https://telegram.me', 'url', $a);
         $this->assertAttributeInstanceOf(User::class, 'user', $a);
 
-        $b = MessageEntity::build($a);
+        $b = MessageEntity::parse($a);
         $this->assertSame($a, $b);
 
-        $z = MessageEntity::build(null);
+        $z = MessageEntity::parse(null);
         $this->assertNull($z);
 
         try {
-            MessageEntity::build('scalar');
+            MessageEntity::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            MessageEntity::build([]);
+            MessageEntity::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

@@ -12,7 +12,7 @@ abstract class BaseScalar implements TypeInterface
      * @inheritdoc
      * @return mixed
      */
-    public static function build($data)
+    public static function parse($data)
     {
         if ($data instanceof TypeInterface) {
             return $data;

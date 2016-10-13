@@ -11,7 +11,7 @@ class AudioTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Audio::build([
+        $a = Audio::parse([
             'file_id' => 'foo',
             'duration' => 123,
         ]);
@@ -20,21 +20,21 @@ class AudioTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('foo', 'file_id', $a);
         $this->assertAttributeSame(123, 'duration', $a);
 
-        $b = Audio::build($a);
+        $b = Audio::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Audio::build(null);
+        $z = Audio::parse(null);
         $this->assertNull($z);
 
         try {
-            Audio::build(123);
+            Audio::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Audio::build([]);
+            Audio::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

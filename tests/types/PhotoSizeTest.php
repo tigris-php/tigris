@@ -11,7 +11,7 @@ class PhotoSizeTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = PhotoSize::build([
+        $a = PhotoSize::parse([
             'file_id' => '123',
             'width' => 640,
             'height' => 480,
@@ -24,21 +24,21 @@ class PhotoSizeTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame(480, 'height', $a);
         $this->assertAttributeSame(1024, 'file_size', $a);
 
-        $b = PhotoSize::build($a);
+        $b = PhotoSize::parse($a);
         $this->assertSame($a, $b);
 
-        $z = PhotoSize::build(null);
+        $z = PhotoSize::parse(null);
         $this->assertNull($z);
 
         try {
-            PhotoSize::build(123);
+            PhotoSize::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            PhotoSize::build([]);
+            PhotoSize::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

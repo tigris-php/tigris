@@ -27,21 +27,8 @@ class ReplyKeyboardHide extends BaseObject implements ReplyMarkupInterface
      */
     public static function create($selective = false)
     {
-        $data = [
-            'hide_keyboard' => true,
-            'selective' => $selective,
-        ];
+        $data = compact('selective');
+        $data['hide_keyboard'] = true;
         return static::build($data);
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
-    {
-        return [
-            'hide_keyboard' => ScalarBoolean::class,
-            'selective' => ScalarBoolean::class,
-        ];
     }
 }

@@ -14,5 +14,5 @@ interface TypeInterface
      * @param mixed $data
      * @return null|static
      */
-    public static function build($data);
+    public static function parse($data);
 }

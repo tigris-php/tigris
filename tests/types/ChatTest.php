@@ -11,7 +11,7 @@ class ChatTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = Chat::build([
+        $a = Chat::parse([
             'id' => 123,
             'type' => 'channel',
             'title' => 'Some Channel',
@@ -28,21 +28,21 @@ class ChatTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame('Tigris', 'first_name', $a);
         $this->assertAttributeSame('Bot', 'last_name', $a);
 
-        $b = Chat::build($a);
+        $b = Chat::parse($a);
         $this->assertSame($a, $b);
 
-        $z = Chat::build(null);
+        $z = Chat::parse(null);
         $this->assertNull($z);
 
         try {
-            Chat::build('scalar');
+            Chat::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
         }
 
         try {
-            Chat::build([]);
+            Chat::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);
@@ -51,7 +51,7 @@ class ChatTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $a = Chat::build([
+        $a = Chat::parse([
             'id' => 100500,
             'type' => 'channel',
             'title' => 'Some Channel',
