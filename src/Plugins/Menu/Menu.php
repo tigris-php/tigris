@@ -55,8 +55,9 @@ class Menu
     /**
      * @param $chatId
      * @param $menuId
+     * @param $title
      */
-    public static function send($chatId, $menuId)
+    public static function send($chatId, $menuId, $title = null)
     {
         $menu = static::get($menuId);
         if (!$menu) {
@@ -66,7 +67,11 @@ class Menu
         $session = Bot::getInstance()->getChatSession($chatId);
         $session->setState(MenuHandler::STATE_PREFIX . $menuId);
 
-        Bot::getInstance()->getApi()->sendMessage($chatId, $menu->title, null, null, null, null,
+        if ($title === null) {
+            $title = $menu->title;
+        }
+
+        Bot::getInstance()->getApi()->sendMessage($chatId, $title, null, null, null, null,
             ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
         );
     }

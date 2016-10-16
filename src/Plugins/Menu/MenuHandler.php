@@ -78,7 +78,6 @@ class MenuHandler extends AbstractPlugin
                 Menu::send($event->message->chat->id, $event->item->targetMenuId);
                 return;
         }
-        Menu::send($event->message->chat->id, $event->menu->id);
     }
 
     /**
