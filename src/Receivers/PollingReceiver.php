@@ -10,8 +10,12 @@ class PollingReceiver extends AbstractReceiver
 
     public $offset = 0;
 
+    public $lastUpdateFile = 'last_update.txt';
+
     protected function onSetBot()
     {
+        $this->offset = $this->getLastOffset();
+
         $loop = $this->bot->getLoop();
         $loop->addPeriodicTimer($this->pollingInterval, function () {
 //            $memory = memory_get_usage() / 1024;
@@ -22,8 +26,39 @@ class PollingReceiver extends AbstractReceiver
 
             foreach ($updates as $update) {
                 $this->offset = $update->update_id + 1;
+                $this->setLastOffset($this->offset);
                 $this->bot->getUpdatesQueue()->insert($update, $update->update_id);
             }
         });
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLastUpdateFilePath()
+    {
+        return $this->bot->getStorageDir() . DIRECTORY_SEPARATOR . $this->lastUpdateFile;
+    }
+
+    /**
+     * @return int
+     */
+    protected function getLastOffset()
+    {
+        $path = $this->getLastUpdateFilePath();
+        if (is_readable($path)) {
+            return (integer) file_get_contents($path);
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @param $offset
+     */
+    protected function setLastOffset($offset)
+    {
+        $path = $this->getLastUpdateFilePath();
+        file_put_contents($path, $offset);
     }
 }

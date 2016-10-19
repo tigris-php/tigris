@@ -75,7 +75,7 @@ class Api
 
     /**
      * Use this method to receive incoming updates using long polling.
-     * {@see \Tigris\Types\Arrays\UpdateArray} object is returned.
+     * An array of {@see \Tigris\Types\Update} objects is returned.
      *
      * @link https://core.telegram.org/bots/api/#getting-updates
      *

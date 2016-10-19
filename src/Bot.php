@@ -41,6 +41,8 @@ abstract class Bot
 
     protected $userInfo;
 
+    protected $storageDir;
+
     /** @var AbstractReceiver */
     protected $receiver;
     /** @var Client */
@@ -109,6 +111,15 @@ abstract class Bot
             $this->setChatSessionFactory(new InMemorySessionFactory());
         }
 
+        if (empty($this->storageDir)) {
+            $this->storageDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR
+            . 'tigris' . DIRECTORY_SEPARATOR . $this->getUserInfo()->username;
+            @mkdir($this->storageDir, 0777, true);
+            if (!is_dir($this->storageDir)) {
+                die('Unable to create storage dir: ' . $this->storageDir);
+            }
+        }
+
         $this->loop->addPeriodicTimer(0.1, function () {
             while (!$this->updatesQueue->isEmpty()) {
                 $item = $this->updatesQueue->extract();
@@ -141,6 +152,25 @@ abstract class Bot
     public function getApi()
     {
         return $this->api;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStorageDir()
+    {
+        return $this->storageDir;
+    }
+
+    /**
+     * @param mixed $storageDir
+     */
+    public function setStorageDir($storageDir)
+    {
+        if (!is_dir($storageDir)) {
+            throw new \BadMethodCallException('Invalid directory: ' . $storageDir);
+        }
+        $this->storageDir = $storageDir;
     }
 
     /**
