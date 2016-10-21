@@ -12,7 +12,7 @@ class ChosenInlineResultTest extends PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $a = \Tigris\Types\Inline\ChosenInlineResult::parse([
+        $a = ChosenInlineResult::parse([
             'result_id' => '121',
             'from' => [
                 'id' => '711',
@@ -28,7 +28,7 @@ class ChosenInlineResultTest extends PHPUnit_Framework_TestCase
             'query' => 'foo',
         ]);
 
-        $this->assertInstanceOf(\Tigris\Types\Inline\ChosenInlineResult::class, $a);
+        $this->assertInstanceOf(ChosenInlineResult::class, $a);
         $this->assertAttributeSame('121', 'result_id', $a);
         $this->assertAttributeInstanceOf(User::class, 'from', $a);
         $this->assertAttributeInstanceOf(Location::class, 'location', $a);
@@ -41,7 +41,7 @@ class ChosenInlineResultTest extends PHPUnit_Framework_TestCase
         $this->assertNull($z);
 
         try {
-            ChosenInlineResult::parse(121);
+            ChosenInlineResult::parse('scalar');
             $this->fail('Expected exception not thrown');
         }  catch (\Exception $e) {
             $this->assertInstanceOf(TelegramTypeException::class, $e);

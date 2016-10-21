@@ -20,10 +20,6 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
                 'last_name' => 'Bot',
                 'username' => '@tigrisbot',
             ],
-            'location' => [
-                'longitude' => 0.5,
-                'latitude' => 0.5,
-            ],
             'query' => 'foo',
             'offset' => 'bar',
         ]);
@@ -31,7 +27,6 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(InlineQuery::class, $a);
         $this->assertAttributeSame('123', 'id', $a);
         $this->assertAttributeInstanceOf(User::class, 'from', $a);
-        $this->assertAttributeInstanceOf(Location::class, 'location', $a);
         $this->assertAttributeSame('foo', 'query', $a);
         $this->assertAttributeSame('bar', 'offset', $a);
 
