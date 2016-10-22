@@ -9,9 +9,10 @@ Class ReplyKeyboardMarkupTest extends  PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $a = ReplyKeyboardMarkup::create([
-                'keyboard' => KeyboardButton::parse(['text' => 'foo'])
-            ]
-        );
+                'keyboard' => [
+                    'text' => 'foo'
+                ]
+        ]);
 
         $this->assertInstanceOf(ReplyKeyboardMarkup::class, $a);
         $this->assertInstanceOf(ReplyMarkupInterface::class, $a);

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author Sergey Vasilev <doozookn@gmail.com>
+ */
 
 use Tigris\Types\InlineKeyboardMarkup;
 use Tigris\Types\InlineKeyboardButton;

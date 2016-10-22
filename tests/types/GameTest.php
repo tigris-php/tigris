@@ -1,11 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: doo
- * Date: 10/21/16
- * Time: 10:41 AM
+ * @author Sergey Vasilev <doozookn@gmail.com>
  */
-
 use Tigris\Exceptions\TelegramTypeException;
 use Tigris\Types\Arrays\PhotoSizeArray;
 use Tigris\Types\Game;
