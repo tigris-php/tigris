@@ -9,7 +9,7 @@ use Tigris\Types\User;
 
 class CallbackQueryTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = CallbackQuery::parse([
             'id' => '123',

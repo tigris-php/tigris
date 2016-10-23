@@ -6,7 +6,7 @@ use Tigris\Types\Base\BaseArray;
 use Tigris\Types\User;
 class MessageEntityArrayTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = MessageEntityArray::parse([
             [

@@ -6,7 +6,7 @@ use \Tigris\Types\User;
 use \Tigris\Types\ChatMember;
 class ChatMemberArrayTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = ChatMemberArray::parse([
             [

@@ -8,7 +8,7 @@ use Tigris\Types\Animation;
 
 class AnimationTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Animation::parse([
             'file_id' => '1147',

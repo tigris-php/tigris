@@ -10,7 +10,7 @@ use Tigris\Types\Video;
 
 class VideoTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Video::parse([
             'file_id' => '123',

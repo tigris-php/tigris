@@ -9,7 +9,7 @@ use Tigris\Types\User;
 
 class ChatMemberTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = ChatMember::parse([
             'user' => [

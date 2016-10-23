@@ -11,7 +11,7 @@ use Tigris\Types\PhotoSize;
 
 class StickerTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Sticker::parse([
             'file_id' => '123',

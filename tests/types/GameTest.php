@@ -8,7 +8,7 @@ use Tigris\Types\Game;
 
 class GameTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Game::parse([
             'title' => 'foo',
