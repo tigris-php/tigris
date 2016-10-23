@@ -8,7 +8,7 @@ use Tigris\Types\Inline\InlineQueryResult;
 
 class InlineQueryResultLocationTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = InlineQueryResultLocation::parse([]);
         $this->assertInstanceOf(\Tigris\Types\Inline\InlineQueryResult\InlineQueryResultLocation::class, $a);

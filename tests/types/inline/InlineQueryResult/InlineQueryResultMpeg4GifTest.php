@@ -8,7 +8,7 @@ use Tigris\Types\Inline\InlineQueryResult;
 
 class InlineQueryResultMpeg4GifTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = InlineQueryResultMpeg4Gif::parse([]);
         $this->assertInstanceOf(\Tigris\Types\Inline\InlineQueryResult\InlineQueryResultMpeg4Gif::class, $a);

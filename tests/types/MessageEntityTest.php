@@ -10,7 +10,7 @@ use Tigris\Types\User;
 
 class MessageEntityTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = MessageEntity::parse([
             'type' => 'text_mention',

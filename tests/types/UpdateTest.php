@@ -3,7 +3,7 @@
 
 class UpdateTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
 
         $a = Tigris\Types\Update::parse([

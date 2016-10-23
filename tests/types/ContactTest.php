@@ -9,7 +9,7 @@ use Tigris\Types\Scalar\ScalarString;
 
 class ContactTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Contact::parse([
             'phone_number' => '+100500',

@@ -8,7 +8,7 @@ use Tigris\Types\Inline\InlineQueryResult;
 
 class InlineQueryResultDocumentTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = InlineQueryResultDocument::parse([]);
         $this->assertInstanceOf(\Tigris\Types\Inline\InlineQueryResult\InlineQueryResultDocument::class, $a);

@@ -10,7 +10,7 @@ use Tigris\Types\User;
 
 class InlineQueryTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = InlineQuery::parse([
             'id' => '123',

@@ -9,7 +9,7 @@ use Tigris\Types\Scalar\ScalarString;
 
 class FileTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = File::parse([
             'file_id' => '123',

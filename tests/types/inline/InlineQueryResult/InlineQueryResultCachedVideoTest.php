@@ -8,7 +8,7 @@ use Tigris\Types\Inline\InlineQueryResult;
 
 class InlineQueryResultCachedVideoTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = InlineQueryResultCachedVideo::parse([]);
         $this->assertInstanceOf(\Tigris\Types\Inline\InlineQueryResult\InlineQueryResultCachedVideo::class, $a);

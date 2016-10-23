@@ -6,7 +6,7 @@ use Tigris\Types\Arrays\PhotoSizeMatrix;
 
 class UserProfilePhotosTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = UserProfilePhotos::parse([
             [

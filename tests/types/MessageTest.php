@@ -7,7 +7,7 @@ use Tigris\Types\Message;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Message::parse([
             'message_id' => 112,

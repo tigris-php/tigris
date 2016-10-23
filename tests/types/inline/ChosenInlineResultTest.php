@@ -10,7 +10,7 @@ use Tigris\Exceptions\TelegramTypeException;
 
 class ChosenInlineResultTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = ChosenInlineResult::parse([
             'result_id' => '121',
