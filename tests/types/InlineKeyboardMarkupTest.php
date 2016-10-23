@@ -13,12 +13,7 @@ class InlineKeyboardMarkupTest extends PHPUnit_Framework_TestCase
     {
         $a = InlineKeyboardMarkup::create($inline_keyboard = [InlineKeyboardButton::create('text')]);
 
-        $this->assertInstanceOf(InlineKeyboardMarkup::class, $a);
         $this->assertInstanceOf(ReplyMarkupInterface::class, $a);
-        //todo
-//        $this->assertAttributeSame([InlineKeyboardButton::create('text')], 'inline_keyboard', $a);
-
-
 
     }
 }
