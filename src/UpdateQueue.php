@@ -12,7 +12,7 @@ use Tigris\Types\Update;
  *
  * @method Update extract()
  */
-class UpdatesQueue extends \SplPriorityQueue
+class UpdateQueue extends \SplPriorityQueue
 {
 
 }

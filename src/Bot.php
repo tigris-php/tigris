@@ -10,11 +10,10 @@ use React\EventLoop\Factory as EventLoopFactory;
 use React\EventLoop\LoopInterface;
 use Tigris\Events\UpdateEvent;
 use Tigris\Plugins\AbstractPlugin;
-use Tigris\Plugins\Menu\MenuHandler;
 use Tigris\Plugins\Command\CommandHandler;
+use Tigris\Plugins\Menu\MenuHandler;
+use Tigris\Plugins\PollingReceiver;
 use Tigris\Plugins\UpdateHandler;
-use Tigris\Receivers\AbstractReceiver;
-use Tigris\Receivers\PollingReceiver;
 use Tigris\Sessions\AbstractSession;
 use Tigris\Sessions\AbstractSessionFactory;
 use Tigris\Sessions\InMemorySessionFactory;
@@ -25,12 +24,6 @@ use YarCode\Event\EventEmitterTrait;
 abstract class Bot
 {
     use EventEmitterTrait;
-
-    const DEFAULT_PLUGINS = [
-        UpdateHandler::class,
-        CommandHandler::class,
-        MenuHandler::class,
-    ];
 
     protected static $instance;
 
@@ -43,14 +36,12 @@ abstract class Bot
 
     protected $storageDir;
 
-    /** @var AbstractReceiver */
-    protected $receiver;
     /** @var Client */
     protected $client;
     /** @var Api */
     protected $api;
-    /** @var UpdatesQueue */
-    protected $updatesQueue;
+    /** @var UpdateQueue */
+    protected $updateQueue;
     /** @var AbstractSessionFactory */
     protected $chatSessionFactory;
 
@@ -61,7 +52,7 @@ abstract class Bot
     {
         $this->loop = EventLoopFactory::create();
         $this->resolver = (new ResolverFactory())->createCached('8.8.8.8', $this->loop);
-        $this->updatesQueue = new UpdatesQueue();
+        $this->updateQueue = new UpdateQueue();
     }
 
     /**
@@ -78,15 +69,37 @@ abstract class Bot
 
         $bot->api = Api::create($apiToken);
 
-        // loading default plugins
-        foreach (static::DEFAULT_PLUGINS as $pluginClass) {
-            $bot->addPlugin($pluginClass);
-        }
+        // loading plugins
+        $bot->setPlugins($bot->plugins());
+
         // loading bot information
         $bot->refreshUserInfo();
 
         $bot->bootstrap();
         return $bot;
+    }
+
+    /**
+     * @return array Array of plugin classes or instances to be registered at bot creation.
+     */
+    public function plugins()
+    {
+        return [
+            UpdateHandler::class,
+            CommandHandler::class,
+            MenuHandler::class,
+            PollingReceiver::class,
+        ];
+    }
+
+    /**
+     * @param array $plugins
+     */
+    final public function setPlugins(array $plugins)
+    {
+        foreach ($plugins as $plugin) {
+            $this->addPlugin($plugin);
+        }
     }
 
     /**
@@ -103,10 +116,6 @@ abstract class Bot
 
     final public function run()
     {
-        if (empty($this->receiver)) {
-            $this->setReceiver(new PollingReceiver());
-        }
-
         if (empty($this->chatSessionFactory)) {
             $this->setChatSessionFactory(new InMemorySessionFactory());
         }
@@ -121,8 +130,8 @@ abstract class Bot
         }
 
         $this->loop->addPeriodicTimer(0.1, function () {
-            while (!$this->updatesQueue->isEmpty()) {
-                $item = $this->updatesQueue->extract();
+            while (!$this->updateQueue->isEmpty()) {
+                $item = $this->updateQueue->extract();
                 $this->emit(UpdateEvent::EVENT_UPDATE_RECEIVED, UpdateEvent::create($item));
             }
         });
@@ -139,11 +148,11 @@ abstract class Bot
     }
 
     /**
-     * @return UpdatesQueue
+     * @return UpdateQueue
      */
-    public function getUpdatesQueue()
+    public function getUpdateQueue()
     {
-        return $this->updatesQueue;
+        return $this->updateQueue;
     }
 
     /**
@@ -174,33 +183,36 @@ abstract class Bot
     }
 
     /**
-     * @param AbstractReceiver $receiver
-     */
-    public function setReceiver(AbstractReceiver $receiver)
-    {
-        $this->receiver = $receiver;
-        $this->receiver->setBot($this);
-    }
-
-    /**
-     * @param string $className
+     * @param string|AbstractPlugin $plugin
      * @throws \InvalidArgumentException
      */
-    public function addPlugin($className)
+    public function addPlugin($plugin)
     {
-        if (!class_exists($className)) {
-            throw new \InvalidArgumentException("Unknown plugin className {$className}");
+        if (is_string($plugin)) {
+            if (!class_exists($plugin)) {
+                throw new \InvalidArgumentException('Unknown plugin class' . $plugin);
+            }
+            $instance = new $plugin;
+        } elseif (is_object($plugin)) {
+            $instance = $plugin;
+        } else {
+            throw new \InvalidArgumentException('Invalid plugin');
         }
 
-        if (isset($this->plugins[$className])) {
+        $class = get_class($instance);
+
+        if (!$instance instanceof AbstractPlugin) {
+            throw new \InvalidArgumentException($class . ' must extend the ' . AbstractPlugin::class);
+        }
+
+        if (isset($this->plugins[$class])) {
             return;
         }
 
-        /** @var AbstractPlugin $plugin */
-        $plugin = new $className;
-        $plugin->setBot($this);
-        $this->plugins[$className] = $plugin;
-        $plugin->bootstrap();
+        /** @var AbstractPlugin $instance */
+        $instance->setBot($this);
+        $this->plugins[$class] = $instance;
+        $instance->bootstrap();
     }
 
     /**

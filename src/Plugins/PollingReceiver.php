@@ -2,9 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Receivers;
+namespace Tigris\Plugins;
 
-class PollingReceiver extends AbstractReceiver
+class PollingReceiver extends AbstractPlugin
 {
     public $pollingInterval = 1;
 
@@ -12,7 +12,7 @@ class PollingReceiver extends AbstractReceiver
 
     public $lastUpdateFile = 'last_update.txt';
 
-    protected function onSetBot()
+    public function bootstrap()
     {
         $this->offset = $this->getLastOffset();
 
@@ -27,7 +27,7 @@ class PollingReceiver extends AbstractReceiver
             foreach ($updates as $update) {
                 $this->offset = $update->update_id + 1;
                 $this->setLastOffset($this->offset);
-                $this->bot->getUpdatesQueue()->insert($update, $update->update_id);
+                $this->bot->getUpdateQueue()->insert($update, $update->update_id);
             }
         });
     }
