@@ -9,7 +9,7 @@ use Tigris\Exceptions\TelegramTypeException;
 
 class AudioTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Audio::parse([
             'file_id' => 'foo',

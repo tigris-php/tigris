@@ -9,7 +9,7 @@ use Tigris\Types\Scalar\ScalarString;
 
 class ChatTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Chat::parse([
             'id' => 123,

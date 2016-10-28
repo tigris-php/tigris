@@ -9,7 +9,7 @@ use Tigris\Types\Venue;
 
 class VenueTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Venue::parse([
             'location' => [

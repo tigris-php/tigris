@@ -10,7 +10,7 @@ use Tigris\Types\Scalar\ScalarString;
 
 class DocumentTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Document::parse([
             'file_id' => '123',

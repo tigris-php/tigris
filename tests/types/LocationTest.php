@@ -8,7 +8,7 @@ use Tigris\Types\Scalar\ScalarFloat;
 
 class LocationTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = Location::parse([
             'longitude' => 0.5,

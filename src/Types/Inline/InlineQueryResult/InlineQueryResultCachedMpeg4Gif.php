@@ -17,7 +17,7 @@ use Tigris\Types\Inline\InlineQueryResult;
  * @property string $title Optional. Title for the result.
  * @property string $caption Optional. Caption of the MPEG-4 file to be sent, 0-200 characters.
  */
-class Template extends InlineQueryResult
+class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult
 {
     const TYPE = 'mpeg4_gif';
 }

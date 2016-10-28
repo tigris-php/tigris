@@ -10,7 +10,7 @@ use Tigris\Types\Arrays\PhotoSizeArray;
 
 class PhotoSizeArrayTest extends PHPUnit_Framework_TestCase
 {
-    public function testBuild()
+    public function testParse()
     {
         $a = PhotoSizeArray::parse([
             [
