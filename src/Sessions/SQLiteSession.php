@@ -19,15 +19,19 @@ class SQLiteSession extends AbstractSession
 
     }
 
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
     /**
      * @inheritdoc
      */
     public function set($index, $value)
     {
-        $statement = $this->storage->prepare("INSERT INTO SESSIONS (session_key, session_value) VALUES (:sessoion_key, :session_value)");
-        $statement->bindParam(':session_key', $index);
-        $statement->bindParam(':session_value', $value);
-        $statement->execute();
+        $statement = $this->storage->prepare("UPDATE sessions SET session_key = ?, session_value = ?  WHERE  session_id = ?;");
+        return $statement->execute([$index, $value, $this->getSessionId()]);
+
     }
 
     /**

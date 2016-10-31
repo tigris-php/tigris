@@ -25,7 +25,7 @@ class SQLiteSessionFactoryTest extends PHPUnit_Framework_TestCase
         $session = $a->getSession($sessionId);
         $this->assertInstanceOf(\Tigris\Sessions\SQLiteSession::class, $session);
         $this->assertAttributeInstanceOf(PDO::class, 'storage', $session);
-
+        $this->assertAttributeSame(1, 'sessionId', $session);
         $z = $a->getSession(null);
         $this->assertNull($z);
 
