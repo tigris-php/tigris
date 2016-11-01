@@ -2,36 +2,43 @@
 
 
 use \Tigris\Sessions\SQLiteSessionFactory;
+use Tigris\Exceptions\TelegramTypeException;
+
 class SQLiteSessionFactoryTest extends PHPUnit_Framework_TestCase
 {
     private $basePath = '/tmp';
     private $baseName = 'base.sql';
 
+
+
     public function testConstruct()
     {
-        $a = new SQLiteSessionFactory($this->basePath.DIRECTORY_SEPARATOR.$this->baseName);
-        $this->assertInstanceOf(SQLiteSessionFactory::class, $a);
-        $this->assertAttributeInstanceOf(PDO::class, 'storage', $a);
+
+        $factory  = new SQLiteSessionFactory($this->basePath.DIRECTORY_SEPARATOR.$this->baseName);
+        $this->assertInstanceOf(SQLiteSessionFactory::class, $factory);
+        $this->assertAttributeInstanceOf(PDO::class, 'storage', $factory);
         $this->assertContains($this->baseName, scandir($this->basePath));
-
     }
-
 
     public function testGetSession()
     {
+        $f  = new SQLiteSessionFactory($this->basePath.DIRECTORY_SEPARATOR.$this->baseName);
+        $a = $f->getSession(1);
+        $this->assertInstanceOf(\Tigris\Sessions\SQLiteSession::class, $a);
+        $this->assertAttributeInstanceOf(\PDO::class, 'storage', $a);
 
-        $sessionId = 1;
-        $a = new SQLiteSessionFactory($this->basePath.DIRECTORY_SEPARATOR.$this->baseName);
-        $session = $a->getSession($sessionId);
-        $this->assertInstanceOf(\Tigris\Sessions\SQLiteSession::class, $session);
-        $this->assertAttributeInstanceOf(PDO::class, 'storage', $session);
-        $this->assertAttributeSame(1, 'sessionId', $session);
-        $z = $a->getSession(null);
+        $this->assertAttributeSame(1, 'sessionId', $a);
+
+        $z = $f->getSession(null);
         $this->assertNull($z);
 
-        $e = $a->getSession(-123);
-        $this->assertNull($e);
+        $b = $f->getSession(-1);
+        $this->assertNull($b);
+
+        $c = $f->getSession('1');
+        $this->assertInstanceOf(\Tigris\Sessions\SQLiteSession::class, $c);
 
         unlink($this->basePath.DIRECTORY_SEPARATOR.$this->baseName);
+
     }
 }

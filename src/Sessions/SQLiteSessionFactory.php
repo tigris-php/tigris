@@ -5,7 +5,7 @@
 namespace Tigris\Sessions;
 
 
-use Tigris\Helpers\ArrayHelper;
+use Tigris\Exceptions\TelegramTypeException;
 
 class SQLiteSessionFactory extends AbstractSessionFactory
 {
@@ -21,8 +21,8 @@ class SQLiteSessionFactory extends AbstractSessionFactory
 
         $this->storage = new \PDO('sqlite:' . $dbPath, 'root', 'password', $opt);
         $statement = $this->storage->prepare("CREATE TABLE IF NOT EXISTS sessions (
-                   session_id INTEGER PRIMARY KEY,
-                   session_key TEXT,
+                   session_id TEXT,
+                   session_key TEXT UNIQUE,
                    session_value TEXT);
                    ");
 
@@ -34,23 +34,12 @@ class SQLiteSessionFactory extends AbstractSessionFactory
      */
     public function getSession($sessionId)
     {
+
         if(!$sessionId || $sessionId <= 0) {
             return null;
         }
 
-        $getSession = $this->storage->prepare("SELECT session_id FROM sessions WHERE session_id=?");
-        $getSession->execute([$sessionId]);
-
-
-        if(!ArrayHelper::getValue($getSession->fetch(), 'session_id')) {
-            $createSession = $this->storage->prepare("INSERT into sessions VALUES (?,'','');");
-            $createSession->execute([$sessionId]);
-            $getSession->execute([$sessionId]);
-        }
-
-        $getSession->execute([$sessionId]);
-
-        $session = new SQLiteSession((integer) ArrayHelper::getValue($getSession->fetch(),'session_id'));
+        $session =  SQLiteSession::create($sessionId);
         $session->storage = $this->storage;
         return $session;
     }
