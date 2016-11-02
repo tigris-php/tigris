@@ -17,8 +17,14 @@ class SQLiteSession extends AbstractSession
      */
     public function get($index, $defaultValue = null)
     {
-        $statement = $this->storage->prepare("SELECT session_value FROM sessions WHERE  session_id = ? AND session_key = ?;");
-        return $statement->execute([$this->getSessionId(), $index]) ? ArrayHelper::getValue($statement->fetch(), 'session_value') : $defaultValue;
+        $statement = $this->storage->prepare("SELECT session_value FROM sessions WHERE  session_id = ? AND session_key = ?");
+        if ($statement->execute([$this->getSessionId(), $index])) {
+            $json_result = ArrayHelper::getValue($statement->fetch(), 'session_value');
+            $result = strlen($json_result) ?  \GuzzleHttp\json_decode($json_result) : $defaultValue;
+        } else {
+            $result = $defaultValue;
+        }
+        return $result;
     }
 
     /**
@@ -33,9 +39,9 @@ class SQLiteSession extends AbstractSession
             $this->clear($index);
         } else {
             if ($this->get($index)) {
-                $statement = $this->storage->prepare("UPDATE sessions SET session_key = ?, session_value = ? WHERE  session_id = ?;");
+                $statement = $this->storage->prepare("UPDATE sessions SET session_key = ?, session_value = ? WHERE  session_id = ?");
             } else {
-                $statement = $this->storage->prepare("INSERT INTO sessions (session_key, session_value, session_id) VALUES (?,?,?);");
+                $statement = $this->storage->prepare("INSERT INTO sessions (session_key, session_value, session_id) VALUES (?,?,?)");
             }
             $statement->execute([$index, \GuzzleHttp\json_encode($value), $this->getSessionId()]);
         }
@@ -46,7 +52,7 @@ class SQLiteSession extends AbstractSession
      */
     public function clear($index)
     {
-        $statement = $this->storage->prepare("DELETE FROM sessions  WHERE  session_id = ? AND session_key = ?;");
+        $statement = $this->storage->prepare("DELETE FROM sessions  WHERE  session_id = ? AND session_key = ?");
         $statement->execute([$this->sessionId, $index]);
     }
 
@@ -55,7 +61,7 @@ class SQLiteSession extends AbstractSession
      */
     public function reset()
     {
-        $statement = $this->storage->prepare("DELETE  FROM sessions WHERE session_id = ?;");
+        $statement = $this->storage->prepare("DELETE  FROM sessions WHERE session_id = ?");
         $statement->execute([$this->sessionId]);
     }
 }

@@ -19,11 +19,11 @@ class SQLiteSessionTest extends PHPUnit_Framework_TestCase
 
         $session->set('test', 'test');
         $getResult = $session->get('test');
-        $this->assertSame('test', \GuzzleHttp\json_decode($getResult));
+        $this->assertSame('test', $getResult);
 
-        $session->set('test', 'new_value');
+        $session->set('test', ['a', 'b', 'c']);
         $getResult = $session->get('test');
-        $this->assertSame('new_value', \GuzzleHttp\json_decode($getResult));
+        $this->assertSame(['a', 'b', 'c'], $getResult);
 
         $session->set('test', null);
         $this->assertNull($session->get('test'));
