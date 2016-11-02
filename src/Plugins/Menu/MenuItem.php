@@ -46,12 +46,12 @@ class MenuItem
     /**
      * This item must open the $menu menu.
      *
-     * @param string|MenuObject $menu
+     * @param string|Menu $menu
      * @return $this
      */
     public function bindMenu($menu)
     {
-        if ($menu instanceof MenuObject) {
+        if ($menu instanceof Menu) {
             $menu = $menu->id;
         }
         $this->type = self::TYPE_MENU;
