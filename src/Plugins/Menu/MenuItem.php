@@ -9,7 +9,7 @@ use Tigris\Types\KeyboardButton;
 class MenuItem
 {
     const TYPE_BUTTON = 'button';
-    const TYPE_MENU_LINK = 'menu_link';
+    const TYPE_MENU = 'menu_link';
     const TYPE_REQUEST_CONTACT = 'request_contact';
     const TYPE_REQUEST_LOCATION = 'request_location';
 
@@ -17,6 +17,7 @@ class MenuItem
     public $text;
     public $type = self::TYPE_BUTTON;
     public $targetMenuId;
+    public $callback = null;
 
     /**
      * @param $text
@@ -36,22 +37,25 @@ class MenuItem
      * @param $id
      * @return $this
      */
-    public function id($id)
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * This item must open the $menuId menu.
+     * This item must open the $menu menu.
      *
-     * @param $menuId
+     * @param string|MenuObject $menu
      * @return $this
      */
-    public function menu($menuId)
+    public function bindMenu($menu)
     {
-        $this->type = self::TYPE_MENU_LINK;
-        $this->targetMenuId = $menuId;
+        if ($menu instanceof MenuObject) {
+            $menu = $menu->id;
+        }
+        $this->type = self::TYPE_MENU;
+        $this->targetMenuId = $menu;
         return $this;
     }
 
@@ -78,13 +82,23 @@ class MenuItem
     }
 
     /**
+     * @param callable $callback
+     * @return $this
+     */
+    public function bind($callback)
+    {
+        $this->callback = $callback;
+        return $this;
+    }
+
+    /**
      * @return KeyboardButton
      */
     public function toKeyboardButton()
     {
         switch ($this->type) {
             case self::TYPE_BUTTON:
-            case self::TYPE_MENU_LINK:
+            case self::TYPE_MENU:
                 return KeyboardButton::create($this->text);
             case self::TYPE_REQUEST_CONTACT:
                 return KeyboardButton::create($this->text, KeyboardButton::REQUEST_CONTACT);

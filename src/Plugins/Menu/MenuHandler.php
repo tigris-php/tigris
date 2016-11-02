@@ -32,7 +32,7 @@ class MenuHandler extends AbstractPlugin
 
         // looking for the menu object
         $menuId = substr($state, strlen(self::STATE_PREFIX));
-        $menu = Menu::get($menuId);
+        $menu = MenuObject::get($menuId);
         if (!$menu) {
             $session->clearState();
             return;
@@ -66,17 +66,21 @@ class MenuHandler extends AbstractPlugin
     }
 
     /**
-     * Default implementation handles menu items with type menu.
+     * Default implementation.
      *
      * @param MenuEvent $event
      */
     public function onItemSelected(MenuEvent $event)
     {
         switch ($event->item->type) {
-            case MenuItem::TYPE_MENU_LINK:
+            case MenuItem::TYPE_MENU:
                 $event->handled = true;
-                Menu::send($event->message->chat->id, $event->item->targetMenuId);
+                MenuObject::send($event->message->chat->id, $event->item->targetMenuId);
                 return;
+            case MenuItem::TYPE_BUTTON:
+                if (null !== $event->item->callback) {
+                    call_user_func($event->item->callback, $event);
+                }
         }
     }
 
@@ -88,6 +92,6 @@ class MenuHandler extends AbstractPlugin
     public function onUnknownItemSelected(MenuEvent $event)
     {
         $event->handled = true;
-        Menu::send($event->message->chat->id, $event->menu->id);
+        MenuObject::send($event->message->chat->id, $event->menu->id);
     }
 }

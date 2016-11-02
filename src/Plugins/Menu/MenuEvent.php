@@ -14,18 +14,18 @@ class MenuEvent extends AbstractEvent
 
     /** @var Message */
     public $message;
-    /** @var Menu */
+    /** @var MenuObject */
     public $menu;
     /** @var MenuItem */
     public $item;
 
     /**
-     * @param Menu $menu
+     * @param MenuObject $menu
      * @param Message $message
 
      * @return static
      */
-    public static function create(Menu $menu, Message $message)
+    public static function create(MenuObject $menu, Message $message)
     {
         $event = new static();
         $event->message = $message;
