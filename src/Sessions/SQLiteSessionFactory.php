@@ -4,9 +4,6 @@
  */
 namespace Tigris\Sessions;
 
-
-use Tigris\Exceptions\TelegramTypeException;
-
 class SQLiteSessionFactory extends AbstractSessionFactory
 {
     /** @var \PDO */
@@ -25,7 +22,6 @@ class SQLiteSessionFactory extends AbstractSessionFactory
                    session_key TEXT UNIQUE,
                    session_value TEXT);
                    ");
-
         $statement->execute();
     }
 
@@ -34,15 +30,11 @@ class SQLiteSessionFactory extends AbstractSessionFactory
      */
     public function getSession($sessionId)
     {
-
-        if(!$sessionId || $sessionId <= 0) {
-            return null;
+        if (!$sessionId) {
+            throw new \InvalidArgumentException('sessionId argument must be set');
         }
-
-        $session =  SQLiteSession::create($sessionId);
+        $session = SQLiteSession::create($sessionId);
         $session->storage = $this->storage;
         return $session;
     }
-
-
 }
