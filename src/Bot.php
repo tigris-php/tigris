@@ -221,7 +221,7 @@ abstract class Bot
      */
     public function getPlugin($className)
     {
-        if (isset($this->plugins[$className])) {
+        if (!isset($this->plugins[$className])) {
             throw new \InvalidArgumentException('Plugin is missing: ' . $className);
         }
         return $this->plugins[$className];
