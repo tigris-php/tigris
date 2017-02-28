@@ -80,9 +80,11 @@ class Menu
             $title = $menu->title;
         }
 
-        Bot::getInstance()->getApi()->sendMessage($chatId, $title, null, null, null, null,
-            ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
-        );
+        try {
+            Bot::getInstance()->getApi()->sendMessage($chatId, $title, null, null, null, null,
+                ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
+            );
+        } catch (\Exception $e) {}
     }
 
     /**
