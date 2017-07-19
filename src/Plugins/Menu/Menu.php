@@ -84,7 +84,9 @@ class Menu
             Bot::getInstance()->getApi()->sendMessage($chatId, $title, null, null, null, null,
                 ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
             );
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
