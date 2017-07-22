@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Audio;
+use Tigris\Telegram\Types\Audio;
 
 class AudioTest extends PHPUnit_Framework_TestCase
 {

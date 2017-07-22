@@ -4,8 +4,8 @@
  */
 namespace Tigris\Helpers;
 
-use Tigris\Types\Base\BaseArray;
-use Tigris\Types\Base\BaseObject;
+use Tigris\Telegram\Types\Base\BaseArray;
+use Tigris\Telegram\Types\Base\BaseObject;
 
 class TypeHelper
 {

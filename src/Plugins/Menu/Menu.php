@@ -6,8 +6,8 @@ namespace Tigris\Plugins\Menu;
 
 use Tigris\Bot;
 use Tigris\Helpers\ArrayHelper;
-use Tigris\Types\KeyboardButton;
-use Tigris\Types\ReplyKeyboardMarkup;
+use Tigris\Telegram\Types\KeyboardButton;
+use Tigris\Telegram\Types\ReplyKeyboardMarkup;
 
 class Menu
 {

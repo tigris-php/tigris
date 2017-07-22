@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Voice;
+use Tigris\Telegram\Types\Voice;
 
 class VoiceTest extends PHPUnit_Framework_TestCase
 {

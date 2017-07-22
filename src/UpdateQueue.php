@@ -4,7 +4,7 @@
  */
 namespace Tigris;
 
-use Tigris\Types\Update;
+use Tigris\Telegram\Types\Update;
 
 /**
  * Class UpdatesQueue

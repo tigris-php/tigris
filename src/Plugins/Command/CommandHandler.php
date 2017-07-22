@@ -4,9 +4,9 @@
  */
 namespace Tigris\Plugins\Command;
 
-use Tigris\Plugins\AbstractPlugin;
 use Tigris\Events\MessageEvent;
-use Tigris\Types\MessageEntity;
+use Tigris\Plugins\AbstractPlugin;
+use Tigris\Telegram\Types\MessageEntity;
 
 class CommandHandler extends AbstractPlugin
 {

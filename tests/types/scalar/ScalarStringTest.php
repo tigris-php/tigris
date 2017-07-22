@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\Scalar\ScalarString;
+use Tigris\Telegram\Types\Scalar\ScalarString;
 
 class ScalarStringTest extends PHPUnit_Framework_TestCase
 {

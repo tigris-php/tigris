@@ -4,8 +4,8 @@
  */
 
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\ChatMember;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\ChatMember;
+use Tigris\Telegram\Types\User;
 
 class ChatMemberTest extends PHPUnit_Framework_TestCase
 {

@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Location;
+use Tigris\Telegram\Types\Location;
 
 class LocationTest extends PHPUnit_Framework_TestCase
 {

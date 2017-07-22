@@ -2,8 +2,8 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\ReplyKeyboardHide;
-use Tigris\Types\Interfaces\ReplyMarkupInterface;
+use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
+use Tigris\Telegram\Types\ReplyKeyboardHide;
 
 class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 {

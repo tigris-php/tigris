@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Tigris\Helpers\TypeHelper;
 use Tigris\Telegram\Exceptions\ApiException;
-use Tigris\Types\Interfaces\TypeInterface;
+use Tigris\Telegram\Types\Interfaces\TypeInterface;
 
 class ApiClient
 {

@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\PhotoSize;
+use Tigris\Telegram\Types\PhotoSize;
 
 class PhotoSizeTest extends PHPUnit_Framework_TestCase
 {

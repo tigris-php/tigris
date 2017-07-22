@@ -3,8 +3,8 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Location;
-use Tigris\Types\Venue;
+use Tigris\Telegram\Types\Location;
+use Tigris\Telegram\Types\Venue;
 
 class VenueTest extends PHPUnit_Framework_TestCase
 {

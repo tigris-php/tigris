@@ -5,7 +5,7 @@
 namespace Tigris\Plugins\Command;
 
 use Tigris\Events\AbstractEvent;
-use Tigris\Types\Message;
+use Tigris\Telegram\Types\Message;
 
 class CommandEvent extends AbstractEvent
 {

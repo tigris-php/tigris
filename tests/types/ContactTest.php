@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Contact;
+use Tigris\Telegram\Types\Contact;
 
 class ContactTest extends PHPUnit_Framework_TestCase
 {

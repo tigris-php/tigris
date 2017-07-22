@@ -2,9 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\PhotoSize;
-use Tigris\Types\Arrays\PhotoSizeArray;
-use Tigris\Types\Arrays\PhotoSizeMatrix;
+use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
+use Tigris\Telegram\Types\Arrays\PhotoSizeMatrix;
+use Tigris\Telegram\Types\PhotoSize;
 
 class PhotoSizeMatrixTest extends PHPUnit_Framework_TestCase
 {

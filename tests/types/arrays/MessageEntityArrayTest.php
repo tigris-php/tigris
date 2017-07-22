@@ -1,9 +1,10 @@
 <?php
 
-use Tigris\Types\Arrays\MessageEntityArray;
-use Tigris\Types\MessageEntity;
-use Tigris\Types\Base\BaseArray;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\Arrays\MessageEntityArray;
+use Tigris\Telegram\Types\Base\BaseArray;
+use Tigris\Telegram\Types\MessageEntity;
+use Tigris\Telegram\Types\User;
+
 class MessageEntityArrayTest extends PHPUnit_Framework_TestCase
 {
     public function testParse()

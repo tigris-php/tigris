@@ -4,7 +4,7 @@
  */
 
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Animation;
+use Tigris\Telegram\Types\Animation;
 
 class AnimationTest extends PHPUnit_Framework_TestCase
 {

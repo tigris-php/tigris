@@ -4,9 +4,9 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Inline\ChosenInlineResult;
-use Tigris\Types\Location;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\Inline\ChosenInlineResult;
+use Tigris\Telegram\Types\Location;
+use Tigris\Telegram\Types\User;
 
 class ChosenInlineResultTest extends PHPUnit_Framework_TestCase
 {

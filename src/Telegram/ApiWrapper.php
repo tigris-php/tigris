@@ -8,20 +8,20 @@ use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Tigris\Helpers\TypeHelper;
 use Tigris\Telegram\Exceptions\ApiException;
-use Tigris\Types\Arrays\ChatMemberArray;
-use Tigris\Types\Arrays\UpdateArray;
-use Tigris\Types\Chat;
-use Tigris\Types\ChatMember;
-use Tigris\Types\File;
-use Tigris\Types\Inline\InlineQueryResult;
-use Tigris\Types\Interfaces\ReplyMarkupInterface;
-use Tigris\Types\Interfaces\TypeInterface;
-use Tigris\Types\Message;
-use Tigris\Types\Scalar\ScalarBoolean;
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Update;
-use Tigris\Types\User;
-use Tigris\Types\UserProfilePhotos;
+use Tigris\Telegram\Types\Arrays\ChatMemberArray;
+use Tigris\Telegram\Types\Arrays\UpdateArray;
+use Tigris\Telegram\Types\Chat;
+use Tigris\Telegram\Types\ChatMember;
+use Tigris\Telegram\Types\File;
+use Tigris\Telegram\Types\Inline\InlineQueryResult;
+use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
+use Tigris\Telegram\Types\Interfaces\TypeInterface;
+use Tigris\Telegram\Types\Message;
+use Tigris\Telegram\Types\Scalar\ScalarBoolean;
+use Tigris\Telegram\Types\Scalar\ScalarInteger;
+use Tigris\Telegram\Types\Update;
+use Tigris\Telegram\Types\User;
+use Tigris\Telegram\Types\UserProfilePhotos;
 
 class ApiWrapper
 {

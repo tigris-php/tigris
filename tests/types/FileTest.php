@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\File;
+use Tigris\Telegram\Types\File;
 
 class FileTest extends PHPUnit_Framework_TestCase
 {

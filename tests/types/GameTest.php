@@ -3,8 +3,8 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Arrays\PhotoSizeArray;
-use Tigris\Types\Game;
+use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
+use Tigris\Telegram\Types\Game;
 
 class GameTest extends PHPUnit_Framework_TestCase
 {

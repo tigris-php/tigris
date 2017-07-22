@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\KeyboardButton;
+use Tigris\Telegram\Types\KeyboardButton;
 
 class KeyboardButtonTest extends PHPUnit_Framework_TestCase
 {

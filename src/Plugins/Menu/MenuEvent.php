@@ -5,7 +5,7 @@
 namespace Tigris\Plugins\Menu;
 
 use Tigris\Events\AbstractEvent;
-use Tigris\Types\Message;
+use Tigris\Telegram\Types\Message;
 
 class MenuEvent extends AbstractEvent
 {

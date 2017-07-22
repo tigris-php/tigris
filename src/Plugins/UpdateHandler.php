@@ -6,7 +6,7 @@ namespace Tigris\Plugins;
 
 use Tigris\Events\MessageEvent;
 use Tigris\Events\UpdateEvent;
-use Tigris\Types\Message;
+use Tigris\Telegram\Types\Message;
 
 class UpdateHandler extends AbstractPlugin
 {

@@ -3,8 +3,8 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\MessageEntity;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\MessageEntity;
+use Tigris\Telegram\Types\User;
 
 class MessageEntityTest extends PHPUnit_Framework_TestCase
 {

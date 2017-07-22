@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\Scalar\ScalarFloat;
+use Tigris\Telegram\Types\Scalar\ScalarFloat;
 
 class ScalarFloatTest extends PHPUnit_Framework_TestCase
 {

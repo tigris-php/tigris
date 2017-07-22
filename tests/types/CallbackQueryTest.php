@@ -4,8 +4,8 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\CallbackQuery;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\CallbackQuery;
+use Tigris\Telegram\Types\User;
 
 class CallbackQueryTest extends PHPUnit_Framework_TestCase
 {

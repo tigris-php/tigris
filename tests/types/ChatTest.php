@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Chat;
+use Tigris\Telegram\Types\Chat;
 
 class ChatTest extends PHPUnit_Framework_TestCase
 {

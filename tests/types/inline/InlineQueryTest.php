@@ -3,8 +3,8 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Inline\InlineQuery;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\Inline\InlineQuery;
+use Tigris\Telegram\Types\User;
 
 class InlineQueryTest extends PHPUnit_Framework_TestCase
 {

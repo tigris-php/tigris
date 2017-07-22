@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\User;
 
 class UserTest extends PHPUnit_Framework_TestCase
 {

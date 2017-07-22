@@ -2,14 +2,14 @@
 /**
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
-use Tigris\Types\Arrays\UpdateArray;
-use Tigris\Types\Base\BaseArray;
-use Tigris\Types\Inline\ChosenInlineResult;
-use Tigris\Types\Inline\InlineQuery;
-use Tigris\Types\Message;
-use Tigris\Types\Update;
-use Tigris\Types\CallbackQuery;
-use \Tigris\Types\User;
+use Tigris\Telegram\Types\Arrays\UpdateArray;
+use Tigris\Telegram\Types\Base\BaseArray;
+use Tigris\Telegram\Types\CallbackQuery;
+use Tigris\Telegram\Types\Inline\ChosenInlineResult;
+use Tigris\Telegram\Types\Inline\InlineQuery;
+use Tigris\Telegram\Types\Message;
+use Tigris\Telegram\Types\Update;
+use Tigris\Telegram\Types\User;
 
 class UpdateArrayTest extends PHPUnit_Framework_TestCase
 {

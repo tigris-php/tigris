@@ -4,7 +4,7 @@
  */
 namespace Tigris\Events;
 
-use Tigris\Types\Message;
+use Tigris\Telegram\Types\Message;
 
 class MessageEvent extends AbstractEvent
 {

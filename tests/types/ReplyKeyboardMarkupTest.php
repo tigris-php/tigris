@@ -1,8 +1,8 @@
 <?php
 
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Interfaces\ReplyMarkupInterface;
-use Tigris\Types\ReplyKeyboardMarkup;
+use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
+use Tigris\Telegram\Types\ReplyKeyboardMarkup;
 
 Class ReplyKeyboardMarkupTest extends  PHPUnit_Framework_TestCase
 {

@@ -18,7 +18,7 @@ use Tigris\Sessions\AbstractSession;
 use Tigris\Sessions\AbstractSessionFactory;
 use Tigris\Sessions\InMemorySessionFactory;
 use Tigris\Telegram\ApiWrapper;
-use Tigris\Types\User;
+use Tigris\Telegram\Types\User;
 use YarCode\Event\EventEmitterTrait;
 
 abstract class Bot

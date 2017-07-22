@@ -2,8 +2,8 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\ForceReply;
-use Tigris\Types\Interfaces\ReplyMarkupInterface;
+use Tigris\Telegram\Types\ForceReply;
+use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
 
 class ForceReplyTest extends PHPUnit_Framework_TestCase
 {

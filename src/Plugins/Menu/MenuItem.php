@@ -4,7 +4,7 @@
  */
 namespace Tigris\Plugins\Menu;
 
-use Tigris\Types\KeyboardButton;
+use Tigris\Telegram\Types\KeyboardButton;
 
 class MenuItem
 {

@@ -3,8 +3,8 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Document;
-use Tigris\Types\PhotoSize;
+use Tigris\Telegram\Types\Document;
+use Tigris\Telegram\Types\PhotoSize;
 
 class DocumentTest extends PHPUnit_Framework_TestCase
 {

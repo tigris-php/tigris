@@ -1,9 +1,9 @@
 <?php
 
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\Base\BaseObject;
-use Tigris\Types\Chat;
-use Tigris\Types\Message;
+use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\Chat;
+use Tigris\Telegram\Types\Message;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {

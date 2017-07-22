@@ -3,9 +3,9 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 
-use Tigris\Types\InlineKeyboardButton;
-use Tigris\Types\Base\BaseObject;
-use Tigris\Types\CallbackGame;
+use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\InlineKeyboardButton;
+
 class InlineKeyboardButtonTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()

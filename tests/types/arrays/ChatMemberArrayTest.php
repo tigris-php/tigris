@@ -1,9 +1,10 @@
 <?php
 
-use Tigris\Types\Arrays\ChatMemberArray;
-use \Tigris\Types\Base\BaseArray;
-use \Tigris\Types\User;
-use \Tigris\Types\ChatMember;
+use Tigris\Telegram\Types\Arrays\ChatMemberArray;
+use Tigris\Telegram\Types\Base\BaseArray;
+use Tigris\Telegram\Types\ChatMember;
+use Tigris\Telegram\Types\User;
+
 class ChatMemberArrayTest extends PHPUnit_Framework_TestCase
 {
     public function testParse()

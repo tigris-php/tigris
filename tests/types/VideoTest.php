@@ -3,8 +3,8 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Types\PhotoSize;
-use Tigris\Types\Video;
+use Tigris\Telegram\Types\PhotoSize;
+use Tigris\Telegram\Types\Video;
 
 class VideoTest extends PHPUnit_Framework_TestCase
 {

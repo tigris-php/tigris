@@ -2,8 +2,8 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Types\Arrays\PhotoSizeArray;
-use Tigris\Types\PhotoSize;
+use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
+use Tigris\Telegram\Types\PhotoSize;
 
 class PhotoSizeArrayTest extends PHPUnit_Framework_TestCase
 {

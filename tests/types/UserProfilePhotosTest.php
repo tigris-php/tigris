@@ -1,8 +1,8 @@
 <?php
 
 
-use Tigris\Types\UserProfilePhotos;
-use Tigris\Types\Arrays\PhotoSizeMatrix;
+use Tigris\Telegram\Types\Arrays\PhotoSizeMatrix;
+use Tigris\Telegram\Types\UserProfilePhotos;
 
 class UserProfilePhotosTest extends PHPUnit_Framework_TestCase
 {
