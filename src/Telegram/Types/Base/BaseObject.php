@@ -2,9 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types\Base;
 
-use Tigris\Helpers\ArrayHelper;
 use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 
@@ -15,9 +15,9 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
 //    }
 
     /**
- * @inheritdoc
- * @return static
- */
+     * @inheritdoc
+     * @return static
+     */
     public static function parse($data)
     {
         if (is_null($data)) {
@@ -44,10 +44,18 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
 
         foreach (static::fields() as $field => $className) {
             /** @var $className TypeInterface */
-            $result->offsetSet($field, $className::parse(ArrayHelper::getValue($data, $field)));
+            $result->offsetSet($field, $className::parse(isset($data[$field]) ? $data[$field] : null));
         }
 
         return $result;
+    }
+
+    /**
+     * @return array
+     */
+    protected static function fields()
+    {
+        return [];
     }
 
     /**
@@ -60,20 +68,12 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
     {
         $result = new static;
 
-        foreach ($values as $field=> $value) {
+        foreach ($values as $field => $value) {
             /** @var $className TypeInterface */
             $result->$field = $value;
         }
 
         return $result;
-    }
-
-    /**
-     * @return array
-     */
-    protected static function fields()
-    {
-        return [];
     }
 
     public function __get($name)

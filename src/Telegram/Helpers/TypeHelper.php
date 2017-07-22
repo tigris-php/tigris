@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Helpers;
+namespace Tigris\Telegram\Helpers;
 
 use Tigris\Telegram\Types\Base\BaseArray;
 use Tigris\Telegram\Types\Base\BaseObject;

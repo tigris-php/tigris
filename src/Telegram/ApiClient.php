@@ -7,8 +7,8 @@ namespace Tigris\Telegram;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Tigris\Helpers\TypeHelper;
 use Tigris\Telegram\Exceptions\ApiException;
+use Tigris\Telegram\Helpers\TypeHelper;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 
 class ApiClient
