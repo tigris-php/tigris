@@ -2,10 +2,8 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\MessageEntity;
-use Tigris\Exceptions\TelegramTypeException;
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
 use Tigris\Types\User;
 
 class MessageEntityTest extends PHPUnit_Framework_TestCase
@@ -42,14 +40,14 @@ class MessageEntityTest extends PHPUnit_Framework_TestCase
             MessageEntity::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
 
         try {
             MessageEntity::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 }

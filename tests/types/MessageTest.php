@@ -1,6 +1,6 @@
 <?php
 
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\Base\BaseObject;
 use Tigris\Types\Chat;
 use Tigris\Types\Message;
@@ -40,7 +40,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
             Message::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 

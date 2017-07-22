@@ -2,10 +2,8 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\Inline\InlineQuery;
-use Tigris\Types\Location;
-use Tigris\Types\Scalar\ScalarString;
 use Tigris\Types\User;
 
 class InlineQueryTest extends PHPUnit_Framework_TestCase
@@ -40,14 +38,14 @@ class InlineQueryTest extends PHPUnit_Framework_TestCase
             InlineQuery::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
 
         try {
             InlineQuery::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 }

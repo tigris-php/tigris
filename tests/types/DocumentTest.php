@@ -2,11 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\Document;
 use Tigris\Types\PhotoSize;
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Types\Scalar\ScalarString;
 
 class DocumentTest extends PHPUnit_Framework_TestCase
 {
@@ -42,14 +40,14 @@ class DocumentTest extends PHPUnit_Framework_TestCase
             Document::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
 
         try {
             Document::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 }

@@ -3,7 +3,7 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\Animation;
 
 class AnimationTest extends PHPUnit_Framework_TestCase
@@ -28,7 +28,7 @@ class AnimationTest extends PHPUnit_Framework_TestCase
             Animation::parse(1147);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
 
         }
 
@@ -36,7 +36,7 @@ class AnimationTest extends PHPUnit_Framework_TestCase
             Animation::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 }

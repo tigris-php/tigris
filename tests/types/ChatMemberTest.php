@@ -3,7 +3,7 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\ChatMember;
 use Tigris\Types\User;
 
@@ -35,7 +35,7 @@ class ChatMemberTest extends PHPUnit_Framework_TestCase
             ChatMember::parse(111);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 }

@@ -3,7 +3,7 @@
 /**
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\CallbackQuery;
 use Tigris\Types\User;
 
@@ -40,14 +40,14 @@ class CallbackQueryTest extends PHPUnit_Framework_TestCase
             CallbackQuery::parse('scalar');
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
 
         try {
             CallbackQuery::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 

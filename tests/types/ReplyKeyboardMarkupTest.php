@@ -1,9 +1,9 @@
 <?php
 
-use Tigris\Types\ReplyKeyboardMarkup;
-use Tigris\Types\KeyboardButton;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\Interfaces\ReplyMarkupInterface;
-use Tigris\Exceptions\TelegramTypeException;
+use Tigris\Types\ReplyKeyboardMarkup;
+
 Class ReplyKeyboardMarkupTest extends  PHPUnit_Framework_TestCase
 {
     public function testCreate()
@@ -27,7 +27,7 @@ Class ReplyKeyboardMarkupTest extends  PHPUnit_Framework_TestCase
             ReplyKeyboardMarkup::parse([]);
             $this->fail(['Not exception']);
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
 
 

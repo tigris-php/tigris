@@ -2,10 +2,8 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Types\Audio;
-use Tigris\Types\Scalar\ScalarString;
-use Tigris\Types\Scalar\ScalarInteger;
-use Tigris\Exceptions\TelegramTypeException;
 
 class AudioTest extends PHPUnit_Framework_TestCase
 {
@@ -30,14 +28,14 @@ class AudioTest extends PHPUnit_Framework_TestCase
             Audio::parse(123);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
 
         try {
             Audio::parse([]);
             $this->fail('Expected exception not thrown');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(TelegramTypeException::class, $e);
+            $this->assertInstanceOf(TypeException::class, $e);
         }
     }
 }

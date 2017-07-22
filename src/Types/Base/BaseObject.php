@@ -4,8 +4,8 @@
  */
 namespace Tigris\Types\Base;
 
-use Tigris\Exceptions\TelegramTypeException;
 use Tigris\Helpers\ArrayHelper;
+use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Traits\JsonTrait;
 use Tigris\Types\Interfaces\TypeInterface;
 
@@ -31,16 +31,16 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
             if ($data instanceof static) {
                 return $data;
             } else {
-                throw new TelegramTypeException('Unexpected input type: ' . get_class($data));
+                throw new TypeException('Unexpected input type: ' . get_class($data));
             }
         }
 
         if (!is_array($data)) {
-            throw new TelegramTypeException('Input must be an array');
+            throw new TypeException('Input must be an array');
         }
 
         if (count($data) == null) {
-            throw new TelegramTypeException('Unexpected empty array');
+            throw new TypeException('Unexpected empty array');
         }
 
         $result = new static;
