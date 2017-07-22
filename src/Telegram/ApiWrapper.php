@@ -12,6 +12,7 @@ use Tigris\Telegram\Types\ChatMember;
 use Tigris\Telegram\Types\File;
 use Tigris\Telegram\Types\Inline\InlineQueryResult;
 use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
+use Tigris\Telegram\Types\Interfaces\TypeInterface;
 use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
@@ -19,6 +20,12 @@ use Tigris\Telegram\Types\Update;
 use Tigris\Telegram\Types\User;
 use Tigris\Telegram\Types\UserProfilePhotos;
 
+/**
+ * Class ApiWrapper
+ * @package Tigris\Telegram
+ *
+ *
+ */
 class ApiWrapper
 {
     const PARSE_MODE_MARKDOWN = 'Markdown';
@@ -33,6 +40,10 @@ class ApiWrapper
     const CHAT_ACTION_UPLOAD_AUDIO = 'upload_audio';
     const CHAT_ACTION_UPLOAD_DOCUMENT = 'upload_document';
     const CHAT_ACTION_FIND_LOCATION = 'find_location';
+
+    const METHODS = [
+        'getMe' => User::class,
+    ];
 
     /** @var ApiClient */
     protected $apiClient;
@@ -51,6 +62,16 @@ class ApiWrapper
     public function setApiClient(ApiClient $apiClient)
     {
         $this->apiClient = $apiClient;
+    }
+
+    function __call($name, $arguments)
+    {
+        if (!array_key_exists($name,self::METHODS)) {
+            throw new \BadMethodCallException('Unsupported method: ' . $name);
+        }
+        /** @var TypeInterface $type */
+        $type = self::METHODS[$name];
+        return $type::parse($this->apiClient->call($name, $arguments));
     }
 
     /**
