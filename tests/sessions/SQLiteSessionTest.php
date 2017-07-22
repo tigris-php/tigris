@@ -7,12 +7,14 @@ use Tigris\Sessions\SQLiteSessionFactory;
 
 class SQLiteSessionTest extends PHPUnit_Framework_TestCase
 {
-    private $basePath = '/tmp';
-    private $baseName = 'base1.sql';
+    private function getDbPath()
+    {
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'test1.sql';
+    }
 
     public function testCreate()
     {
-        $factory = new SQLiteSessionFactory($this->basePath . DIRECTORY_SEPARATOR . $this->baseName);
+        $factory = new SQLiteSessionFactory($this->getDbPath());
         $session = $factory->getSession('test_id');
         $this->assertInstanceOf(SQLiteSession::class, $session);
         $this->assertSame('test_id', $session->getSessionId());
@@ -43,6 +45,6 @@ class SQLiteSessionTest extends PHPUnit_Framework_TestCase
             $this->assertInstanceOf(\InvalidArgumentException::class, $e);
         }
 
-        unlink($this->basePath . DIRECTORY_SEPARATOR . $this->baseName);
+        @unlink($this->getDbPath());
     }
 }

@@ -6,20 +6,22 @@ use Tigris\Sessions\SQLiteSessionFactory;
 
 class SQLiteSessionFactoryTest extends PHPUnit_Framework_TestCase
 {
-    private $basePath = '/tmp';
-    private $baseName = 'base.sql';
+    private function getDbPath()
+    {
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'test1.sql';
+    }
 
     public function testConstruct()
     {
-        $factory = new SQLiteSessionFactory($this->basePath . DIRECTORY_SEPARATOR . $this->baseName);
+        $factory = new SQLiteSessionFactory($this->getDbPath());
         $this->assertInstanceOf(SQLiteSessionFactory::class, $factory);
         $this->assertAttributeInstanceOf(PDO::class, 'storage', $factory);
-        $this->assertContains($this->baseName, scandir($this->basePath));
+        $this->assertFileExists($this->getDbPath());
     }
 
     public function testGetSession()
     {
-        $f = new SQLiteSessionFactory($this->basePath . DIRECTORY_SEPARATOR . $this->baseName);
+        $f = new SQLiteSessionFactory($this->getDbPath());
         $a = $f->getSession(1);
         $this->assertInstanceOf(\Tigris\Sessions\SQLiteSession::class, $a);
         $this->assertAttributeInstanceOf(\PDO::class, 'storage', $a);
@@ -36,6 +38,6 @@ class SQLiteSessionFactoryTest extends PHPUnit_Framework_TestCase
         $c = $f->getSession('1');
         $this->assertInstanceOf(\Tigris\Sessions\SQLiteSession::class, $c);
 
-        unlink($this->basePath . DIRECTORY_SEPARATOR . $this->baseName);
+        @unlink($this->getDbPath());
     }
 }
