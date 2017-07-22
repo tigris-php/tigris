@@ -17,7 +17,7 @@ use Tigris\Plugins\UpdateHandler;
 use Tigris\Sessions\AbstractSession;
 use Tigris\Sessions\AbstractSessionFactory;
 use Tigris\Sessions\InMemorySessionFactory;
-use Tigris\Telegram\Api;
+use Tigris\Telegram\ApiWrapper;
 use Tigris\Types\User;
 use YarCode\Event\EventEmitterTrait;
 
@@ -38,7 +38,7 @@ abstract class Bot
 
     /** @var Client */
     protected $client;
-    /** @var Api */
+    /** @var ApiWrapper */
     protected $api;
     /** @var UpdateQueue */
     protected $updateQueue;
@@ -67,7 +67,7 @@ abstract class Bot
         }
         static::$instance = $bot = new static();
 
-        $bot->api = Api::create($apiToken);
+        $bot->api = ApiWrapper::create($apiToken);
 
         // loading plugins
         $bot->setPlugins($bot->plugins());
@@ -156,7 +156,7 @@ abstract class Bot
     }
 
     /**
-     * @return Api
+     * @return ApiWrapper
      */
     public function getApi()
     {

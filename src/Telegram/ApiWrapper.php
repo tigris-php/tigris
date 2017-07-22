@@ -23,7 +23,7 @@ use Tigris\Types\Update;
 use Tigris\Types\User;
 use Tigris\Types\UserProfilePhotos;
 
-class Api
+class ApiWrapper
 {
     const PARSE_MODE_MARKDOWN = 'Markdown';
     const PARSE_MODE_HTML = 'HTML';
