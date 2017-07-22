@@ -2,9 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Exceptions;
+namespace Tigris\Telegram\Exceptions;
 
-class TelegramApiException extends \Exception
+class ApiException extends \Exception
 {
     
 }

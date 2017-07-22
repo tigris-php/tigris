@@ -2,9 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Types;
 
-use Tigris\Exceptions\TelegramApiException;
 use Tigris\Types\Base\BaseObject;
 use Tigris\Types\Inline\ChosenInlineResult;
 use Tigris\Types\Inline\InlineQuery;
@@ -13,7 +13,7 @@ use Tigris\Types\Scalar\ScalarInteger;
 /**
  * Class Update
  * This object represents an incoming update.
- * 
+ *
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#update
  *
@@ -47,6 +47,28 @@ class Update extends BaseObject
         return $obj;
     }
 
+    /**
+     * Detects update type
+     *
+     * @param $data
+     * @return string
+     */
+    protected static function detectType(array $data)
+    {
+        foreach ([
+                     self::TYPE_MESSAGE,
+                     self::TYPE_EDITED_MESSAGE,
+                     self::TYPE_INLINE_QUERY,
+                     self::TYPE_CHOSEN_INLINE_RESULT,
+                     self::TYPE_CALLBACK_QUERY,
+                 ] as $type) {
+            if (isset($data[$type])) {
+                return $type;
+            }
+        }
+        return static::TYPE_UNKNOWN;
+    }
+
     protected static function fields()
     {
         return [
@@ -57,28 +79,5 @@ class Update extends BaseObject
             'chosen_inline_result' => ChosenInlineResult::class,
             'callback_query' => CallbackQuery::class,
         ];
-    }
-
-    /**
-     * Detects update type
-     *
-     * @param $data
-     * @return string
-     * @throws TelegramApiException
-     */
-    protected static function detectType(array $data)
-    {
-        foreach([
-            self::TYPE_MESSAGE,
-            self::TYPE_EDITED_MESSAGE,
-            self::TYPE_INLINE_QUERY,
-            self::TYPE_CHOSEN_INLINE_RESULT,
-            self::TYPE_CALLBACK_QUERY,
-        ] as $type) {
-            if (isset($data[$type])) {
-                return $type;
-            }
-        }
-        return static::TYPE_UNKNOWN;
     }
 }

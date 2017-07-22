@@ -6,8 +6,8 @@ namespace Tigris\Telegram;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Tigris\Exceptions\TelegramApiException;
 use Tigris\Helpers\TypeHelper;
+use Tigris\Telegram\Exceptions\ApiException;
 use Tigris\Types\Arrays\ChatMemberArray;
 use Tigris\Types\Arrays\UpdateArray;
 use Tigris\Types\Chat;
@@ -724,13 +724,13 @@ class Api
     /**
      * @param ResponseInterface $response
      * @return mixed
-     * @throws TelegramApiException
+     * @throws ApiException
      */
     protected function parseResponse(ResponseInterface $response)
     {
         $data = json_decode($response->getBody()->getContents(), true);
         if ($data === null || $data['ok'] != true) {
-            throw new TelegramApiException('Request failure');
+            throw new ApiException('Request failure');
         }
 
         return $data['result'];

@@ -2,9 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Types;
 
-use Tigris\Exceptions\TelegramApiException;
 use Tigris\Types\Arrays\MessageEntityArray;
 use Tigris\Types\Arrays\PhotoSizeArray;
 use Tigris\Types\Base\BaseObject;
@@ -115,6 +115,43 @@ class Message extends BaseObject
         return $obj;
     }
 
+    /**
+     * Detects message type
+     *
+     * @param $data
+     * @return string
+     */
+    protected static function detectType(array $data)
+    {
+        foreach ([
+                     self::TYPE_TEXT,
+                     self::TYPE_AUDIO,
+                     self::TYPE_DOCUMENT,
+                     self::TYPE_GAME,
+                     self::TYPE_PHOTO,
+                     self::TYPE_STICKER,
+                     self::TYPE_VIDEO,
+                     self::TYPE_VOICE,
+                     self::TYPE_CONTACT,
+                     self::TYPE_LOCATION,
+                     self::TYPE_VENUE,
+                     self::TYPE_NEW_CHAT_MEMBER,
+                     self::TYPE_LEFT_CHAT_MEMBER,
+                     self::TYPE_NEW_CHAT_TITLE,
+                     self::TYPE_NEW_CHAT_PHOTO,
+                     self::TYPE_DELETE_CHAT_PHOTO,
+                     self::TYPE_GROUP_CHAT_CREATED,
+                     self::TYPE_SUPERGROUP_CHAT_CREATED,
+                     self::TYPE_CHANNEL_CHAT_CREATED,
+                     self::TYPE_MESSAGE_PINNED,
+                 ] as $type) {
+            if (isset($data[$type])) {
+                return $type;
+            }
+        }
+        return static::TYPE_UNKNOWN;
+    }
+
     protected static function fields()
     {
         return [
@@ -155,48 +192,10 @@ class Message extends BaseObject
     }
 
     /**
-     * Detects message type
-     *
-     * @param $data
-     * @return string
-     * @throws TelegramApiException
-     */
-    protected static function detectType(array $data)
-    {
-        foreach([
-            self::TYPE_TEXT,
-            self::TYPE_AUDIO,
-            self::TYPE_DOCUMENT,
-            self::TYPE_GAME,
-            self::TYPE_PHOTO,
-            self::TYPE_STICKER,
-            self::TYPE_VIDEO,
-            self::TYPE_VOICE,
-            self::TYPE_CONTACT,
-            self::TYPE_LOCATION,
-            self::TYPE_VENUE,
-            self::TYPE_NEW_CHAT_MEMBER,
-            self::TYPE_LEFT_CHAT_MEMBER,
-            self::TYPE_NEW_CHAT_TITLE,
-            self::TYPE_NEW_CHAT_PHOTO,
-            self::TYPE_DELETE_CHAT_PHOTO,
-            self::TYPE_GROUP_CHAT_CREATED,
-            self::TYPE_SUPERGROUP_CHAT_CREATED,
-            self::TYPE_CHANNEL_CHAT_CREATED,
-            self::TYPE_MESSAGE_PINNED,
-        ] as $type) {
-            if (isset($data[$type])) {
-                return $type;
-            }
-        }
-        return static::TYPE_UNKNOWN;
-    }
-
-    /**
      * @inheritdoc
      */
     public function __toString()
     {
-        return (string) $this->offsetGet('message_id');
+        return (string)$this->offsetGet('message_id');
     }
 }
