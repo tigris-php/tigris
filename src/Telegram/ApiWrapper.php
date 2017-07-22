@@ -2,12 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram;
 
-use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
-use Tigris\Telegram\Exceptions\ApiException;
-use Tigris\Telegram\Helpers\TypeHelper;
 use Tigris\Telegram\Types\Arrays\ChatMemberArray;
 use Tigris\Telegram\Types\Arrays\UpdateArray;
 use Tigris\Telegram\Types\Chat;
@@ -15,7 +12,6 @@ use Tigris\Telegram\Types\ChatMember;
 use Tigris\Telegram\Types\File;
 use Tigris\Telegram\Types\Inline\InlineQueryResult;
 use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
-use Tigris\Telegram\Types\Interfaces\TypeInterface;
 use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
@@ -38,39 +34,23 @@ class ApiWrapper
     const CHAT_ACTION_UPLOAD_DOCUMENT = 'upload_document';
     const CHAT_ACTION_FIND_LOCATION = 'find_location';
 
-    protected $apiToken;
-    /** @var \GuzzleHttp\Client */
-    protected $client;
+    /** @var ApiClient */
+    protected $apiClient;
 
     /**
-     * Disabled default Api constructor.
+     * @param ApiClient $apiClient
      */
-    protected function __construct()
+    public function __construct(ApiClient $apiClient)
     {
-
+        $this->setApiClient($apiClient);
     }
 
     /**
-     * @param string $apiToken
-     * @return static
+     * @param ApiClient $apiClient
      */
-    public static function create($apiToken)
+    public function setApiClient(ApiClient $apiClient)
     {
-        $api = new static();
-        $api->apiToken = $apiToken;
-        $api->client = new Client([
-            'base_uri' => 'https://api.telegram.org/bot' . $apiToken . '/',
-            'timeout' => 10,
-        ]);
-        return $api;
-    }
-
-    /**
-     * @return Client
-     */
-    public function getClient()
-    {
-        return $this->client;
+        $this->apiClient = $apiClient;
     }
 
     /**
@@ -89,8 +69,23 @@ class ApiWrapper
         $limit = null,
         $timeout = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return UpdateArray::parse($data);
+    }
+
+    /**
+     * @param $methodName
+     * @param array $args
+     * @return array
+     */
+    protected function parseArgs($methodName, array $args)
+    {
+        $method = new \ReflectionMethod(static::class, $methodName);
+        $result = [];
+        foreach ($method->getParameters() as $i => $p) {
+            $result[$p->getName()] = isset($args[$i]) ? $args[$i] : null;
+        }
+        return $result;
     }
 
     /**
@@ -103,7 +98,7 @@ class ApiWrapper
      */
     public function getMe()
     {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return User::parse($data);
     }
 
@@ -131,7 +126,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         ReplyMarkupInterface $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -149,7 +144,7 @@ class ApiWrapper
      */
     public function forwardMessage($chat_id, $from_chat_id, $message_id, $disable_notification = null)
     {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -175,7 +170,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         ReplyMarkupInterface $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -206,7 +201,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         ReplyMarkupInterface $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -232,7 +227,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         ReplyMarkupInterface $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -256,7 +251,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -290,7 +285,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -319,7 +314,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -345,7 +340,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -377,7 +372,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -405,7 +400,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
     }
 
@@ -423,7 +418,7 @@ class ApiWrapper
         $chat_id,
         $action
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarBoolean::parse($data);
     }
 
@@ -443,7 +438,7 @@ class ApiWrapper
         $offset = null,
         $limit = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return UserProfilePhotos::parse($data);
     }
 
@@ -460,7 +455,7 @@ class ApiWrapper
     public function getFile(
         $file_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return File::parse($data);
     }
 
@@ -479,7 +474,7 @@ class ApiWrapper
         $chat_id,
         $user_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarBoolean::parse($data);
     }
 
@@ -495,7 +490,7 @@ class ApiWrapper
     public function leaveChat(
         $chat_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarBoolean::parse($data);
     }
 
@@ -514,7 +509,7 @@ class ApiWrapper
         $chat_id,
         $user_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarBoolean::parse($data);
     }
 
@@ -531,7 +526,7 @@ class ApiWrapper
     public function getChat(
         $chat_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Chat::parse($data);
     }
 
@@ -548,7 +543,7 @@ class ApiWrapper
     public function getChatAdministrators(
         $chat_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ChatMemberArray::parse($data);
     }
 
@@ -564,7 +559,7 @@ class ApiWrapper
     public function getChatMembersCount(
         $chat_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarInteger::parse($data);
     }
 
@@ -582,9 +577,11 @@ class ApiWrapper
         $chat_id,
         $user_id
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ChatMember::parse($data);
     }
+
+    // Games endpoints
 
     /**
      * Use this method to send answers to callback queries sent from inline keyboards.
@@ -605,7 +602,7 @@ class ApiWrapper
         $show_alert,
         $url = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarBoolean::parse($data);
     }
 
@@ -634,11 +631,9 @@ class ApiWrapper
         $switch_pm_text = null,
         $switch_pm_parameter = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return ScalarBoolean::parse($data);
     }
-
-    // Games endpoints
 
     /**
      * Use this method to send a game.
@@ -660,79 +655,7 @@ class ApiWrapper
         $reply_to_message_id = null,
         ReplyMarkupInterface $reply_markup = null
     ) {
-        $data = $this->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
+        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
         return Message::parse($data);
-    }
-
-    /**
-     * @param $methodName
-     * @param array $args
-     * @return array
-     */
-    protected function parseArgs($methodName, array $args)
-    {
-        $method =  new \ReflectionMethod(static::class, $methodName);
-        $result = [];
-        foreach ($method->getParameters() as $i=> $p) {
-            $result[$p->getName()] = isset($args[$i]) ? $args[$i] : null;
-        }
-        return $result;
-    }
-
-    /**
-     * @param $methodName
-     * @param null|array $params
-     * @return mixed
-     */
-    protected function call($methodName, $params = [])
-    {
-        // removing empty params
-        $query = array_filter($params);
-
-        // detecting if we need to use multipart/form-data
-        $multipart = array_reduce($params, function($carry, $item) {
-            return $carry || is_resource($item);
-        }, false);
-
-        // converting existing types to arrays if needed
-        array_walk($query, function (&$item) {
-            if ($item instanceof TypeInterface) {
-                $item = TypeHelper::jsonEncode($item, false);
-            }
-        });
-
-        if ($multipart) {
-            $query = array_map(function($key, $item) {
-                return [
-                    'name' => $key,
-                    'contents' => $item,
-                ];
-            }, array_keys($params), $params);
-            $options = array_filter([
-                'multipart' => $query,
-            ]);
-        } else {
-            $options = array_filter([
-                'json' => $query,
-            ]);
-        }
-
-        $response = $this->client->post($methodName, $options);
-        return $this->parseResponse($response);
-    }
-
-    /**
-     * @param ResponseInterface $response
-     * @return mixed
-     * @throws ApiException
-     */
-    protected function parseResponse(ResponseInterface $response)
-    {
-        $data = json_decode($response->getBody()->getContents(), true);
-        if ($data === null || $data['ok'] != true) {
-            throw new ApiException('Request failure');
-        }
-
-        return $data['result'];
     }
 }
