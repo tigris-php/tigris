@@ -7,12 +7,9 @@ namespace Tigris\Telegram\Types\Base;
 use Tigris\Helpers\ArrayHelper;
 use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
-use Tigris\Traits\JsonTrait;
 
 abstract class BaseObject extends \ArrayObject implements TypeInterface
 {
-    use JsonTrait;
-
 //    public function __construct($input = null, $flags = 0, $iterator_class = "ArrayIterator") {
 //        parent::__construct($input, static::ARRAY_AS_PROPS, $iterator_class);
 //    }

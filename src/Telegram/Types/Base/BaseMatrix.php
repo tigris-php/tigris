@@ -5,12 +5,9 @@
 namespace Tigris\Telegram\Types\Base;
 
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
-use Tigris\Traits\JsonTrait;
 
 abstract class BaseMatrix extends BaseArray implements TypeInterface
 {
-    use JsonTrait;
-
     const ENTITY_CLASS = null;
     
     /**
