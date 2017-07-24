@@ -23,37 +23,37 @@ use Tigris\Telegram\Types\WebhookInfo;
  * Class ApiWrapper
  * @package Tigris\Telegram
  *
- * @method null|Update[] getUpdates(array $params)
- * @method null|true setWebhook(array $params)
- * @method null|true deleteWebhook(array $params)
- * @method null|WebhookInfo getWebhookInfo(array $params)
+ * @method null|Update[]            getUpdates(array $params)
+ * @method null|true                setWebhook(array $params)
+ * @method null|true                deleteWebhook(array $params)
+ * @method null|WebhookInfo         getWebhookInfo(array $params)
  *
- * @method null|User getMe()
+ * @method null|User                getMe()
  *
- * @method null|Message sendMessage(array $params)
- * @method null|Message forwardMessage(array $params)
- * @method null|Message sendPhoto(array $params)
- * @method null|Message sendAudio(array $params)
- * @method null|Message sendDocument(array $params)
- * @method null|Message sendSticker(array $params)
- * @method null|Message sendVideo(array $params)
- * @method null|Message sendLocation(array $params)
- * @method null|Message sendVenue(array $params)
- * @method null|Message sendContact(array $params)
- * @method null|Message sendGame(array $params)
+ * @method null|Message             sendMessage(array $params)
+ * @method null|Message             forwardMessage(array $params)
+ * @method null|Message             sendPhoto(array $params)
+ * @method null|Message             sendAudio(array $params)
+ * @method null|Message             sendDocument(array $params)
+ * @method null|Message             sendSticker(array $params)
+ * @method null|Message             sendVideo(array $params)
+ * @method null|Message             sendLocation(array $params)
+ * @method null|Message             sendVenue(array $params)
+ * @method null|Message             sendContact(array $params)
+ * @method null|Message             sendGame(array $params)
  *
- * @method null|true sendChatAction(array $params)
- * @method null|UserProfilePhotos getUserProfilePhotos(array $params)
- * @method null|File getFile(array $params)
- * @method null|true kickChatMember(array $params)
- * @method null|true leaveChat(array $params)
- * @method null|true unbanChatMember(array $params)
- * @method null|Chat getChat(array $params)
- * @method null|ChatMemberArray getChatAdministrators(array $params)
- * @method null|integer getChatMembersCount(array $params)
- * @method null|ChatMember getChatMember(array $params)
- * @method null|true answerCallbackQuery(array $params)
- * @method null|true answerInlineQuery(array $params)
+ * @method null|true                sendChatAction(array $params)
+ * @method null|UserProfilePhotos   getUserProfilePhotos(array $params)
+ * @method null|File                getFile(array $params)
+ * @method null|true                kickChatMember(array $params)
+ * @method null|true                leaveChat(array $params)
+ * @method null|true                unbanChatMember(array $params)
+ * @method null|Chat                getChat(array $params)
+ * @method null|ChatMemberArray     getChatAdministrators(array $params)
+ * @method null|integer             getChatMembersCount(array $params)
+ * @method null|ChatMember          getChatMember(array $params)
+ * @method null|true                answerCallbackQuery(array $params)
+ * @method null|true                answerInlineQuery(array $params)
  */
 class ApiWrapper
 {
@@ -116,7 +116,7 @@ class ApiWrapper
      * @param string $arguments
      * @return TypeInterface|null
      */
-    function __call($methodName, $arguments)
+    public function __call($methodName, $arguments)
     {
         if (!array_key_exists($methodName, self::METHODS)) {
             throw new \BadMethodCallException('Unsupported method: ' . $methodName);
@@ -131,16 +131,6 @@ class ApiWrapper
             }
         }
 
-        return $this->parseResponse($methodName, $response);
-    }
-
-    /**
-     * @param $methodName
-     * @param null|array $response
-     * @return null|TypeInterface
-     */
-    protected function parseResponse($methodName, $response)
-    {
         if ($response == null) {
             return null;
         }
