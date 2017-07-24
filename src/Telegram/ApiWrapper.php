@@ -10,8 +10,6 @@ use Tigris\Telegram\Types\Arrays\UpdateArray;
 use Tigris\Telegram\Types\Chat;
 use Tigris\Telegram\Types\ChatMember;
 use Tigris\Telegram\Types\File;
-use Tigris\Telegram\Types\Inline\InlineQueryResult;
-use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
@@ -42,7 +40,31 @@ class ApiWrapper
     const CHAT_ACTION_FIND_LOCATION = 'find_location';
 
     const METHODS = [
+        'getUpdates' => UpdateArray::class,
         'getMe' => User::class,
+        'sendMessage' => Message::class,
+        'forwardMessage' => Message::class,
+        'sendPhoto' => Message::class,
+        'sendDocument' => Message::class,
+        'sendSticker' => Message::class,
+        'sendVideo' => Message::class,
+        'sendVoice' => Message::class,
+        'sendLocation' => Message::class,
+        'sendVenue' => Message::class,
+        'sendContact' => Message::class,
+        'sendChatAction' => ScalarBoolean::class,
+        'getUserProfilePhotos' => UserProfilePhotos::class,
+        'getFile' => File::class,
+        'kickChatMember' => ScalarBoolean::class,
+        'leaveChat' => ScalarBoolean::class,
+        'unbanChatMember' => ScalarBoolean::class,
+        'getChat' => Chat::class,
+        'getChatAdministrators' => ChatMemberArray::class,
+        'getChatMembersCount' => ScalarInteger::class,
+        'getChatMember' => ChatMember::class,
+        'answerCallbackQuery' => ScalarBoolean::class,
+        'answerInlineQuery' => ScalarBoolean::class,
+        'sendGame' => Message::class,
     ];
 
     /** @var ApiClient */
@@ -64,365 +86,230 @@ class ApiWrapper
         $this->apiClient = $apiClient;
     }
 
-    function __call($name, $arguments)
+    /**
+     * @param string $methodName
+     * @param string $arguments
+     */
+    function __call($methodName, $arguments)
     {
-        if (!array_key_exists($name,self::METHODS)) {
-            throw new \BadMethodCallException('Unsupported method: ' . $name);
-        }
-        /** @var TypeInterface $type */
-        $type = self::METHODS[$name];
-        return $type::parse($this->apiClient->call($name, $arguments));
+        $this->callInternal($methodName, $arguments);
     }
 
     /**
-     * Use this method to receive incoming updates using long polling.
-     * An array of {@see \Tigris\Types\Update} objects is returned.
-     *
-     * @link https://core.telegram.org/bots/api/#getting-updates
-     *
-     * @param integer|null $offset
-     * @param integer|null $limit
-     * @param integer|null $timeout
-     * @return Update[]|UpdateArray
+     * @param string $methodName
+     * @param array|null $arguments
+     * @return TypeInterface|null
      */
-    public function getUpdates(
-        $offset = null,
-        $limit = null,
-        $timeout = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return UpdateArray::parse($data);
+    protected function callInternal($methodName, $arguments = [])
+    {
+        if (!array_key_exists($methodName, self::METHODS)) {
+            throw new \BadMethodCallException('Unsupported method: ' . $methodName);
+        }
+        $response = $this->apiClient->call($methodName, $arguments);
+        return $this->parseResponse($methodName, $response);
     }
 
     /**
      * @param $methodName
-     * @param array $args
-     * @return array
+     * @param null|array $response
+     * @return null|TypeInterface
      */
-    protected function parseArgs($methodName, array $args)
+    protected function parseResponse($methodName, $response)
     {
-        $method = new \ReflectionMethod(static::class, $methodName);
-        $result = [];
-        foreach ($method->getParameters() as $i => $p) {
-            $result[$p->getName()] = isset($args[$i]) ? $args[$i] : null;
+        if ($response == null) {
+            return null;
         }
-        return $result;
+        /** @var TypeInterface $type */
+        $type = self::METHODS[$methodName];
+        return $type::parse($response);
+    }
+
+    /**
+     * Use this method to receive incoming updates using long polling.
+     *
+     * An array of {@see \Tigris\Telegram\Types\Update} objects is returned.
+     *
+     * @link https://core.telegram.org/bots/api/#getupdates
+     *
+     * @param array $params
+     * @return null|TypeInterface|Update[]|UpdateArray
+     */
+    public function getUpdates(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * A simple method for testing your bot's auth token. Requires no parameters.
-     * Returns basic information about the bot in form of a {@see \Tigris\Types\User} object.
+     * Returns basic information about the bot in form of a {@see \Tigris\Telegram\Types\User} object.
      *
      * @link https://core.telegram.org/bots/api#getme
      *
-     * @return User
+     * @return null|TypeInterface|User
      */
     public function getMe()
     {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return User::parse($data);
+        return $this->callInternal(__FUNCTION__);
     }
 
     /**
      * Use this method to send text messages.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendmessage
      *
-     * @param integer|string $chat_id
-     * @param string $text
-     * @param string|null $parse_mode
-     * @param boolean|null $disable_web_page_preview
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendMessage(
-        $chat_id,
-        $text,
-        $parse_mode = null,
-        $disable_web_page_preview = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        ReplyMarkupInterface $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendMessage(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to forward messages of any kind.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#forwardmessage
      *
-     * @param integer|string $chat_id
-     * @param integer|string $from_chat_id
-     * @param integer $message_id
-     * @param boolean|null $disable_notification
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function forwardMessage($chat_id, $from_chat_id, $message_id, $disable_notification = null)
+    public function forwardMessage(array $params)
     {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send photos.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendphoto
      *
-     * @param integer|string $chat_id
-     * @param string|resource $photo
-     * @param string|null $caption
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendPhoto(
-        $chat_id,
-        $photo,
-        $caption = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        ReplyMarkupInterface $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendPhoto(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player.
-     * Your audio must be in the .mp3 format. On success, the sent {@see \Tigris\Types\Message} is returned.
+     * Your audio must be in the .mp3 format. On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      * Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      *
      * @link https://core.telegram.org/bots/api#sendaudio
      *
-     * @param integer|string $chat_id
-     * @param string|resource $audio
-     * @param integer|null $duration
-     * @param string|null $performer
-     * @param string|null $title
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendAudio(
-        $chat_id,
-        $audio,
-        $duration = null,
-        $performer = null,
-        $title = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        ReplyMarkupInterface $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendAudio(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
-     * Use this method to send general files. On success, the sent {@see \Tigris\Types\Message} is returned.
+     * Use this method to send general files. On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
      * @link https://core.telegram.org/bots/api#senddocument
      *
-     * @param integer|string $chat_id
-     * @param string|resource $document
-     * @param string|null $caption
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendDocument(
-        $chat_id,
-        $document,
-        $caption = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        ReplyMarkupInterface $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendDocument(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send .webp stickers.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendsticker
      *
-     * @param integer|string $chat_id
-     * @param string|resource $sticker
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendSticker(
-        $chat_id,
-        $sticker,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendSticker(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send video files, Telegram clients support mp4 videos
      * (other formats may be sent as {@see Tigris\Types\Document}).
-     * On success, the sent {@see \Tigris\Types\Message} is returned. Bots can currently send video files of up to
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned. Bots can currently send video files of up to
      * 50 MB in size, this limit may be changed in the future.
      *
      * @link https://core.telegram.org/bots/api#sendvideo
      *
-     * @param integer|string $chat_id
-     * @param string|resource $video
-     * @param integer|null $duration
-     * @param integer|null $width
-     * @param integer|null $height
-     * @param string|null $caption
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendVideo(
-        $chat_id,
-        $video,
-        $duration = null,
-        $width = null,
-        $height = null,
-        $caption = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendVideo(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice
      * message. For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent
-     * as {@see \Tigris\Types\Audio} or {@see \Tigris\Types\Document}).
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * as {@see \Tigris\Telegram\Types\Audio} or {@see \Tigris\Telegram\Types\Document}).
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
      * @link https://core.telegram.org/bots/api#sendvoice
      *
-     * @param integer|string $chat_id
-     * @param string|resource $voice
-     * @param integer|null $duration
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendVoice(
-        $chat_id,
-        $voice,
-        $duration = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendVoice(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send point on the map.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendlocation
      *
-     * @param integer|string $chat_id
-     * @param float $latitude
-     * @param float $longitude
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendLocation(
-        $chat_id,
-        $latitude,
-        $longitude,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendLocation(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send information about a venue.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendvenue
      *
-     * @param integer|string $chat_id
-     * @param float $latitude
-     * @param float $longitude
-     * @param string $title
-     * @param string $address
-     * @param string $foursquare_id
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendVenue(
-        $chat_id,
-        $latitude,
-        $longitude,
-        $title,
-        $address,
-        $foursquare_id,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendVenue(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send phone contacts.
-     * On success, the sent {@see \Tigris\Types\Message} is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendcontact
      *
-     * @param integer|string $chat_id
-     * @param string $phone_number
-     * @param string $first_name
-     * @param string|null $last_name
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendContact(
-        $chat_id,
-        $phone_number,
-        $first_name,
-        $last_name = null,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendContact(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -431,53 +318,41 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#sendchataction
      *
-     * @param integer|Chat $chat_id
-     * @param string $action
-     * @return true
+     * @param array @params
+     * @return null|TypeInterface|true
      */
-    public function sendChatAction(
-        $chat_id,
-        $action
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::parse($data);
+    public function sendChatAction(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to get a list of profile pictures for a user.
-     * Returns a {@see \Tigris\Types\UserProfilePhotos} object.
+     * Returns a {@see \Tigris\Telegram\Types\UserProfilePhotos} object.
      *
      * @link https://core.telegram.org/bots/api#getuserprofilephotos
      *
-     * @param integer $user_id
-     * @param integer $offset
-     * @param integer $limit
-     * @return UserProfilePhotos
+     * @param array @params
+     * @return null|TypeInterface|UserProfilePhotos
      */
-    public function getUserProfilePhotos(
-        $user_id,
-        $offset = null,
-        $limit = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return UserProfilePhotos::parse($data);
+    public function getUserProfilePhotos(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to get basic info about a file and prepare it for downloading.
      * For the moment, bots can download files of up to 20MB in size.
-     * On success, a File object is returned.
+     * On success, a {@see \Tigris\Telegram\Types\File} object is returned.
      *
      * @link https://core.telegram.org/bots/api#getfile
      *
-     * @param integer $file_id
-     * @return File
+     * @param array @params
+     * @return null|TypeInterface|File
      */
-    public function getFile(
-        $file_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return File::parse($data);
+    public function getFile(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -487,16 +362,12 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#kickchatmember
      *
-     * @param integer|string $chat_id
-     * @param integer $user_id
-     * @return true
+     * @param array @params
+     * @return null|TypeInterface|true
      */
-    public function kickChatMember(
-        $chat_id,
-        $user_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::parse($data);
+    public function kickChatMember(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -505,14 +376,12 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#leavechat
      *
-     * @param integer|string $chat_id
-     * @return true
+     * @param array @params
+     * @return null|TypeInterface|true
      */
-    public function leaveChat(
-        $chat_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::parse($data);
+    public function leaveChat(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -522,33 +391,27 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#unbanchatmember
      *
-     * @param integer|string $chat_id
-     * @param integer $user_id
-     * @return true
+     * @param array @params
+     * @return null|TypeInterface|true
      */
-    public function unbanChatMember(
-        $chat_id,
-        $user_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::parse($data);
+    public function unbanChatMember(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to get up to date information about the chat (current name of the user for one-on-one
      * conversations, current username of a user, group or channel, etc.).
-     * Returns a {@see \Tigris\Types\Chat} object on success.
+     * Returns a {@see \Tigris\Telegram\Types\Chat} object on success.
      *
      * @link https://core.telegram.org/bots/api#getchat
      *
-     * @param integer|string $chat_id
-     * @return Chat
+     * @param array @params
+     * @return null|TypeInterface|Chat
      */
-    public function getChat(
-        $chat_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Chat::parse($data);
+    public function getChat(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -558,14 +421,12 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#getchatadministrators
      *
-     * @param integer|string $chat_id
-     * @return ChatMember[]|ChatMemberArray
+     * @param array @params
+     * @return null|TypeInterface|ChatMember[]|ChatMemberArray
      */
-    public function getChatAdministrators(
-        $chat_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ChatMemberArray::parse($data);
+    public function getChatAdministrators(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -574,35 +435,27 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#getchatmemberscount
      *
-     * @param integer|string $chat_id
-     * @return integer
+     * @param array @params
+     * @return null|TypeInterface|integer
      */
-    public function getChatMembersCount(
-        $chat_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarInteger::parse($data);
+    public function getChatMembersCount(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to get information about a member of a chat.
-     * Returns a {@see \Tigris\Types\ChatMember} object on success.
+     * Returns a {@see \Tigris\Telegram\Types\ChatMember} object on success.
      *
      * @link https://core.telegram.org/bots/api#getchatmember
      *
-     * @param integer|string $chat_id
-     * @param integer|string $user_id
-     * @return ChatMember
+     * @param array @params
+     * @return null|TypeInterface|ChatMember
      */
-    public function getChatMember(
-        $chat_id,
-        $user_id
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ChatMember::parse($data);
+    public function getChatMember(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
-
-    // Games endpoints
 
     /**
      * Use this method to send answers to callback queries sent from inline keyboards.
@@ -611,20 +464,12 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#answercallbackquery
      *
-     * @param string $callback_query_id
-     * @param string $text
-     * @param boolean $show_alert
-     * @param string $url
-     * @return true
+     * @param array @params
+     * @return null|TypeInterface|true
      */
-    public function answerCallbackQuery(
-        $callback_query_id,
-        $text,
-        $show_alert,
-        $url = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::parse($data);
+    public function answerCallbackQuery(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
@@ -634,49 +479,25 @@ class ApiWrapper
      *
      * @link https://core.telegram.org/bots/api#answerinlinequery
      *
-     * @param string $inline_query_id
-     * @param InlineQueryResult[] $results
-     * @param integer|null $cache_time
-     * @param boolean|null $is_personal
-     * @param string|null $next_offset
-     * @param string|null $switch_pm_text
-     * @param string|null $switch_pm_parameter
-     * @return true
+     * @param array @params
+     * @return null|TypeInterface|true
      */
-    public function answerInlineQuery(
-        $inline_query_id,
-        $results,
-        $cache_time = null,
-        $is_personal = null,
-        $next_offset = null,
-        $switch_pm_text = null,
-        $switch_pm_parameter = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return ScalarBoolean::parse($data);
+    public function answerInlineQuery(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 
     /**
      * Use this method to send a game.
-     * On success, the sent Message is returned.
+     * On success, the sent {@see \Tigris\Telegram\Types\Message} is returned.
      *
      * @link https://core.telegram.org/bots/api#sendgame
      *
-     * @param integer|string $chat_id
-     * @param string $game_short_name
-     * @param boolean|null $disable_notification
-     * @param integer|null $reply_to_message_id
-     * @param ReplyMarkupInterface|null $reply_markup
-     * @return Message
+     * @param array @params
+     * @return null|TypeInterface|Message
      */
-    public function sendGame(
-        $chat_id,
-        $game_short_name,
-        $disable_notification = null,
-        $reply_to_message_id = null,
-        ReplyMarkupInterface $reply_markup = null
-    ) {
-        $data = $this->apiClient->call(__FUNCTION__, $this->parseArgs(__FUNCTION__, func_get_args()));
-        return Message::parse($data);
+    public function sendGame(array $params)
+    {
+        return $this->callInternal(__FUNCTION__, $params);
     }
 }
