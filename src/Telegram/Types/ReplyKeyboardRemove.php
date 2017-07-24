@@ -13,10 +13,10 @@ use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#replykeyboardhide
  *
- * @property boolean $hide_keyboard
+ * @property boolean $remove_keyboard
  * @property boolean $selective
  */
-class ReplyKeyboardHide extends BaseObject implements ReplyMarkupInterface
+class ReplyKeyboardRemove extends BaseObject implements ReplyMarkupInterface
 {
     /**
      * Constructor
@@ -27,7 +27,7 @@ class ReplyKeyboardHide extends BaseObject implements ReplyMarkupInterface
     public static function create($selective = false)
     {
         $data = compact('selective');
-        $data['hide_keyboard'] = true;
+        $data['remove_keyboard'] = true;
         return static::build($data);
     }
 }

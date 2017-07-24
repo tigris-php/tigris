@@ -24,13 +24,14 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * Class ApiWrapper
  * @package Tigris\Telegram
  *
+ * Updates related methods
+ * @link https://core.telegram.org/bots/api#getting-updates
  * @method null|Update[]            getUpdates(array $params)
  * @method null|true                setWebhook(array $params)
  * @method null|true                deleteWebhook(array $params)
  * @method null|WebhookInfo         getWebhookInfo(array $params)
  *
  * @method null|User                getMe()
- *
  * @method null|Message             sendMessage(array $params)
  * @method null|Message             forwardMessage(array $params)
  * @method null|Message             sendPhoto(array $params)
@@ -55,14 +56,23 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|true                answerCallbackQuery(array $params)
  * @method null|true                answerInlineQuery(array $params)
  *
+ * Payments methods
+ * @link https://core.telegram.org/bots/api#payments
+ * @method null|Message             sendInvoice(array $params)
+ * @method null|true                answerShippingQuery(array $params)
+ * @method null|true                answerPreCheckoutQuery(array $params)
  * @method null|Message             sendGame(array $params)
+ *
+ * Games methods
+ * @link https://core.telegram.org/bots/api#games
  * @method null|Message             setGameScore(array $params)
  * @method null|GameHighScoreArray  getGameHighScores(array $params)
+ *
+ *
  */
 class ApiWrapper
 {
     const METHODS = [
-        // updates methods
         'getUpdates' => UpdateArray::class,
         'setWebhook' => ScalarBoolean::class,
         'deleteWebhook' => ScalarBoolean::class,

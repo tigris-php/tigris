@@ -14,17 +14,13 @@ use Tigris\Telegram\Types\Games\CallbackGame;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#inlinekeyboardbutton
  *
- * @property string $text Label text on the button.
- * @property string|null $url Optional. HTTP url to be opened when button is pressed.
- * @property string|null $callback_data Optional. Data to be sent in a callback query to the bot
- *  when button is pressed, 1-64 bytes.
- * @property string|null $switch_inline_query Optional. If set, pressing the button will prompt the user to select one of
- *  their chats, open that chat and insert the bot‘s username and the specified inline query in the input field.
- *  Can be empty, in which case just the bot’s username will be inserted.
- * @property string|null $switch_inline_query_current_chat Optional. If set, pressing the button will insert the bot‘s
- *  username and the specified inline query in the current chat's input field.
- *  Can be empty, in which case only the bot’s username will be inserted.
- * @property CallbackGame|null $callback_game Optional. Description of the game that will be launched when the user presses the button.
+ * @property string $text
+ * @property string|null $url
+ * @property string|null $callback_data
+ * @property string|null $switch_inline_query
+ * @property string|null $switch_inline_query_current_chat
+ * @property CallbackGame|null $callback_game
+ * @property boolean|null $pay
  */
 class InlineKeyboardButton extends BaseObject
 {
@@ -35,6 +31,7 @@ class InlineKeyboardButton extends BaseObject
      * @param string|null $switch_inline_query
      * @param string|null $switch_inline_query_current_chat
      * @param CallbackGame|null $callback_game
+     * @param boolean|null $pay
      * @return BaseObject|static
      */
     public static function create(
@@ -43,7 +40,8 @@ class InlineKeyboardButton extends BaseObject
         $callback_data = null,
         $switch_inline_query = null,
         $switch_inline_query_current_chat = null,
-        CallbackGame $callback_game = null
+        CallbackGame $callback_game = null,
+        $pay = null
     ){
         // checking arguments
         $check = [
@@ -52,6 +50,7 @@ class InlineKeyboardButton extends BaseObject
             $switch_inline_query,
             $switch_inline_query_current_chat,
             $callback_game,
+            $pay
         ];
         $check = array_filter($check);
         if (count($check) > 1) {
@@ -64,7 +63,8 @@ class InlineKeyboardButton extends BaseObject
             'callback_data',
             'switch_inline_query',
             'switch_inline_query_current_chat',
-            'callback_game'
+            'callback_game',
+            'pay'
         ));
     }
 }

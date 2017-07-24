@@ -3,16 +3,16 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
-use Tigris\Telegram\Types\ReplyKeyboardHide;
+use Tigris\Telegram\Types\ReplyKeyboardRemove;
 
-class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
+class ReplyKeyboardRemoveTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $a = ReplyKeyboardHide::create(true);
+        $a = ReplyKeyboardRemove::create(true);
         $this->assertInstanceOf(ReplyMarkupInterface::class, $a);
-        $this->assertInstanceOf(ReplyKeyboardHide::class, $a);
-        $this->assertSame(true, $a->hide_keyboard, $a);
+        $this->assertInstanceOf(ReplyKeyboardRemove::class, $a);
+        $this->assertSame(true, $a->remove_keyboard, $a);
         $this->assertSame(true, $a->selective, $a);
     }
 }
