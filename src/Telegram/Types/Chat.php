@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
@@ -16,13 +17,16 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#chat
  *
- * @property integer $id Unique identifier for this chat.
- * @property string $type Type of chat.
- * @property string $title Optional. Title, for supergroups, channels and group chats.
- * @property string $username Optional. Username, for private chats, supergroups and channels if available.
- * @property string $first_name Optional. First name of the other party in a private chat.
- * @property string $last_name Optional. Last name of the other party in a private chat.
- * @property boolean $all_members_are_administrators Optional. True if a group has ‘All Members Are Admins’ enabled.
+ * @property integer $id
+ * @property string $type
+ * @property string $title
+ * @property string $username
+ * @property string $first_name
+ * @property string $last_name
+ * @property boolean $all_members_are_administrators
+ * @property ChatPhoto $photo
+ * @property string $description
+ * @property string $invite_link
  */
 class Chat extends BaseObject
 {
@@ -31,9 +35,6 @@ class Chat extends BaseObject
     const TYPE_SUPERGROUP = 'supergroup';
     const TYPE_CHANNEL = 'channel';
 
-    /**
-     * @inheritdoc
-     */
     protected static function fields()
     {
         return [
@@ -44,14 +45,14 @@ class Chat extends BaseObject
             'first_name' => ScalarString::class,
             'last_name' => ScalarString::class,
             'all_members_are_administrators' => ScalarBoolean::class,
+            'photo' => ChatPhoto::class,
+            'description' => ScalarString::class,
+            'invite_link' => ScalarString::class,
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function __toString()
     {
-        return (string) $this->offsetGet('id');
+        return (string)$this->offsetGet('id');
     }
 }

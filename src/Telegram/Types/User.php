@@ -24,9 +24,6 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class User extends BaseObject
 {
-    /**
-     * @inheritdoc
-     */
     protected static function fields()
     {
         return [
