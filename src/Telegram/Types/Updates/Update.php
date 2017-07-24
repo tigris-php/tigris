@@ -16,7 +16,7 @@ use Tigris\Telegram\Types\Scalar\ScalarInteger;
  * Class Update
  * This object represents an incoming update.
  *
- * @package Tigris\Types
+ * @package Tigris\Telegram\Types
  * @link https://core.telegram.org/bots/api#update
  *
  * @property integer $update_id
