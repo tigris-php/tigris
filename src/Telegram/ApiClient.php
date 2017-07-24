@@ -94,6 +94,7 @@ class ApiClient
     protected function parseResponse(ResponseInterface $response)
     {
         $data = json_decode($response->getBody()->getContents(), true);
+
         if ($data === null || $data['ok'] != true) {
             throw new ApiException('Request failure');
         }
