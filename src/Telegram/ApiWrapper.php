@@ -26,19 +26,6 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  */
 class ApiWrapper
 {
-    const PARSE_MODE_MARKDOWN = 'Markdown';
-    const PARSE_MODE_HTML = 'HTML';
-
-    /** @see sendChatAction() */
-    const CHAT_ACTION_TYPING = 'typing';
-    const CHAT_ACTION_UPLOAD_PHOTO = 'upload_photo';
-    const CHAT_ACTION_RECORD_VIDEO = 'record_video';
-    const CHAT_ACTION_UPLOAD_VIDEO = 'upload_video';
-    const CHAT_ACTION_RECORD_AUDIO = 'record_audio';
-    const CHAT_ACTION_UPLOAD_AUDIO = 'upload_audio';
-    const CHAT_ACTION_UPLOAD_DOCUMENT = 'upload_document';
-    const CHAT_ACTION_FIND_LOCATION = 'find_location';
-
     const METHODS = [
         'getUpdates' => UpdateArray::class,
         'getMe' => User::class,
@@ -67,6 +54,9 @@ class ApiWrapper
         'sendGame' => Message::class,
     ];
 
+    /** @var callable */
+    protected $errorHandler;
+
     /** @var ApiClient */
     protected $apiClient;
 
@@ -84,6 +74,14 @@ class ApiWrapper
     public function setApiClient(ApiClient $apiClient)
     {
         $this->apiClient = $apiClient;
+    }
+
+    /**
+     * @param callable $errorHandler
+     */
+    public function setErrorHandler(callable $errorHandler)
+    {
+        $this->errorHandler = $errorHandler;
     }
 
     /**
@@ -105,7 +103,16 @@ class ApiWrapper
         if (!array_key_exists($methodName, self::METHODS)) {
             throw new \BadMethodCallException('Unsupported method: ' . $methodName);
         }
-        $response = $this->apiClient->call($methodName, $arguments);
+
+        $response = null;
+        try {
+            $response = $this->apiClient->call($methodName, $arguments);
+        } catch (\Exception $e) {
+            if (is_callable($this->errorHandler)) {
+                call_user_func($this->errorHandler, $e);
+            }
+        }
+
         return $this->parseResponse($methodName, $response);
     }
 
