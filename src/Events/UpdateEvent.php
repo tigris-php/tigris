@@ -4,7 +4,7 @@
  */
 namespace Tigris\Events;
 
-use Tigris\Telegram\Types\Update;
+use Tigris\Telegram\Types\Updates\Update;
 
 class UpdateEvent extends AbstractEvent
 {

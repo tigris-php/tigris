@@ -5,7 +5,7 @@
 namespace Tigris\Telegram\Types\Arrays;
 
 use Tigris\Telegram\Types\Base\BaseArray;
-use Tigris\Telegram\Types\Update;
+use Tigris\Telegram\Types\Updates\Update;
 
 /**
  * Class UpdateArray

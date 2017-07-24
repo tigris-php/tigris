@@ -15,10 +15,10 @@ use Tigris\Telegram\Types\Interfaces\TypeInterface;
 use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
-use Tigris\Telegram\Types\Update;
+use Tigris\Telegram\Types\Updates\Update;
+use Tigris\Telegram\Types\Updates\WebhookInfo;
 use Tigris\Telegram\Types\User;
 use Tigris\Telegram\Types\UserProfilePhotos;
-use Tigris\Telegram\Types\WebhookInfo;
 
 /**
  * Class ApiWrapper

@@ -3,11 +3,13 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace Tigris\Telegram\Types;
+namespace Tigris\Telegram\Types\Updates;
 
 use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\CallbackQuery;
 use Tigris\Telegram\Types\Inline\ChosenInlineResult;
 use Tigris\Telegram\Types\Inline\InlineQuery;
+use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
 
 /**
@@ -20,7 +22,11 @@ use Tigris\Telegram\Types\Scalar\ScalarInteger;
  * @property integer $update_id
  * @property Message $message
  * @property Message $edited_message
+ * @property Message $channel_post
+ * @property Message $edited_channel_post
  * @property InlineQuery $inline_query
+ * @property ChosenInlineResult $chosen_inline_result
+ * @property CallbackQuery $callback_query
  */
 class Update extends BaseObject
 {

@@ -8,7 +8,7 @@ use Tigris\Telegram\Types\CallbackQuery;
 use Tigris\Telegram\Types\Inline\ChosenInlineResult;
 use Tigris\Telegram\Types\Inline\InlineQuery;
 use Tigris\Telegram\Types\Message;
-use Tigris\Telegram\Types\Update;
+use Tigris\Telegram\Types\Updates\Update;
 use Tigris\Telegram\Types\User;
 
 class UpdateArrayTest extends PHPUnit_Framework_TestCase

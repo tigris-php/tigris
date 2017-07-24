@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace Tigris\Telegram\Types;
+namespace Tigris\Telegram\Types\Updates;
 
 use Tigris\Telegram\Types\Arrays\ScalarStringArray;
 use Tigris\Telegram\Types\Base\BaseObject;
