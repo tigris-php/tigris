@@ -22,7 +22,9 @@ class PollingReceiver extends AbstractPlugin
 //            $formatted = number_format($memory, 3) . 'K';
 //            echo "Current memory usage: {$formatted}\n";
 
-            $updates = $this->bot->getApi()->getUpdates($this->offset);
+            $updates = $this->bot->getApi()->getUpdates([
+                'offset' => $this->offset,
+            ]);
 
             foreach ($updates as $update) {
                 $this->offset = $update->update_id + 1;

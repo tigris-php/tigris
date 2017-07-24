@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Plugins\Menu;
 
 use Tigris\Bot;
@@ -17,7 +18,7 @@ class Menu
     public $id;
     /** @var string */
     public $title;
-    /** @var MenuItem[][]*/
+    /** @var MenuItem[][] */
     public $items;
 
     /**
@@ -53,15 +54,6 @@ class Menu
     }
 
     /**
-     * @param $id
-     * @return Menu|null
-     */
-    public static function get($id)
-    {
-        return ArrayHelper::getValue(static::$instances, $id);
-    }
-
-    /**
      * @param $chatId
      * @param $menuId
      * @param $title
@@ -81,12 +73,23 @@ class Menu
         }
 
         try {
-            Bot::getInstance()->getApi()->sendMessage($chatId, $title, null, null, null, null,
-                ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
-            );
+            Bot::getInstance()->getApi()->sendMessage([
+                'chat_id' => $chatId,
+                'text' => $title,
+                'reply_markup' => ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
+            ]);
         } catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    /**
+     * @param $id
+     * @return Menu|null
+     */
+    public static function get($id)
+    {
+        return ArrayHelper::getValue(static::$instances, $id);
     }
 
     /**
@@ -96,7 +99,7 @@ class Menu
     {
         /** @var KeyboardButton[][] $result */
         $result = $this->items;
-        array_walk_recursive($result, function(MenuItem &$item) {
+        array_walk_recursive($result, function (MenuItem &$item) {
             $item = $item->toKeyboardButton();
         });
         return $result;
