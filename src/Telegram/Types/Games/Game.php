@@ -2,7 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Telegram\Types;
+namespace Tigris\Telegram\Types\Games;
 
 use Tigris\Telegram\Types\Arrays\MessageEntityArray;
 use Tigris\Telegram\Types\Arrays\PhotoSizeArray;

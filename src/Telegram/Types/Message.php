@@ -8,6 +8,7 @@ namespace Tigris\Telegram\Types;
 use Tigris\Telegram\Types\Arrays\MessageEntityArray;
 use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
 use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\Games\Game;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
 use Tigris\Telegram\Types\Scalar\ScalarString;

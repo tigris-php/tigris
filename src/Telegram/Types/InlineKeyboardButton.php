@@ -5,6 +5,7 @@
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\Games\CallbackGame;
 
 /**
  * This object represents one button of an inline keyboard.

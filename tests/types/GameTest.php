@@ -4,7 +4,7 @@
  */
 use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
-use Tigris\Telegram\Types\Game;
+use Tigris\Telegram\Types\Games\Game;
 
 class GameTest extends PHPUnit_Framework_TestCase
 {

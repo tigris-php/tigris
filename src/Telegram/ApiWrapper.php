@@ -6,6 +6,7 @@
 namespace Tigris\Telegram;
 
 use Tigris\Telegram\Types\Arrays\ChatMemberArray;
+use Tigris\Telegram\Types\Arrays\GameHighScoreArray;
 use Tigris\Telegram\Types\Arrays\UpdateArray;
 use Tigris\Telegram\Types\Chat;
 use Tigris\Telegram\Types\ChatMember;
@@ -40,7 +41,6 @@ use Tigris\Telegram\Types\WebhookInfo;
  * @method null|Message             sendLocation(array $params)
  * @method null|Message             sendVenue(array $params)
  * @method null|Message             sendContact(array $params)
- * @method null|Message             sendGame(array $params)
  *
  * @method null|true                sendChatAction(array $params)
  * @method null|UserProfilePhotos   getUserProfilePhotos(array $params)
@@ -54,6 +54,10 @@ use Tigris\Telegram\Types\WebhookInfo;
  * @method null|ChatMember          getChatMember(array $params)
  * @method null|true                answerCallbackQuery(array $params)
  * @method null|true                answerInlineQuery(array $params)
+ *
+ * @method null|Message             sendGame(array $params)
+ * @method null|Message             setGameScore(array $params)
+ * @method null|GameHighScoreArray  getGameHighScores(array $params)
  */
 class ApiWrapper
 {
@@ -134,6 +138,7 @@ class ApiWrapper
         if ($response == null) {
             return null;
         }
+
         /** @var TypeInterface $type */
         $type = self::METHODS[$methodName];
         return $type::parse($response);
