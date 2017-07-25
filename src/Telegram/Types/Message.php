@@ -12,6 +12,7 @@ use Tigris\Telegram\Types\Payments\SuccessfulPayment;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
 use Tigris\Telegram\Types\Scalar\ScalarString;
+use Tigris\Telegram\Types\Stickers\Sticker;
 
 /**
  * Class Message

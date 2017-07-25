@@ -2,9 +2,11 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Telegram\Types;
+
+namespace Tigris\Telegram\Types\Stickers;
 
 use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\PhotoSize;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
 use Tigris\Telegram\Types\Scalar\ScalarString;
 
@@ -12,15 +14,17 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * Class Sticker
  * This object represents a sticker.
  *
- * @package Tigris\Types
+ * @package Tigris\Telegram\Types
  * @link https://core.telegram.org/bots/api#sticker
  *
- * @property string $file_id Unique identifier for this file.
- * @property integer $width Sticker width.
- * @property integer $height Sticker height.
- * @property PhotoSize $thumb Optional. Sticker thumbnail in .webp or .jpg format.
- * @property string $emoji Optional. Emoji associated with the sticker.
- * @property integer $file_size Optional. File size.
+ * @property string $file_id
+ * @property integer $width
+ * @property integer $height
+ * @property PhotoSize|null $thumb
+ * @property string|null $emoji
+ * @property string|null $set_name
+ * @property MaskPosition|null $mask_position
+ * @property int|null $file_size
  */
 class Sticker extends BaseObject
 {
@@ -35,6 +39,8 @@ class Sticker extends BaseObject
             'height' => ScalarInteger::class,
             'thumb' => PhotoSize::class,
             'emoji' => ScalarString::class,
+            'set_name' => ScalarString::class,
+            'mask_position' => MaskPosition::class,
             'file_size' => ScalarInteger::class,
         ];
     }

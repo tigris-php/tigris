@@ -4,7 +4,7 @@
  */
 use Tigris\Telegram\Exceptions\TypeException;
 use Tigris\Telegram\Types\PhotoSize;
-use Tigris\Telegram\Types\Sticker;
+use Tigris\Telegram\Types\Stickers\Sticker;
 
 class StickerTest extends PHPUnit_Framework_TestCase
 {
