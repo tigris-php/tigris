@@ -13,6 +13,7 @@ use Tigris\Telegram\Types\Interfaces\TypeInterface;
 use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
+use Tigris\Telegram\Types\Scalar\ScalarString;
 use Tigris\Telegram\Types\Updates\Update;
 use Tigris\Telegram\Types\Updates\WebhookInfo;
 use Tigris\Telegram\Types\User;
@@ -70,10 +71,12 @@ use Tigris\Telegram\Types\UserProfilePhotos;
 class ApiWrapper
 {
     const METHODS = [
+        // update methods
         'getUpdates' => [Update::class],
         'setWebhook' => ScalarBoolean::class,
         'deleteWebhook' => ScalarBoolean::class,
         'getWebhookInfo' => WebhookInfo::class,
+        // common methods
         'getMe' => User::class,
         'sendMessage' => Message::class,
         'forwardMessage' => Message::class,
@@ -88,13 +91,24 @@ class ApiWrapper
         'sendChatAction' => ScalarBoolean::class,
         'getUserProfilePhotos' => UserProfilePhotos::class,
         'getFile' => File::class,
+        // channel management methods
         'kickChatMember' => ScalarBoolean::class,
-        'leaveChat' => ScalarBoolean::class,
         'unbanChatMember' => ScalarBoolean::class,
+        'restrictChatMember' => ScalarBoolean::class,
+        'promoteChatMember' => ScalarBoolean::class,
+        'exportChatInviteLink' => ScalarString::class,
+        'setChatPhoto' => ScalarBoolean::class,
+        'deleteChatPhoto' => ScalarBoolean::class,
+        'setChatTitle' => ScalarBoolean::class,
+        'setChatDescription' => ScalarBoolean::class,
+        'pinChatMessage' => ScalarBoolean::class,
+        'unpinChatMessage' => ScalarBoolean::class,
+        'leaveChat' => ScalarBoolean::class,
         'getChat' => Chat::class,
         'getChatAdministrators' => [ChatMember::class],
         'getChatMembersCount' => ScalarInteger::class,
         'getChatMember' => ChatMember::class,
+        // query methods
         'answerCallbackQuery' => ScalarBoolean::class,
         'answerInlineQuery' => ScalarBoolean::class,
         // games methods

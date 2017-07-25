@@ -19,14 +19,14 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  *
  * @property integer $id
  * @property string $type
- * @property string $title
- * @property string $username
- * @property string $first_name
- * @property string $last_name
- * @property boolean $all_members_are_administrators
- * @property ChatPhoto $photo
- * @property string $description
- * @property string $invite_link
+ * @property string|null $title
+ * @property string|null $username
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property bool|null $all_members_are_administrators
+ * @property ChatPhoto|null $photo
+ * @property string|null $description
+ * @property string|null $invite_link
  */
 class Chat extends BaseObject
 {
