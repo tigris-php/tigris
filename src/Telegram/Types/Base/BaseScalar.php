@@ -4,6 +4,7 @@
  */
 namespace Tigris\Telegram\Types\Base;
 
+use Tigris\Telegram\TypeParser;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 
 abstract class BaseScalar implements TypeInterface
@@ -14,15 +15,7 @@ abstract class BaseScalar implements TypeInterface
      */
     public static function parse($data)
     {
-        if ($data instanceof TypeInterface) {
-            return $data;
-        }
-
-        if (is_null($data)) {
-            return null;
-        }
-
-        return static::readData($data);
+        return TypeParser::parse(static::class, $data);
     }
 
     public static function readData($data)

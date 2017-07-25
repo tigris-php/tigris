@@ -5,7 +5,6 @@
 
 namespace Tigris\Telegram\Types\Updates;
 
-use Tigris\Telegram\Types\Arrays\ScalarStringArray;
 use Tigris\Telegram\Types\Base\BaseObject;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
@@ -24,7 +23,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @property integer|null $last_error_date
  * @property string|null $last_error_message
  * @property integer|null $max_connections
- * @property ScalarStringArray|null $allowed_updates
+ * @property ScalarString[]|null $allowed_updates
  */
 class WebhookInfo extends BaseObject
 {
@@ -40,7 +39,7 @@ class WebhookInfo extends BaseObject
             'last_error_date' => ScalarInteger::class,
             'last_error_message' => ScalarString::class,
             'max_connections' => ScalarInteger::class,
-            'allowed_updates' => ScalarStringArray::class,
+            'allowed_updates' => [ScalarString::class],
         ];
     }
 }

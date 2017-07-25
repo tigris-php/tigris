@@ -1,7 +1,6 @@
 <?php
 
 
-use Tigris\Telegram\Types\Arrays\PhotoSizeMatrix;
 use Tigris\Telegram\Types\UserProfilePhotos;
 
 class UserProfilePhotosTest extends PHPUnit_Framework_TestCase
@@ -9,9 +8,9 @@ class UserProfilePhotosTest extends PHPUnit_Framework_TestCase
     public function testParse()
     {
         $a = UserProfilePhotos::parse([
-            [
             'total_count' => 12,
-                'photos' => [
+            'photos' => [
+                [
                     [
                         'file_id' => 'foobar',
                         'width' => 640,

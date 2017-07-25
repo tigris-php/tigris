@@ -2,10 +2,11 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types\Games;
 
-use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
 use Tigris\Telegram\Types\Base\BaseObject;
+use Tigris\Telegram\Types\PhotoSize;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
 use Tigris\Telegram\Types\Scalar\ScalarString;
 
@@ -18,7 +19,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @link https://core.telegram.org/bots/api#animation
  *
  * @property string $file_id Unique file identifier
- * @property PhotoSizeArray $thumb Optional. Animation thumbnail as defined by sender.
+ * @property PhotoSize[] $thumb Optional. Animation thumbnail as defined by sender.
  * @property string $file_name Optional. Original animation filename as defined by sender.
  * @property string $mime_type Optional. MIME type of the file as defined by sender.
  * @property string $file_size Optional. File size.
@@ -32,7 +33,7 @@ class Animation extends BaseObject
     {
         return [
             'file_id' => ScalarString::class,
-            'thumb' => PhotoSizeArray::class,
+            'thumb' => [PhotoSize::class],
             'file_name' => ScalarString::class,
             'mime_type' => ScalarString::class,
             'file_size' => ScalarInteger::class,

@@ -5,7 +5,7 @@
 
 namespace Tigris\Telegram\Types\Base;
 
-use Tigris\Telegram\Exceptions\TypeException;
+use Tigris\Telegram\TypeParser;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 
 abstract class BaseObject extends \ArrayObject implements TypeInterface
@@ -20,34 +20,7 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
      */
     public static function parse($data)
     {
-        if (is_null($data)) {
-            return null;
-        }
-
-        if ($data instanceof TypeInterface) {
-            if ($data instanceof static) {
-                return $data;
-            } else {
-                throw new TypeException('Unexpected input type: ' . get_class($data));
-            }
-        }
-
-        if (!is_array($data)) {
-            throw new TypeException('Input must be an array');
-        }
-
-        if (count($data) == null) {
-            throw new TypeException('Unexpected empty array');
-        }
-
-        $result = new static;
-
-        foreach (static::fields() as $field => $className) {
-            /** @var $className TypeInterface */
-            $result->offsetSet($field, $className::parse(isset($data[$field]) ? $data[$field] : null));
-        }
-
-        return $result;
+        return TypeParser::parse(static::class, $data);
     }
 
     /**
@@ -89,7 +62,7 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
     public function __toString()
     {
         if ($this->offsetExists('id')) {
-            return (string) $this->offsetGet('id');
+            return (string)$this->offsetGet('id');
         } else {
             return false;
         }

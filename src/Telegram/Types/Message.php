@@ -5,9 +5,6 @@
 
 namespace Tigris\Telegram\Types;
 
-use Tigris\Telegram\Types\Arrays\MessageEntityArray;
-use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
-use Tigris\Telegram\Types\Arrays\UserArray;
 use Tigris\Telegram\Types\Base\BaseObject;
 use Tigris\Telegram\Types\Games\Game;
 use Tigris\Telegram\Types\Payments\Invoice;
@@ -43,7 +40,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @property Video $video
  * @property Voice $voice
  * @property VideoNote $video_note
- * @property UserArray $new_chat_members
+ * @property User[] $new_chat_members
  * @property string $caption
  * @property Contact $contact
  * @property Location $location
@@ -164,11 +161,11 @@ class Message extends BaseObject
             'reply_to_message' => Message::class,
             'edit_date' => ScalarInteger::class,
             'text' => ScalarString::class,
-            'entities' => MessageEntityArray::class,
+            'entities' => [MessageEntity::class],
             'audio' => Audio::class,
             'document' => Document::class,
             'game' => Game::class,
-            'photo' => PhotoSizeArray::class,
+            'photo' => [PhotoSize::class],
             'sticker' => Sticker::class,
             'video' => Video::class,
             'voice' => Voice::class,
@@ -177,11 +174,11 @@ class Message extends BaseObject
             'location' => Location::class,
             'venue' => Venue::class,
             'video_note' => VideoNote::class,
-            'new_chat_members' => UserArray::class,
+            'new_chat_members' => [User::class],
             'new_chat_member' => User::class,
             'left_chat_member' => User::class,
             'new_chat_title' => ScalarString::class,
-            'new_chat_photo' => PhotoSizeArray::class,
+            'new_chat_photo' => [PhotoSize::class],
             'delete_chat_photo' => ScalarBoolean::class,
             'group_chat_created' => ScalarBoolean::class,
             'supergroup_chat_created' => ScalarBoolean::class,

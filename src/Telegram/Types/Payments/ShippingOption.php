@@ -5,7 +5,6 @@
 
 namespace Tigris\Telegram\Types\Payments;
 
-use Tigris\Telegram\Types\Arrays\LabelledPriceArray;
 use Tigris\Telegram\Types\Base\BaseObject;
 use Tigris\Telegram\Types\Scalar\ScalarString;
 
@@ -27,7 +26,7 @@ class ShippingOption extends BaseObject
         return [
             'id' => ScalarString::class,
             'title' => ScalarString::class,
-            'prices' => LabelledPriceArray::class,
+            'prices' => [LabeledPrice::class],
         ];
     }
 }

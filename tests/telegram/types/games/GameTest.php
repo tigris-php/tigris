@@ -3,7 +3,6 @@
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
 use Tigris\Telegram\Exceptions\TypeException;
-use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
 use Tigris\Telegram\Types\Games\Game;
 
 class GameTest extends PHPUnit_Framework_TestCase
@@ -13,12 +12,14 @@ class GameTest extends PHPUnit_Framework_TestCase
         $a = Game::parse([
             'title' => 'foo',
             'description' => 'bar',
-            'photo' => [[
-                'file_id' => '123',
-                'width' => 100,
-                'height' => 100,
-                'file_size' => 100
-            ]],
+            'photo' => [
+                [
+                    'file_id' => '123',
+                    'width' => 100,
+                    'height' => 100,
+                    'file_size' => 100
+                ]
+            ],
         ]);
 
         $this->assertInstanceOf(Game::class, $a);

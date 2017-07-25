@@ -5,9 +5,6 @@
 
 namespace Tigris\Telegram;
 
-use Tigris\Telegram\Types\Arrays\ChatMemberArray;
-use Tigris\Telegram\Types\Arrays\GameHighScoreArray;
-use Tigris\Telegram\Types\Arrays\UpdateArray;
 use Tigris\Telegram\Types\Chat;
 use Tigris\Telegram\Types\ChatMember;
 use Tigris\Telegram\Types\File;
@@ -73,7 +70,7 @@ use Tigris\Telegram\Types\UserProfilePhotos;
 class ApiWrapper
 {
     const METHODS = [
-        'getUpdates' => [ArrayParser::class, Update::class],
+        'getUpdates' => [Update::class],
         'setWebhook' => ScalarBoolean::class,
         'deleteWebhook' => ScalarBoolean::class,
         'getWebhookInfo' => WebhookInfo::class,
@@ -95,7 +92,7 @@ class ApiWrapper
         'leaveChat' => ScalarBoolean::class,
         'unbanChatMember' => ScalarBoolean::class,
         'getChat' => Chat::class,
-        'getChatAdministrators' => ChatMemberArray::class,
+        'getChatAdministrators' => [ChatMember::class],
         'getChatMembersCount' => ScalarInteger::class,
         'getChatMember' => ChatMember::class,
         'answerCallbackQuery' => ScalarBoolean::class,
@@ -103,7 +100,7 @@ class ApiWrapper
 
         'sendGame' => Message::class,
         'setGameScore' => Message::class,
-        'getGameHighScores' => GameHighScoreArray::class,
+        'getGameHighScores' => [GameHighScore::class],
     ];
 
     /** @var callable */
