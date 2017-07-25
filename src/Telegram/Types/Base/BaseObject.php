@@ -5,7 +5,7 @@
 
 namespace Tigris\Telegram\Types\Base;
 
-use Tigris\Telegram\TypeParser;
+use Tigris\Telegram\Helpers\TypeHelper;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 
 abstract class BaseObject extends \ArrayObject implements TypeInterface
@@ -20,7 +20,7 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
      */
     public static function parse($data)
     {
-        return TypeParser::parse(static::class, $data);
+        return TypeHelper::parse(static::class, $data);
     }
 
     /**
