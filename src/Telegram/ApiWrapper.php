@@ -32,6 +32,8 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|true                deleteWebhook(array $params)
  * @method null|WebhookInfo         getWebhookInfo(array $params)
  *
+ * Common methods
+ * @link https://core.telegram.org/bots/api#available-methods
  * @method null|User                getMe()
  * @method null|Message             sendMessage(array $params)
  * @method null|Message             forwardMessage(array $params)
@@ -39,22 +41,40 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|Message             sendAudio(array $params)
  * @method null|Message             sendDocument(array $params)
  * @method null|Message             sendVideo(array $params)
+ * @method null|Message             sendVoice(array $params)
+ * @method null|Message             sendVideoNote(array $params)
  * @method null|Message             sendLocation(array $params)
  * @method null|Message             sendVenue(array $params)
  * @method null|Message             sendContact(array $params)
- *
  * @method null|true                sendChatAction(array $params)
  * @method null|UserProfilePhotos   getUserProfilePhotos(array $params)
  * @method null|File                getFile(array $params)
  * @method null|true                kickChatMember(array $params)
- * @method null|true                leaveChat(array $params)
  * @method null|true                unbanChatMember(array $params)
+ * @method null|true                restrictChatMember(array $params)
+ * @method null|true                promoteChatMember(array $params)
+ * @method null|string              exportChatInviteLink(array $params)
+ * @method null|true                setChatPhoto(array $params)
+ * @method null|true                deleteChatPhoto(array $params)
+ * @method null|true                setChatTitle(array $params)
+ * @method null|true                setChatDescription(array $params)
+ * @method null|true                pinChatMessage(array $params)
+ * @method null|true                unpinChatMessage(array $params)
+ * @method null|true                leaveChat(array $params)
  * @method null|Chat                getChat(array $params)
- * @method null|ChatMember[]     getChatAdministrators(array $params)
+ * @method null|ChatMember[]        getChatAdministrators(array $params)
  * @method null|integer             getChatMembersCount(array $params)
  * @method null|ChatMember          getChatMember(array $params)
  * @method null|true                answerCallbackQuery(array $params)
  * @method null|true                answerInlineQuery(array $params)
+ *
+ * Updating messages
+ * @link https://core.telegram.org/bots/api#updating-messages
+ *
+ * @method null|true                editMessageText(array $params)
+ * @method null|true                editMessageCaption(array $params)
+ * @method null|true                editMessageReplyMarkup(array $params)
+ * @method null|true                deleteMessage(array $params)
  *
  * Sticker methods
  * @link https://core.telegram.org/bots/api#stickers
@@ -64,7 +84,7 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|true                createNewStickerSet(array $params)
  * @method null|true                addStickerToSet(array $params)
  * @method null|true                setStickerPositionInSet(array $params)
- * @method null|true             deleteStickerFromSet(array $params)
+ * @method null|true                deleteStickerFromSet(array $params)
  *
  * Payments methods
  * @link https://core.telegram.org/bots/api#payments
@@ -82,26 +102,30 @@ use Tigris\Telegram\Types\UserProfilePhotos;
 class ApiWrapper
 {
     const METHODS = [
-        // update methods
+        // Updates related methods
+
         'getUpdates' => [Update::class],
         'setWebhook' => ScalarBoolean::class,
         'deleteWebhook' => ScalarBoolean::class,
         'getWebhookInfo' => WebhookInfo::class,
-        // common methods
+
+        // Common methods
+
         'getMe' => User::class,
         'sendMessage' => Message::class,
         'forwardMessage' => Message::class,
         'sendPhoto' => Message::class,
+        'sendAudio' => Message::class,
         'sendDocument' => Message::class,
         'sendVideo' => Message::class,
         'sendVoice' => Message::class,
+        'sendVideoNote' => Message::class,
         'sendLocation' => Message::class,
         'sendVenue' => Message::class,
         'sendContact' => Message::class,
         'sendChatAction' => ScalarBoolean::class,
         'getUserProfilePhotos' => UserProfilePhotos::class,
         'getFile' => File::class,
-        // channel management methods
         'kickChatMember' => ScalarBoolean::class,
         'unbanChatMember' => ScalarBoolean::class,
         'restrictChatMember' => ScalarBoolean::class,
@@ -118,7 +142,18 @@ class ApiWrapper
         'getChatAdministrators' => [ChatMember::class],
         'getChatMembersCount' => ScalarInteger::class,
         'getChatMember' => ChatMember::class,
-        // sticker methods
+        'answerCallbackQuery' => ScalarBoolean::class,
+        'answerInlineQuery' => ScalarBoolean::class,
+
+        // Updating messages
+
+        'editMessageText' => ScalarBoolean::class,
+        'editMessageCaption' => ScalarBoolean::class,
+        'editMessageReplyMarkup' => ScalarBoolean::class,
+        'deleteMessage' => ScalarBoolean::class,
+
+        // Sticker methods
+
         'sendSticker' => Message::class,
         'getStickerSet' => StickerSet::class,
         'uploadStickerFile' => File::class,
@@ -126,17 +161,17 @@ class ApiWrapper
         'addStickerToSet' => ScalarBoolean::class,
         'setStickerPositionInSet' => ScalarBoolean::class,
         'deleteStickerFromSet' => ScalarBoolean::class,
-        // query methods
-        'answerCallbackQuery' => ScalarBoolean::class,
-        'answerInlineQuery' => ScalarBoolean::class,
-        // games methods
-        'sendGame' => Message::class,
-        'setGameScore' => Message::class,
-        'getGameHighScores' => [GameHighScore::class],
-        // payment methods
+
+        // Payment methods
+
         'sendInvoice' => Message::class,
         'answerShippingQuery' => ScalarBoolean::class,
         'answerPreCheckoutQuery' => ScalarBoolean::class,
+
+        // Games methods
+        'sendGame' => Message::class,
+        'setGameScore' => Message::class,
+        'getGameHighScores' => [GameHighScore::class],
     ];
 
     /** @var callable */
