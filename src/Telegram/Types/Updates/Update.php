@@ -32,6 +32,8 @@ class Update extends BaseObject
 {
     const TYPE_MESSAGE = 'message';
     const TYPE_EDITED_MESSAGE = 'edited_message';
+    const TYPE_CHANNEL_POST = 'channel_post';
+    const TYPE_EDITED_CHANNEL_POST = 'edited_channel_post';
     const TYPE_INLINE_QUERY = 'inline_query';
     const TYPE_CHOSEN_INLINE_RESULT = 'chosen_inline_result';
     const TYPE_CALLBACK_QUERY = 'callback_query';
@@ -64,6 +66,8 @@ class Update extends BaseObject
         foreach ([
              self::TYPE_MESSAGE,
              self::TYPE_EDITED_MESSAGE,
+             self::TYPE_CHANNEL_POST,
+             self::TYPE_EDITED_CHANNEL_POST,
              self::TYPE_INLINE_QUERY,
              self::TYPE_CHOSEN_INLINE_RESULT,
              self::TYPE_CALLBACK_QUERY,
@@ -81,6 +85,8 @@ class Update extends BaseObject
             'update_id' => ScalarInteger::class,
             'message' => Message::class,
             'edited_message' => Message::class,
+            'channel_post' => Message::class,
+            'edited_channel_post' => Message::class,
             'inline_query' => InlineQuery::class,
             'chosen_inline_result' => ChosenInlineResult::class,
             'callback_query' => CallbackQuery::class,

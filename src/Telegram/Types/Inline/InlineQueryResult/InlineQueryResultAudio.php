@@ -12,11 +12,11 @@ use Tigris\Telegram\Types\Inline\InlineQueryResult;
  * @package Tigris\Types\Inline
  * @link https://core.telegram.org/bots/api#inlinequeryresultaudio
  *
- * @property string $audio_url A valid URL for the audio file.
- * @property string $title Title.
- * @property string $caption Optional. Caption, 0-200 characters.
- * @property string $performer Optional. Performer.
- * @property integer $audio_duration Optional. Audio duration in seconds.
+ * @property string $audio_url
+ * @property string $title
+ * @property string|null $caption
+ * @property string|null $performer
+ * @property int|null $audio_duration
  */
 class InlineQueryResultAudio extends InlineQueryResult
 {
