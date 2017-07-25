@@ -5,6 +5,7 @@
 
 namespace Tigris\Telegram;
 
+use phpDocumentor\Reflection\Types\Boolean;
 use Tigris\Telegram\Types\Chat;
 use Tigris\Telegram\Types\ChatMember;
 use Tigris\Telegram\Types\File;
@@ -14,6 +15,7 @@ use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
 use Tigris\Telegram\Types\Scalar\ScalarString;
+use Tigris\Telegram\Types\Stickers\StickerSet;
 use Tigris\Telegram\Types\Updates\Update;
 use Tigris\Telegram\Types\Updates\WebhookInfo;
 use Tigris\Telegram\Types\User;
@@ -36,7 +38,6 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|Message             sendPhoto(array $params)
  * @method null|Message             sendAudio(array $params)
  * @method null|Message             sendDocument(array $params)
- * @method null|Message             sendSticker(array $params)
  * @method null|Message             sendVideo(array $params)
  * @method null|Message             sendLocation(array $params)
  * @method null|Message             sendVenue(array $params)
@@ -54,6 +55,16 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|ChatMember          getChatMember(array $params)
  * @method null|true                answerCallbackQuery(array $params)
  * @method null|true                answerInlineQuery(array $params)
+ *
+ * Sticker methods
+ * @link https://core.telegram.org/bots/api#stickers
+ * @method null|Message             sendSticker(array $params)
+ * @method null|StickerSet          getStickerSet(array $params)
+ * @method null|File                uploadStickerFile(array $params)
+ * @method null|true                createNewStickerSet(array $params)
+ * @method null|true                addStickerToSet(array $params)
+ * @method null|true                setStickerPositionInSet(array $params)
+ * @method null|true             deleteStickerFromSet(array $params)
  *
  * Payments methods
  * @link https://core.telegram.org/bots/api#payments
@@ -82,7 +93,6 @@ class ApiWrapper
         'forwardMessage' => Message::class,
         'sendPhoto' => Message::class,
         'sendDocument' => Message::class,
-        'sendSticker' => Message::class,
         'sendVideo' => Message::class,
         'sendVoice' => Message::class,
         'sendLocation' => Message::class,
@@ -108,6 +118,14 @@ class ApiWrapper
         'getChatAdministrators' => [ChatMember::class],
         'getChatMembersCount' => ScalarInteger::class,
         'getChatMember' => ChatMember::class,
+        // sticker methods
+        'sendSticker' => Message::class,
+        'getStickerSet' => StickerSet::class,
+        'uploadStickerFile' => File::class,
+        'createNewStickerSet' => ScalarBoolean::class,
+        'addStickerToSet' => ScalarBoolean::class,
+        'setStickerPositionInSet' => ScalarBoolean::class,
+        'deleteStickerFromSet' => ScalarBoolean::class,
         // query methods
         'answerCallbackQuery' => ScalarBoolean::class,
         'answerInlineQuery' => ScalarBoolean::class,
