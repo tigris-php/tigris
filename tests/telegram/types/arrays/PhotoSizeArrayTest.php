@@ -24,7 +24,7 @@ class PhotoSizeArrayTest extends PHPUnit_Framework_TestCase
             ],
         ]);
 
-        $this->assertInstanceOf(PhotoSizeArray::class, $a);
+        $this->assertInternalType('array', $a);
         $this->assertInstanceOf(PhotoSize::class, $a[0]);
         $this->assertInstanceOf(PhotoSize::class, $a[1]);
 

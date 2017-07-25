@@ -39,8 +39,7 @@ class MessageEntityArrayTest extends PHPUnit_Framework_TestCase
 
 
 
-        $this->assertInstanceOf(MessageEntityArray::class, $a);
-        $this->assertInstanceOf(BaseArray::class, $a);
+        $this->assertInternalType('array', $a);
 
         $this->assertInstanceOf(MessageEntity::class, $a[0]);
         $this->assertInstanceOf(MessageEntity::class, $a[1]);

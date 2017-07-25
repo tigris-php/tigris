@@ -29,6 +29,6 @@ class UserProfilePhotosTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertInstanceOf(UserProfilePhotos::class, $a);
-        $this->assertAttributeInstanceOf(PhotoSizeMatrix::class, 'photos', $a);
+        $this->assertAttributeInternalType('array', 'photos', $a);
     }
 }

@@ -24,7 +24,7 @@ class GameTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Game::class, $a);
         $this->assertAttributeSame('foo', 'title', $a);
         $this->assertAttributeSame('bar', 'description', $a);
-        $this->assertAttributeInstanceOf(PhotoSizeArray::class, 'photo', $a);
+        $this->assertAttributeInternalType('array', 'photo', $a);
 
         $b = Game::parse($a);
         $this->assertSame($b, $a);

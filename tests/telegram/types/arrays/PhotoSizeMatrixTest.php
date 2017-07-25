@@ -41,14 +41,11 @@ class PhotoSizeMatrixTest extends PHPUnit_Framework_TestCase
             ],
         ]);
 
-        $this->assertInstanceOf(PhotoSizeMatrix::class, $a);
+        $this->assertInternalType('array', $a);
         $this->assertInstanceOf(PhotoSize::class, $a[0][0]);
         $this->assertInstanceOf(PhotoSize::class, $a[0][1]);
         $this->assertInstanceOf(PhotoSize::class, $a[1][0]);
         $this->assertInstanceOf(PhotoSize::class, $a[1][1]);
-
-        $b = PhotoSizeArray::parse($a);
-        $this->assertSame($a, $b);
 
         $z = PhotoSize::parse(null);
         $this->assertNull($z);

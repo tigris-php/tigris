@@ -30,8 +30,7 @@ class ChatMemberArrayTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertInstanceOf(ChatMemberArray::class, $a);
-        $this->assertInstanceOf(BaseArray::class, $a);
+        $this->assertInternalType('array', $a);
 
         $this->assertInstanceOf(ChatMember::class, $a[0]);
         $this->assertInstanceOf(ChatMember::class, $a[1]);

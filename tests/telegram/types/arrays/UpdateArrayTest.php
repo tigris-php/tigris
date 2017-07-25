@@ -100,8 +100,7 @@ class UpdateArrayTest extends PHPUnit_Framework_TestCase
             ],
         ]);
 
-        $this->assertInstanceOf(UpdateArray::class, $a);
-        $this->assertInstanceOf(BaseArray::class, $a);
+        $this->assertInternalType('array', $a);
 
         $this->assertInstanceOf(Update::class, $a[0]);
         $this->assertInstanceOf(Update::class, $a[1]);
@@ -131,11 +130,7 @@ class UpdateArrayTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(User::class, $a[0]->callback_query->from);
         $this->assertInstanceOf(User::class, $a[1]->callback_query->from);
 
-
-        $b = UpdateArray::parse($a);
-        $this->assertSame($a, $b);
-
-        $z = Update::parse(null);
+        $z = UpdateArray::parse(null);
         $this->assertNull($z);
 
     }
