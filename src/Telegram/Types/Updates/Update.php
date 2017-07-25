@@ -37,6 +37,8 @@ class Update extends BaseObject
     const TYPE_INLINE_QUERY = 'inline_query';
     const TYPE_CHOSEN_INLINE_RESULT = 'chosen_inline_result';
     const TYPE_CALLBACK_QUERY = 'callback_query';
+    const TYPE_SHIPPING_QUERY = 'shipping_query';
+    const TYPE_PRE_CHECKOUT_QUERY = 'pre_checkout_query';
     const TYPE_UNKNOWN = 'unknown';
 
     public $type;

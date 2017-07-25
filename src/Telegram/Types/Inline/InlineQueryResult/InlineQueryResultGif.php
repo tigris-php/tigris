@@ -2,7 +2,9 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types\Inline\InlineQueryResult;
+
 use Tigris\Telegram\Types\Inline\InlineQueryResult;
 
 /**
@@ -13,12 +15,13 @@ use Tigris\Telegram\Types\Inline\InlineQueryResult;
  * @package Tigris\Types\Inline
  * @link https://core.telegram.org/bots/api#inlinequeryresultgif
  *
- * @property string $gif_url A valid URL for the GIF file. File size must not exceed 1MB.
- * @property integer $gif_width Optional. Width of the GIF.
- * @property integer $gif_height Optional. Height of the GIF.
- * @property string $thumb_url URL of the static thumbnail for the result (jpeg or gif).
- * @property string $title Optional. Title for the result.
- * @property string $caption Optional. Caption of the GIF file to be sent, 0-200 characters.
+ * @property string $gif_url
+ * @property int|null $gif_width
+ * @property int|null $gif_height
+ * @property int|null $gif_duration
+ * @property string $thumb_url
+ * @property string|null $title
+ * @property string|null $caption
  */
 class InlineQueryResultGif extends InlineQueryResult
 {

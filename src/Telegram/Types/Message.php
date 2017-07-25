@@ -45,7 +45,6 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @property Contact $contact
  * @property Location $location
  * @property Venue $venue
- * @property User $new_chat_member
  * @property User $left_chat_member
  * @property string $new_chat_title
  * @property PhotoSize[] $new_chat_photo
@@ -78,7 +77,6 @@ class Message extends BaseObject
     const TYPE_VIDEO_NOTE = 'video_note';
     // service messages
     const TYPE_NEW_CHAT_MEMBERS = 'new_chat_members';
-    const TYPE_NEW_CHAT_MEMBER = 'new_chat_member';
     const TYPE_LEFT_CHAT_MEMBER = 'left_chat_member';
     const TYPE_NEW_CHAT_TITLE = 'new_chat_title';
     const TYPE_NEW_CHAT_PHOTO = 'new_chat_photo';
@@ -128,7 +126,6 @@ class Message extends BaseObject
                      self::TYPE_VENUE,
                      self::TYPE_VIDEO_NOTE,
                      self::TYPE_NEW_CHAT_MEMBERS,
-                     self::TYPE_NEW_CHAT_MEMBER,
                      self::TYPE_LEFT_CHAT_MEMBER,
                      self::TYPE_NEW_CHAT_TITLE,
                      self::TYPE_NEW_CHAT_PHOTO,
@@ -175,7 +172,6 @@ class Message extends BaseObject
             'venue' => Venue::class,
             'video_note' => VideoNote::class,
             'new_chat_members' => [User::class],
-            'new_chat_member' => User::class,
             'left_chat_member' => User::class,
             'new_chat_title' => ScalarString::class,
             'new_chat_photo' => [PhotoSize::class],

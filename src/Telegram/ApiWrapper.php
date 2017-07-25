@@ -97,10 +97,14 @@ class ApiWrapper
         'getChatMember' => ChatMember::class,
         'answerCallbackQuery' => ScalarBoolean::class,
         'answerInlineQuery' => ScalarBoolean::class,
-
+        // games methods
         'sendGame' => Message::class,
         'setGameScore' => Message::class,
         'getGameHighScores' => [GameHighScore::class],
+        // payment methods
+        'sendInvoice' => Message::class,
+        'answerShippingQuery' => ScalarBoolean::class,
+        'answerPreCheckoutQuery' => ScalarBoolean::class,
     ];
 
     /** @var callable */

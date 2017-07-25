@@ -14,4 +14,6 @@ class ChatAction
     const UPLOAD_AUDIO = 'upload_audio';
     const UPLOAD_DOCUMENT = 'upload_document';
     const FIND_LOCATION = 'find_location';
+    const RECORD_VIDEO_NOTE = 'record_video_note';
+    const UPLOAD_VIDEO_NOTE = 'upload_video_note';
 }
