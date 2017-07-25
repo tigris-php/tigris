@@ -150,7 +150,7 @@ class Message extends BaseObject
         return static::TYPE_UNKNOWN;
     }
 
-    protected static function fields()
+    public static function fields()
     {
         return [
             'message_id' => ScalarInteger::class,

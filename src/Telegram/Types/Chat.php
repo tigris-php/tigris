@@ -35,7 +35,7 @@ class Chat extends BaseObject
     const TYPE_SUPERGROUP = 'supergroup';
     const TYPE_CHANNEL = 'channel';
 
-    protected static function fields()
+    public static function fields()
     {
         return [
             'id' => ScalarInteger::class,
@@ -49,10 +49,5 @@ class Chat extends BaseObject
             'description' => ScalarString::class,
             'invite_link' => ScalarString::class,
         ];
-    }
-
-    public function __toString()
-    {
-        return (string)$this->offsetGet('id');
     }
 }

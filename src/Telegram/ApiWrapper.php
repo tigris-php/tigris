@@ -11,6 +11,7 @@ use Tigris\Telegram\Types\Arrays\UpdateArray;
 use Tigris\Telegram\Types\Chat;
 use Tigris\Telegram\Types\ChatMember;
 use Tigris\Telegram\Types\File;
+use Tigris\Telegram\Types\Games\GameHighScore;
 use Tigris\Telegram\Types\Interfaces\TypeInterface;
 use Tigris\Telegram\Types\Message;
 use Tigris\Telegram\Types\Scalar\ScalarBoolean;
@@ -50,7 +51,7 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|true                leaveChat(array $params)
  * @method null|true                unbanChatMember(array $params)
  * @method null|Chat                getChat(array $params)
- * @method null|ChatMemberArray     getChatAdministrators(array $params)
+ * @method null|ChatMember[]     getChatAdministrators(array $params)
  * @method null|integer             getChatMembersCount(array $params)
  * @method null|ChatMember          getChatMember(array $params)
  * @method null|true                answerCallbackQuery(array $params)
@@ -61,19 +62,18 @@ use Tigris\Telegram\Types\UserProfilePhotos;
  * @method null|Message             sendInvoice(array $params)
  * @method null|true                answerShippingQuery(array $params)
  * @method null|true                answerPreCheckoutQuery(array $params)
- * @method null|Message             sendGame(array $params)
  *
  * Games methods
  * @link https://core.telegram.org/bots/api#games
+ * @method null|Message             sendGame(array $params)
  * @method null|Message             setGameScore(array $params)
- * @method null|GameHighScoreArray  getGameHighScores(array $params)
- *
+ * @method null|GameHighScore[]     getGameHighScores(array $params)
  *
  */
 class ApiWrapper
 {
     const METHODS = [
-        'getUpdates' => UpdateArray::class,
+        'getUpdates' => [ArrayParser::class, Update::class],
         'setWebhook' => ScalarBoolean::class,
         'deleteWebhook' => ScalarBoolean::class,
         'getWebhookInfo' => WebhookInfo::class,
@@ -100,7 +100,10 @@ class ApiWrapper
         'getChatMember' => ChatMember::class,
         'answerCallbackQuery' => ScalarBoolean::class,
         'answerInlineQuery' => ScalarBoolean::class,
+
         'sendGame' => Message::class,
+        'setGameScore' => Message::class,
+        'getGameHighScores' => GameHighScoreArray::class,
     ];
 
     /** @var callable */

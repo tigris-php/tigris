@@ -62,12 +62,12 @@ class Update extends BaseObject
     protected static function detectType(array $data)
     {
         foreach ([
-                     self::TYPE_MESSAGE,
-                     self::TYPE_EDITED_MESSAGE,
-                     self::TYPE_INLINE_QUERY,
-                     self::TYPE_CHOSEN_INLINE_RESULT,
-                     self::TYPE_CALLBACK_QUERY,
-                 ] as $type) {
+             self::TYPE_MESSAGE,
+             self::TYPE_EDITED_MESSAGE,
+             self::TYPE_INLINE_QUERY,
+             self::TYPE_CHOSEN_INLINE_RESULT,
+             self::TYPE_CALLBACK_QUERY,
+         ] as $type) {
             if (isset($data[$type])) {
                 return $type;
             }
@@ -75,7 +75,7 @@ class Update extends BaseObject
         return static::TYPE_UNKNOWN;
     }
 
-    protected static function fields()
+    public static function fields()
     {
         return [
             'update_id' => ScalarInteger::class,

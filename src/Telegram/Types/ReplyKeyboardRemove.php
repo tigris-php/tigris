@@ -2,16 +2,17 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
 use Tigris\Telegram\Types\Interfaces\ReplyMarkupInterface;
 
 /**
- * Class ReplyKeyboardHide
+ * Class ReplyKeyboardRemove
  *
- * @package Tigris\Types
- * @link https://core.telegram.org/bots/api#replykeyboardhide
+ * @package Tigris\Telegram\Types
+ * @link https://core.telegram.org/bots/api#replykeyboardremove
  *
  * @property boolean $remove_keyboard
  * @property boolean $selective

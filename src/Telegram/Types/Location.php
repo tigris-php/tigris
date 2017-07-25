@@ -22,7 +22,7 @@ class Location extends BaseObject
     /**
      * @inheritdoc
      */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'longitude' => ScalarFloat::class,

@@ -23,7 +23,7 @@ use Tigris\Telegram\Types\User;
  */
 class ShippingQuery extends BaseObject
 {
-    protected static function fields()
+    public static function fields()
     {
         return [
             'id' => ScalarString::class,

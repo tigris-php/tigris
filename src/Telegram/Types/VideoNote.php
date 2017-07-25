@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
@@ -16,17 +17,17 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @link https://core.telegram.org/bots/api#videonote
  *
  * @property string $file_id
- * @property integer $length
- * @property integer $duration
- * @property PhotoSize $thumb
- * @property integer $file_size
+ * @property int $length
+ * @property int $duration
+ * @property PhotoSize|null $thumb
+ * @property int|null $file_size
  */
 class VideoNote extends BaseObject
 {
     /**
      * @inheritdoc
      */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'file_id' => ScalarString::class,

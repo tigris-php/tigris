@@ -4,6 +4,7 @@
  */
 namespace Tigris\Telegram\Types;
 
+use Tigris\Telegram\Types\Arrays\PhotoSizeArray;
 use Tigris\Telegram\Types\Arrays\PhotoSizeMatrix;
 use Tigris\Telegram\Types\Base\BaseObject;
 use Tigris\Telegram\Types\Scalar\ScalarInteger;
@@ -22,7 +23,7 @@ class UserProfilePhotos extends BaseObject
     /**
      * @inheritdoc
      */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'total_count' => ScalarInteger::class,

@@ -27,7 +27,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class SuccessfulPayment extends BaseObject
 {
-    protected static function fields()
+    public static function fields()
     {
         return [
             'currency' => ScalarString::class,

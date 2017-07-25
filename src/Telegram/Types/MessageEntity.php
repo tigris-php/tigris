@@ -35,7 +35,7 @@ class MessageEntity extends BaseObject
     const TYPE_TEXT_LINK = 'text_link';
     const TYPE_TEXT_MENTION = 'text_mention';
 
-    protected static function fields()
+    public static function fields()
     {
         return [
             'type' => ScalarString::class,

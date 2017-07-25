@@ -22,7 +22,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class ShippingOption extends BaseObject
 {
-    protected static function fields()
+    public static function fields()
     {
         return [
             'id' => ScalarString::class,

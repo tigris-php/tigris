@@ -26,7 +26,7 @@ class Document extends BaseObject
     /**
      * @inheritdoc
      */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'file_id' => ScalarString::class,

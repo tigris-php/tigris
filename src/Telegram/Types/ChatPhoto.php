@@ -2,10 +2,10 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
-use Tigris\Telegram\Types\Scalar\ScalarInteger;
 use Tigris\Telegram\Types\Scalar\ScalarString;
 
 /**
@@ -20,10 +20,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class ChatPhoto extends BaseObject
 {
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'small_file_id' => ScalarString::class,

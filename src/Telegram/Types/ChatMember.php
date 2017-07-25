@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
@@ -13,8 +14,8 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#chatmember
  *
- * @property User $user Information about the user.
- * @property string $status The member's status in the chat.
+ * @property User $user
+ * @property string $status
  */
 class ChatMember extends BaseObject
 {
@@ -24,10 +25,7 @@ class ChatMember extends BaseObject
     const STATUS_LEFT = 'left';
     const STATUS_KICKED = 'kicked';
 
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'user' => User::class,

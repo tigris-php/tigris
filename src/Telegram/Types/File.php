@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
@@ -15,16 +16,13 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#file
  *
- * @property string $file_id Unique identifier for this file.
- * @property integer $file_size Optional. File size, if known.
- * @property string $file_path Optional. File path.
+ * @property string $file_id
+ * @property int|null $file_size
+ * @property string|null $file_path
  */
 class File extends BaseObject
 {
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'file_id' => ScalarString::class,

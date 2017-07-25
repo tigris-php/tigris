@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
@@ -15,17 +16,14 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#contact
  *
- * @property string $phone_number Contact's phone number.
- * @property string $first_name Contact's first name.
- * @property string $last_name Optional. Contact's last name.
- * @property integer $user_id Optional. Contact's user identifier in Telegram.
+ * @property string $phone_number
+ * @property string $first_name
+ * @property string|null $last_name
+ * @property int|null $user_id
  */
 class Contact extends BaseObject
 {
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'phone_number' => ScalarString::class,

@@ -2,6 +2,7 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
+
 namespace Tigris\Telegram\Types;
 
 use Tigris\Telegram\Types\Base\BaseObject;
@@ -15,20 +16,17 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  * @package Tigris\Types
  * @link https://core.telegram.org/bots/api#video
  *
- * @property string $file_id Unique identifier for this file.
- * @property integer $width Video width as defined by sender.
- * @property integer $height Video height as defined by sender.
- * @property integer $duration Duration of the video in seconds as defined by sender.
- * @property PhotoSize $thumb Optional. Video thumbnail.
- * @property string $mime_type Optional. Mime type of a file as defined by sender.
- * @property integer $file_size Optional. File size.
+ * @property string $file_id
+ * @property int $width
+ * @property int $height
+ * @property int $duration
+ * @property PhotoSize|null $thumb
+ * @property string|null $mime_type
+ * @property int|null $file_size
  */
 class Video extends BaseObject
 {
-    /**
-     * @inheritdoc
-     */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'file_id' => ScalarString::class,

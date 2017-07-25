@@ -10,8 +10,6 @@ use Tigris\Telegram\Types\Updates\Update;
 /**
  * Class UpdateArray
  * @package Tigris\Types
- *
- * @mixin Update[]
  */
 class UpdateArray extends BaseArray
 {

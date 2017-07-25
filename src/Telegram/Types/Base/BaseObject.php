@@ -53,7 +53,7 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
     /**
      * @return array
      */
-    protected static function fields()
+    public static function fields()
     {
         return [];
     }
@@ -89,7 +89,7 @@ abstract class BaseObject extends \ArrayObject implements TypeInterface
     public function __toString()
     {
         if ($this->offsetExists('id')) {
-            return $this->offsetGet('id');
+            return (string) $this->offsetGet('id');
         } else {
             return false;
         }

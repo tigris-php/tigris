@@ -31,7 +31,7 @@ class WebhookInfo extends BaseObject
     /**
      * @inheritdoc
      */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'url' => ScalarString::class,

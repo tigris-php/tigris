@@ -24,7 +24,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class User extends BaseObject
 {
-    protected static function fields()
+    public static function fields()
     {
         return [
             'id' => ScalarInteger::class,

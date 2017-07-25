@@ -21,7 +21,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class LabeledPrice extends BaseObject
 {
-    protected static function fields()
+    public static function fields()
     {
         return [
             'label' => ScalarString::class,

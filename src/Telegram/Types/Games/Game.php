@@ -33,7 +33,7 @@ class Game extends BaseObject
     /**
      * @inheritdoc
      */
-    protected static function fields()
+    public static function fields()
     {
         return [
             'title' => ScalarString::class,

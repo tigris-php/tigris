@@ -24,7 +24,7 @@ use Tigris\Telegram\Types\Scalar\ScalarString;
  */
 class ShippingAddress extends BaseObject
 {
-    protected static function fields()
+    public static function fields()
     {
         return [
             'country_code' => ScalarString::class,
