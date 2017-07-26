@@ -2,11 +2,13 @@
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
-namespace Tigris\Telegram;
+
+namespace Tigris;
 
 use GuzzleHttp\Client;
-use Tigris\Bot;
 use React\EventLoop\Factory as EventLoopFactory;
+use Tigris\Telegram\ApiClient;
+use Tigris\Telegram\ApiWrapper;
 
 class BotFactory
 {
