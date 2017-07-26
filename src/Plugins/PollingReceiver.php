@@ -26,6 +26,10 @@ class PollingReceiver extends AbstractPlugin
                 'offset' => $this->offset,
             ]);
 
+            if ($updates == null) {
+                return;
+            }
+
             foreach ($updates as $update) {
                 $this->offset = $update->update_id + 1;
                 $this->setLastOffset($this->offset);
