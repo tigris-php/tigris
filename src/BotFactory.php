@@ -20,9 +20,13 @@ class BotFactory
         if (!is_subclass_of($className, Bot::class)) {
             throw new \InvalidArgumentException('Wrong class');
         }
-        $this->className;
+        $this->className = $className;
     }
 
+    /**
+     * @param $apiToken
+     * @return Bot
+     */
     public function create($apiToken)
     {
         $httpClient = new Client();
