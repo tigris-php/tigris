@@ -71,7 +71,7 @@ class UpdateHandler extends AbstractPlugin
             case Message::TYPE_VOICE:
                 $this->bot->emit(MessageEvent::EVENT_VOICE_MESSAGE_RECEIVED, $event);
                 break;
-            case Message::TYPE_NEW_CHAT_MEMBER:
+            case Message::TYPE_NEW_CHAT_MEMBERS:
             case Message::TYPE_LEFT_CHAT_MEMBER:
             case Message::TYPE_NEW_CHAT_TITLE:
             case Message::TYPE_NEW_CHAT_PHOTO:

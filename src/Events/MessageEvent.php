@@ -21,6 +21,7 @@ class MessageEvent extends AbstractEvent
     const EVENT_VIDEO_MESSAGE_RECEIVED = 'onVideoMessageReceived';
     const EVENT_VENUE_MESSAGE_RECEIVED = 'onVenueMessageReceived';
     const EVENT_VOICE_MESSAGE_RECEIVED = 'onVoiceMessageReceived';
+    const EVENT_VIDEO_NOTE_MESSAGE_RECEIVED = 'onVideoNoteMessageReceived';
     const EVENT_SERVICE_MESSAGE_RECEIVED = 'onServiceMessageReceived';
     const EVENT_UNKNOWN_TYPE_MESSAGE_RECEIVED = 'onUnknownTypeMessageReceived';
 

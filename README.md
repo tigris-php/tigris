@@ -8,6 +8,28 @@ Tigris is a modern reactive event-driven Telegram bot framework written in PHP.
 
 ## Usage
 
+### Without extending the Bot class
+
+*Create a bot instance*
+```php
+$bot = (new BotFactory())->create($apiToken);
+```
+*Define your custom even handlers*
+```php
+$bot = (new BotFactory())->create($apiToken);
+$bot->addListener(MessageEvent::EVENT_TEXT_MESSAGE_RECEIVED, function (MessageEvent $event) use ($bot) {
+    // sending your first message
+    $bot->getApi()->sendMessage([
+        'chat_id' => $event->message->chat->id, 
+        'text' => 'Hello World!',
+    ]);
+});
+```
+*Run your bot*
+```php
+$bot->run();
+```
+
 *Extend the Tigris\Bot class to create your own bot implementation*
 ```php
 class SampleBot extends \Tigris\Bot
@@ -16,16 +38,19 @@ class SampleBot extends \Tigris\Bot
     public function bootstrap()
     {
         // registering event callback
-        $this->addListener(MessageEvent::EVENT_TEXT_MESSAGE_RECEIVED, function(MessageEvent $event) {
+        $this->addListener(MessageEvent::EVENT_TEXT_MESSAGE_RECEIVED, function (MessageEvent $event) {
             // sending your first message
-            $this->api->sendMessage($event->message->chat->id, 'Hello World!');
+            $this->getApi()->sendMessage([
+                'chat_id' => $event->message->chat->id, 
+                'text' => 'Hello World!',
+            ]);
         });   
     }
 }
 ```
 *Run the bot instance*
 ```php
-$bot = SampleBot::create($apiToken);
+$bot = (new BotFactory(SampleBot::class))->create($apiToken);
 $bot->run();
 ```
 

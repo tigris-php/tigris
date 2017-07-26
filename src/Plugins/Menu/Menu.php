@@ -72,15 +72,11 @@ class Menu
             $title = $menu->title;
         }
 
-        try {
-            Bot::getInstance()->getApi()->sendMessage([
-                'chat_id' => $chatId,
-                'text' => $title,
-                'reply_markup' => ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
-            ]);
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        Bot::getInstance()->getApi()->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $title,
+            'reply_markup' => ReplyKeyboardMarkup::create($menu->toKeyboard(), false, true)
+        ]);
     }
 
     /**
