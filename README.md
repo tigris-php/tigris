@@ -29,7 +29,7 @@ $bot->addListener(MessageEvent::EVENT_TEXT_MESSAGE_RECEIVED, function (MessageEv
 ```php
 $bot->run();
 ```
-
+### Extending the Bot class
 *Extend the Tigris\Bot class to create your own bot implementation*
 ```php
 class SampleBot extends \Tigris\Bot
