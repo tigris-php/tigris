@@ -25,7 +25,7 @@ class CommandHandler extends AbstractPlugin
     {
         $message = $event->message;
 
-        array_walk($message->entities, function(MessageEntity $entity) use ($message, $event) {
+        foreach ($message->entities as $entity) {
             $foundCommand = false;
             if ($entity->type === MessageEntity::TYPE_BOT_COMMAND) {
                 $command = mb_substr($message->text, $entity->offset, $entity->length);
@@ -46,6 +46,6 @@ class CommandHandler extends AbstractPlugin
             if ($foundCommand) {
                 $event->handled = true;
             }
-        });
+        }
     }
 }
