@@ -23,6 +23,12 @@ class SQLiteSessionTest extends PHPUnit_Framework_TestCase
         $getResult = $session->get('test');
         $this->assertSame('test', $getResult);
 
+        $session->set('integer_value', 123);
+        $this->assertSame(123, $session->get('integer_value'));
+
+        $session->set('test_zero_value', 0);
+        $this->assertSame(0, $session->get('test_zero_value'));
+
         $session->set('test', ['a', 'b', 'c']);
         $getResult = $session->get('test');
         $this->assertSame(['a', 'b', 'c'], $getResult);

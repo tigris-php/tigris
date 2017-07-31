@@ -18,7 +18,7 @@ class ArrayHelper
             return $default;
         }
 
-        if ($key == null) {
+        if (null === $key) {
             throw new \InvalidArgumentException('Key is not set');
         }
 

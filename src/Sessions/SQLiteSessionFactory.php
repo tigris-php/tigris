@@ -2,6 +2,7 @@
 /**
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
+
 namespace Tigris\Sessions;
 
 class SQLiteSessionFactory extends AbstractSessionFactory
@@ -19,9 +20,10 @@ class SQLiteSessionFactory extends AbstractSessionFactory
         $this->storage = new \PDO('sqlite:' . $dbPath, 'root', 'password', $opt);
         $statement = $this->storage->prepare("CREATE TABLE IF NOT EXISTS sessions (
                    session_id TEXT,
-                   session_key TEXT UNIQUE,
-                   session_value TEXT);
-                   ");
+                   session_key TEXT,
+                   session_value TEXT,
+                   UNIQUE(session_id, session_key)
+                   );");
         $statement->execute();
     }
 
