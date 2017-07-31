@@ -52,14 +52,6 @@ class SQLiteSessionTest extends PHPUnit_Framework_TestCase
         $session->set('test_zero_value', 0);
         $this->assertSame(0, $session->get('test_zero_value'));
 
-
-        try {
-            $session->set(false, '123');
-            $this->fail("Not exceptions");
-        } catch (Exception $e) {
-            $this->assertInstanceOf(\InvalidArgumentException::class, $e);
-        }
-
         @unlink($this->getDbPath());
     }
 }
