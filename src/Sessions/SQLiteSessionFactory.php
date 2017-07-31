@@ -22,8 +22,8 @@ class SQLiteSessionFactory extends AbstractSessionFactory
                    session_id TEXT,
                    session_key TEXT,
                    session_value TEXT,
-                   UNIQUE(session_id, session_key)
-                   );");
+                   UNIQUE (session_id,session_key) ON CONFLICT REPLACE ) ;
+                   ");
         $statement->execute();
     }
 
