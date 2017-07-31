@@ -9,7 +9,9 @@ class SQLiteSessionTest extends PHPUnit_Framework_TestCase
 {
     private function getDbPath()
     {
-        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'test1.sql';
+        $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'test1.sql';
+        @unlink ($path);
+        return $path;
     }
 
     public function testCreate()
