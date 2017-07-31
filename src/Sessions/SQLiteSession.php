@@ -2,6 +2,7 @@
 /**
  * @author Sergey Vasilev <doozookn@gmail.com>
  */
+
 namespace Tigris\Sessions;
 
 use Tigris\Helpers\ArrayHelper;
@@ -11,7 +12,6 @@ class SQLiteSession extends AbstractSession
     /** @var \PDO */
     public $storage;
 
-
     /**
      * @param @inheritdoc
      */
@@ -20,11 +20,9 @@ class SQLiteSession extends AbstractSession
         $statement = $this->storage->prepare("SELECT session_value FROM sessions WHERE  session_id = ? AND session_key = ?");
         if ($statement->execute([$this->getSessionId(), $index])) {
             $json_result = ArrayHelper::getValue($statement->fetch(), 'session_value');
-            $result = strlen($json_result) ?  \GuzzleHttp\json_decode($json_result) : $defaultValue;
-        } else {
-            $result = $defaultValue;
+            return strlen($json_result) ? \GuzzleHttp\json_decode($json_result) : $defaultValue;
         }
-        return $result;
+        return $defaultValue;
     }
 
     /**
@@ -35,16 +33,13 @@ class SQLiteSession extends AbstractSession
         if (!$index) {
             throw new \InvalidArgumentException('Index argument must be set');
         }
-        if (!$value) {
-            $this->clear($index);
+        if (null === $this->get($index)) {
+            $statement = $this->storage->prepare("INSERT INTO sessions (session_key, session_value, session_id) VALUES (?,?,?)");
         } else {
-            if ($this->get($index)) {
-                $statement = $this->storage->prepare("UPDATE sessions SET session_key = ?, session_value = ? WHERE  session_id = ?");
-            } else {
-                $statement = $this->storage->prepare("INSERT INTO sessions (session_key, session_value, session_id) VALUES (?,?,?)");
-            }
-            $statement->execute([$index, \GuzzleHttp\json_encode($value), $this->getSessionId()]);
+            $statement = $this->storage->prepare("UPDATE sessions SET session_key = ?, session_value = ? WHERE  session_id = ?");
         }
+        $statement->execute([$index, \GuzzleHttp\json_encode($value), $this->getSessionId()]);
+
     }
 
     /**
