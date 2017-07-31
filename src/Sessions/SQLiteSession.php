@@ -30,16 +30,8 @@ class SQLiteSession extends AbstractSession
      */
     public function set($index, $value = null)
     {
-        if (!$index) {
-            throw new \InvalidArgumentException('Index argument must be set');
-        }
-        if (null === $this->get($index)) {
-            $statement = $this->storage->prepare("INSERT INTO sessions (session_key, session_value, session_id) VALUES (?,?,?)");
-        } else {
-            $statement = $this->storage->prepare("UPDATE sessions SET session_key = ?, session_value = ? WHERE  session_id = ?");
-        }
+        $statement = $this->storage->prepare("INSERT INTO sessions (session_key, session_value, session_id) VALUES (?,?,?)");
         $statement->execute([$index, \GuzzleHttp\json_encode($value), $this->getSessionId()]);
-
     }
 
     /**
